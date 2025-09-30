@@ -64,7 +64,7 @@ const anagraficaItems: NavItem[] = [
     path: "/utenti",
   },
   {
-    icon: <CourtIcon />,
+    icon: <CourtIcon fill="currentColor" />,
     name: "Campi",
     path: "/campi",
   },

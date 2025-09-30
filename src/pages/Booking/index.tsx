@@ -40,7 +40,7 @@ export default function Reservation() {
         description="This is React.js Ecommerce Dashboard page for TailAdmin - React.js Tailwind CSS Admin Dashboard Template"
       />
       <PageBreadcrumb pageTitle="Prenota" />
-      <Separetor marginY={5} color="gray" />
+      <Separetor marginY="5" color="gray" />
       <div className="flex w-full mb-5 gap-4 justify-between">
         {[
           { step: 1, label: "Seleziona un giorno" },
@@ -54,14 +54,16 @@ export default function Reservation() {
             <li
               className={`${
                 currentStep === step
-                  ? "text-black dark:text-black"
-                  : "text-gray-500 dark:text-gray-400 "
+                  ? "text-brand-500 dark:text-white"
+                  : "text-gray-500 dark:text-gray-400"
               } flex-1 flex flex-col md:flex-row gap-2.5 justify-center items-center`}
             >
               <span
                 className={`${
-                  currentStep == step ? " border-black" : " border-gray-400"
-                } flex items-center justify-center w-8 h-8 border rounded-full shrink-0 dark:border-black`}
+                  currentStep == step
+                    ? " border-brand-500 dark:border-white"
+                    : " border-gray-400 "
+                } flex items-center justify-center w-8 h-8 border rounded-full shrink-0 `}
               >
                 {step}
               </span>
@@ -79,22 +81,12 @@ export default function Reservation() {
 
       <div className="flex justify-between ">
         <Button
-          className={` ${
-            prevBtnDisabled
-              ? ""
-              : "cursor-pointer transition-transform active:scale-95 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
-          }`}
           disabled={prevBtnDisabled}
           onClick={() => setCurrentStep((prev) => Math.max(1, prev - 1))}
         >
           Indietro
         </Button>
         <Button
-          className={`${
-            nextBtnDisabled
-              ? ""
-              : "cursor-pointer transition-transform active:scale-95 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
-          }`}
           disabled={nextBtnDisabled}
           onClick={() => setCurrentStep((prev) => Math.min(3, prev + 1))}
         >

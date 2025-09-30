@@ -91,7 +91,7 @@ export default function Step2() {
   ];
   return (
     <div className="flex flex-col lg:flex-row gap-8">
-      <div className="flex-none bg-black text-white w-full lg:w-[250px] h-[250px] text-center shadow-none">
+      <div className="flex-none bg-brand-600 text-white w-full lg:w-[250px] h-[250px] text-center shadow-none rounded-xl p-4 flex flex-col justify-center items-center">
         <p className="text-2xl">{dataSelected.day}</p>
         <h4 className="text-6xl font-bold">{dataSelected.date.getDate()}</h4>
         <p className="text-2xl">{dataSelected.month}</p>
@@ -101,19 +101,30 @@ export default function Step2() {
           return (
             <>
               <div className="mb-8">
-                <h3 className="text-lg font-semibold mb-4">{ts.name}</h3>
+                <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">
+                  {ts.name}
+                </h3>
+
                 <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 md:gap-4">
                   {ts.available_slots.map((as) => (
-                    <div className="py-2 px-1 md:px-3 border border-gray-200 bg-white shadow-none dark:border-gray-700 dark:bg-gray-800 flex flex-col items-center text-center rounded-xl hover:border hover:border-black cursor-pointer transition-all hover:scale-105">
-                      <div className="text-xs md:text-base">
+                    <div
+                      key={`${ts.name}-${as.start}`}
+                      className="py-2 px-1 md:px-3 border border-gray-200 bg-white shadow-none 
+                             dark:border-gray-700 dark:bg-gray-800 
+                             flex flex-col items-center text-center rounded-xl 
+                             cursor-pointer transition-all hover:scale-[1.02]
+                             hover:border-brand-600 dark:hover:border-gray-200"
+                    >
+                      <div className="text-xs md:text-base text-gray-800 dark:text-gray-200 font-medium">
                         {`${as.start} - ${as.end}`}
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
+              {/* Separatore (Dark Mode) */}
               {index + 1 < timeSlots.length && (
-                <hr className="my-8 border-gray-200" />
+                <hr className="my-8 border-gray-200 dark:border-gray-700" />
               )}
             </>
           );

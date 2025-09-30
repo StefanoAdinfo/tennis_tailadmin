@@ -1,8 +1,8 @@
 export const Separetor = ({
-  marginY,
+  marginY = "5",
   color,
 }: {
-  marginY: number;
+  marginY?: string;
   color: string;
 }) => {
   return (

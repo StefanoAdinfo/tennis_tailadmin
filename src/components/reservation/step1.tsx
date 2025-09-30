@@ -118,28 +118,39 @@ export default function Step1() {
       {cards.map((card) => {
         const data = new Date(card.date);
         return (
-          <div key={card.id} className="flex items-center justify-center">
+          <div key={card.id} className="flex items-center justify-center ">
             <div
               key={card.id}
-              className={`flex flex-col items-center text-center rounded-xl shadow-none py-2 md:py-4 w-full
-                        ${
-                          !card.active && card.disabled
-                            ? "cursor-not-allowed bg-gray-100 text-gray-300 opacity-70"
-                            : ""
-                        }
-                        ${
-                          card.active && !card.disabled
-                            ? "bg-black text-white"
-                            : ""
-                        }
-                        ${
-                          !card.active && !card.disabled
-                            ? "hover:border hover:border-black cursor-pointer transition-all hover:scale-105"
-                            : ""
-                        }
-                        `}
+              className={`flex flex-col items-center text-center rounded-xl shadow-none py-2 md:py-4 w-full border 
+                    
+                    ${
+                      // STATO NORMALE: Sfondo bianco/scuro, bordo grigio chiaro/scuro
+                      !card.active && !card.disabled
+                        ? "bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200"
+                        : ""
+                    }
+                    ${
+                      // HOVER NORMALE: Bordo brand-600/gray-200
+                      !card.active && !card.disabled
+                        ? "hover:border-brand-600 dark:hover:border-gray-200 cursor-pointer transition-all hover:scale-105"
+                        : ""
+                    }
+                    ${
+                      // STATO DISABILITATO: Sfondo/testo grigio chiaro/scuro e opacità ridotta
+                      !card.active && card.disabled
+                        ? "cursor-not-allowed bg-gray-100 dark:bg-gray-900 text-gray-300 dark:text-gray-600 border-gray-200 dark:border-gray-700 opacity-70"
+                        : ""
+                    }
+                    ${
+                      // STATO ATTIVO: Sfondo brand-600, testo bianco, bordo brand-600
+                      card.active && !card.disabled
+                        ? "bg-brand-600 text-white border-brand-600"
+                        : ""
+                    }
+                    `}
             >
               <div className="flex flex-col lg:gap-4">
+                {/* Il testo erediterà il colore dal contenitore principale */}
                 <p>{card.day}</p>
                 <h4 className="text-4xl font-bold">{data.getDate()}</h4>
                 <p>{card.month}</p>
