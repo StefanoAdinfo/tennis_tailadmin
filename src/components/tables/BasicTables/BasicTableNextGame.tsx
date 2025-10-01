@@ -7,7 +7,10 @@ import {
 } from "../../ui/table";
 import { Games } from "../../../lib/type";
 import Badge from "../../ui/badge/Badge";
-import { HandCoins } from "../../../icons";
+import { TrashBinIcon } from "../../../icons";
+import Button from "../../ui/button/Button";
+import { useState } from "react";
+import { Modal } from "../../ui/modal";
 
 const tableData: Games[] = [
   {
@@ -211,6 +214,18 @@ const tableData: Games[] = [
 ];
 
 export default function BasicTableOne() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectReservation, setSelectReservation] = useState<Games | null>(
+    null
+  );
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
+  const handleOpenModal = (reservation: Games) => {
+    setSelectReservation(reservation);
+    setIsOpen(true);
+  };
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
       <div className="max-w-full overflow-x-auto">
@@ -250,7 +265,7 @@ export default function BasicTableOne() {
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400 flex items-center justify-center"
+                className="px-5 py-3 font-medium text-gray-500 text-center text-theme-xs dark:text-gray-400 "
               >
                 Azione
               </TableCell>
@@ -296,14 +311,49 @@ export default function BasicTableOne() {
                   </Badge>
                 </TableCell>
 
-                <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400 flex items-center justify-center">
-                  <HandCoins />
+                <TableCell className="px-4 py-3 text-gray-500 text-theme-sm dark:text-gray-400 text-center">
+                  <Button
+                    variant="ghost"
+                    onClick={() => handleOpenModal(reservation)}
+                    className="hover:text-red-500 dark:hover:text-red-500"
+                  >
+                    <TrashBinIcon />
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </div>
+      <Modal
+        isOpen={isOpen}
+        onClose={handleCloseModal}
+        className="max-w-lg p-6"
+      >
+        <h5 className="text-lg font-medium text-gray-800 dark:text-white/90 my-2">
+          Sei sicuro di voler annullare questa partita?
+        </h5>
+        <p className="mt-4 text-sm leading-normal text-gray-500 dark:text-gray-400">
+          Data: {selectReservation?.date}
+        </p>
+        <p className="mt-1 text-sm leading-normal text-gray-500 dark:text-gray-400">
+          Durata: {selectReservation?.duration}
+        </p>
+        <p className="mt-4 text-sm leading-normal text-gray-500 dark:text-gray-400">
+          Campo: {selectReservation?.court_name}
+        </p>
+        <p className="max-w-xs mt-1 text-sm leading-normal text-gray-500 dark:text-gray-400">
+          {" "}
+          Partecipanti:{" "}
+          {selectReservation?.partecipants
+            .map((partecipant) => partecipant.name + " " + partecipant.surname)
+            .join(", ")}
+        </p>
+
+        <div className="mt-6 flex  justify-end ">
+          <Button onClick={handleCloseModal}>Annulla partita</Button>
+        </div>
+      </Modal>
     </div>
   );
 }

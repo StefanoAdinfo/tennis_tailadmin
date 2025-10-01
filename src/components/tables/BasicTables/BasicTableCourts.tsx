@@ -256,7 +256,7 @@ export default function BasicTableOne() {
         onClose={handleCloseModal}
         className="max-w-lg p-6"
       >
-        <h5 className="text-base font-medium text-gray-800 dark:text-white/90">
+        <h5 className="text-lg font-medium text-gray-800 dark:text-white/90 my-2">
           Sei sicuro di voler eliminare {selectCourt?.name}
         </h5>
         <p className="mt-4 text-sm leading-normal text-gray-500 dark:text-gray-400">
