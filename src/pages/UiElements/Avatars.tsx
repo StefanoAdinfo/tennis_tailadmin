@@ -25,11 +25,7 @@ export default function Avatars() {
         </ComponentCard>
         <ComponentCard title="Avatar with online indicator">
           <div className="flex flex-col items-center justify-center gap-5 sm:flex-row">
-            <Avatar
-              src="/images/user/user-01.jpg"
-              size="xsmall"
-              status="online"
-            />
+            <Avatar src="" alt="SD" size="xsmall" status="online" />
             <Avatar
               src="/images/user/user-01.jpg"
               size="small"

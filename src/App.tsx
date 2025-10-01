@@ -22,9 +22,11 @@ import UsersCollect from "./pages/ToCollect/UsersCollect";
 import ReservationCollect from "./pages/ToCollect/ReservationCollect";
 import Revenue from "./pages/Revenue";
 import Users from "./pages/Users";
+import UsersShow from "./pages/Users/show";
 import Courts from "./pages/Courts";
 import Booking from "./pages/Booking";
 
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.3.0/dist/flowbite.min.js"></script>;
 export default function App() {
   return (
     <>
@@ -45,6 +47,7 @@ export default function App() {
             <Route path="/incassi" element={<Revenue />} />
             {/* Anagrafica */}
             <Route path="/utenti" element={<Users />} />
+            <Route path="/utenti/:id" element={<UsersShow />} />
             <Route path="/campi" element={<Courts />} />
             {/* Prenota */}
             <Route path="/prenota" element={<Booking />} />

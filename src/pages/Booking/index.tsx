@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import PageMeta from "../../components/common/PageMeta";
-import { Separetor } from "../../components/ui/Separetor";
+import { Separator } from "../../components/ui/separator/Separator";
 import Button from "../../components/ui/button/Button";
 import Step1 from "../../components/reservation/step1";
 import Step2 from "../../components/reservation/step2";
@@ -40,7 +40,7 @@ export default function Reservation() {
         description="This is React.js Ecommerce Dashboard page for TailAdmin - React.js Tailwind CSS Admin Dashboard Template"
       />
       <PageBreadcrumb pageTitle="Prenota" />
-      <Separetor marginY="5" color="gray" />
+      <Separator marginY="5" color="gray" />
       <div className="flex w-full mb-5 gap-4 justify-between">
         {[
           { step: 1, label: "Seleziona un giorno" },

@@ -60,7 +60,7 @@ export default function Step3() {
                       value="SINGOLO"
                       checked={gameType === "SINGOLO"}
                       onChange={() => setGameType("SINGOLO")}
-                      className="h-5 w-5 text-brand-600 border-gray-300 dark:border-gray-600 focus:ring-brand-600 dark:focus:ring-brand-600 bg-white dark:bg-gray-700 mb-1.5 cursor-pointer"
+                      className="h-5 w-5 text-brand-600 border-gray-300 dark:border-gray-600 focus:ring-brand-600 dark:focus:ring-brand-600 bg-white dark:bg-gray-700  cursor-pointer"
                     />
                     <Label
                       htmlFor="singolo"
@@ -80,7 +80,7 @@ export default function Step3() {
                       checked={gameType === "DOPPIO"}
                       onChange={() => setGameType("DOPPIO")}
                       // Colore del radio/focus: BLU (brand-600)
-                      className="h-5 w-5 text-brand-600 border-gray-300 dark:border-gray-600 focus:ring-brand-600 dark:focus:ring-brand-600 bg-white dark:bg-gray-700 mb-1.5 cursor-pointer"
+                      className="h-5 w-5 text-brand-600 border-gray-300 dark:border-gray-600 focus:ring-brand-600 dark:focus:ring-brand-600 bg-white dark:bg-gray-700  cursor-pointer"
                     />
                     <Label
                       htmlFor="doppio"

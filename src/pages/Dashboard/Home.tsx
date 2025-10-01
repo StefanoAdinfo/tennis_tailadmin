@@ -23,7 +23,7 @@ export default function Home() {
           <EcommerceMetrics />
         </div>
 
-        <div className="col-span-6 space-y-6">
+        <div className="col-span-12 md:col-span-6 space-y-6">
           <ComponentCard
             title="Partite da incasare"
             buttonShow
@@ -33,7 +33,7 @@ export default function Home() {
           </ComponentCard>
         </div>
 
-        <div className="col-span-6 space-y-6">
+        <div className="col-span-12 md:col-span-6 space-y-6">
           <ComponentCard
             title="Utenti da incasare"
             buttonShow

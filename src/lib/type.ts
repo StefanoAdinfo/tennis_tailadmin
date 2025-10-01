@@ -78,6 +78,10 @@ export type User = {
   avatar: string;
 };
 export type Reservation = {
+  court_name: ReactNode;
+  date: ReactNode;
+  duration: ReactNode;
+  light: any;
   id: string;
   user: User;
   startDate: string;

@@ -8,6 +8,7 @@ import {
 import { User } from "../../../lib/type";
 import { PenIcon } from "../../../icons";
 import Badge from "../../ui/badge/Badge";
+import { Link } from "react-router";
 
 const tableData: User[] = [
   {
@@ -126,9 +127,11 @@ export default function BasicTableRevenue() {
                   </Badge>
                 </TableCell>
 
-                <TableCell className="px-4 py-3  text-theme-sm dark:text-gray-400 flex items-center justify-center ">
-                  <PenIcon />
-                </TableCell>
+                <Link to={`/utenti/${user.id}`}>
+                  <TableCell className="px-4 py-3  text-theme-sm hover:text-brand-500 dark:text-gray-400 dark:hover:text-brand-500 flex items-center justify-center cursor-pointer ">
+                    <PenIcon />
+                  </TableCell>
+                </Link>
               </TableRow>
             ))}
           </TableBody>

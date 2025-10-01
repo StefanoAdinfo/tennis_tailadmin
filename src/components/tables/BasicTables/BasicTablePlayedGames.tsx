@@ -6,7 +6,7 @@ import {
   TableRow,
 } from "../../ui/table";
 import { Reservation } from "../../../lib/type";
-import { HandCoins } from "../../../icons";
+import Badge from "../../ui/badge/Badge";
 
 const tableData: Reservation[] = [
   {
@@ -16,9 +16,9 @@ const tableData: Reservation[] = [
       name: "Giuseppe",
       surname: "Verdi",
       email: "giuseppe.verdi@example.com",
-      role: "",
-      is_active: false,
-      avatar: "",
+      role: "user",
+      is_active: true,
+      avatar: "/images/user/user-18.jpg",
     },
     court: {
       id: "1",
@@ -75,9 +75,9 @@ const tableData: Reservation[] = [
       name: "Lucia",
       surname: "Blu",
       email: "lucia.blu@example.com",
-      role: "",
-      is_active: false,
-      avatar: "",
+      role: "user",
+      is_active: true,
+      avatar: "/images/user/user-17.jpg",
     },
     court: {
       id: "2",
@@ -143,9 +143,9 @@ const tableData: Reservation[] = [
       name: "Francesca",
       surname: "Bruno",
       email: "francesca.bruno@example.com",
-      role: "",
-      is_active: false,
-      avatar: "",
+      role: "user",
+      is_active: true,
+      avatar: "/images/user/user-20.jpg",
     },
     court: {
       id: "3",
@@ -211,9 +211,9 @@ const tableData: Reservation[] = [
       name: "Giuseppe",
       surname: "Verdi",
       email: "giuseppe.verdi@example.com",
-      role: "",
-      is_active: false,
-      avatar: "",
+      role: "user",
+      is_active: true,
+      avatar: "/images/user/user-27.jpg",
     },
     court: {
       id: "4",
@@ -288,9 +288,9 @@ const tableData: Reservation[] = [
       name: "Francesca",
       surname: "Bruno",
       email: "francesca.bruno@example.com",
-      role: "",
-      is_active: false,
-      avatar: "",
+      role: "user",
+      is_active: true,
+      avatar: "/images/user/user-21.jpg",
     },
     court: {
       id: "5",
@@ -360,7 +360,7 @@ const tableData: Reservation[] = [
   },
 ];
 
-export default function BasicTableOne() {
+export default function BasicTablePlayedGames() {
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
       <div className="max-w-full overflow-x-auto">
@@ -372,13 +372,19 @@ export default function BasicTableOne() {
                 isHeader
                 className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
-                Campo
+                Data Partita
               </TableCell>
               <TableCell
                 isHeader
                 className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
-                Data
+                Partecipanti
+              </TableCell>
+              <TableCell
+                isHeader
+                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+              >
+                Campo
               </TableCell>
               <TableCell
                 isHeader
@@ -388,9 +394,15 @@ export default function BasicTableOne() {
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400 flex items-center justify-center"
+                className="px-5 py-3 font-medium text-gray-500  text-theme-xs dark:text-gray-400 text-center"
               >
-                Azione
+                Annullata
+              </TableCell>
+              <TableCell
+                isHeader
+                className="px-5 py-3 font-medium text-gray-500  text-theme-xs dark:text-gray-400 text-center"
+              >
+                Pagata
               </TableCell>
             </TableRow>
           </TableHeader>
@@ -400,17 +412,38 @@ export default function BasicTableOne() {
             {tableData.map((reservation) => (
               <TableRow key={reservation.id}>
                 <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                  {reservation.startDate}
+                </TableCell>
+
+                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                  {reservation.partecipants.map((partecipant, index) => (
+                    <div key={index}>
+                      {partecipant.name} {partecipant.surname}
+                      {","}
+                    </div>
+                  ))}
+                </TableCell>
+                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                   {reservation.court.name}
                 </TableCell>
                 <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                  {reservation.startDate}
+                  {reservation.total_amount.toFixed(2)}€
                 </TableCell>
-                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                  {reservation.total_amount.toFixed(2) + " €"}
+                <TableCell className="px-4 py-3 text-gray-500 text-center text-theme-sm dark:text-gray-400">
+                  <Badge
+                    size="sm"
+                    color={reservation.is_cancelled ? "success" : "error"}
+                  >
+                    {reservation.is_cancelled ? "Si" : "No"}
+                  </Badge>
                 </TableCell>
-
-                <TableCell className="px-4 py-3  text-theme-sm dark:text-gray-400 flex items-center justify-center ">
-                  <HandCoins />
+                <TableCell className="px-4 py-3 text-gray-500  text-theme-sm dark:text-gray-400 text-center">
+                  <Badge
+                    size="sm"
+                    color={reservation.is_paid ? "success" : "error"}
+                  >
+                    {reservation.is_paid ? "Si" : "No"}
+                  </Badge>
                 </TableCell>
               </TableRow>
             ))}

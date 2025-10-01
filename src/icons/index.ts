@@ -63,6 +63,7 @@ import { ReactComponent as CalendarOff } from "./calendar-off.svg?react";
 import { ReactComponent as CalendarPlus } from "./calendar-plus.svg?react";
 import { ReactComponent as WalletMinimal } from "./wallet-minimal.svg?react";
 import { ReactComponent as X } from "./x.svg?react";
+import { ReactComponent as Camera } from "./camera.svg?react";
 
 export {
   ErrorHexaIcon,
@@ -130,4 +131,5 @@ export {
   CalendarPlus,
   WalletMinimal,
   X,
+  Camera,
 };

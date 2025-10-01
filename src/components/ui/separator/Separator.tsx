@@ -1,9 +1,9 @@
-export const Separetor = ({
+export const Separator = ({
   marginY = "5",
-  color,
+  color = "gray",
 }: {
   marginY?: string;
-  color: string;
+  color?: string;
 }) => {
   return (
     <div
