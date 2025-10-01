@@ -7,6 +7,9 @@ import {
 } from "../../ui/table";
 import { Reservation } from "../../../lib/type";
 import { HandCoins } from "../../../icons";
+import { useState } from "react";
+import { ReservationSummaryModal } from "../../ui/modal/ReservationSummaryModal";
+import Button from "../../ui/button/Button";
 
 const tableData: Reservation[] = [
   {
@@ -16,21 +19,21 @@ const tableData: Reservation[] = [
       name: "Giuseppe",
       surname: "Verdi",
       email: "giuseppe.verdi@example.com",
-      role: "",
-      is_active: false,
-      avatar: "",
+      role: "Player",
+      is_active: true,
+      avatar: "/images/user/user-1.jpg",
     },
     court: {
       id: "1",
       name: "Campo 1",
-      picturePath: null,
-      court_type: "",
-      location: "",
-      active: 0,
-      price_socio: 0,
-      price_non_socio: 0,
-      price_lights: 0,
-      price_junior: 0,
+      picturePath: "/images/court/court-1.jpg",
+      court_type: "Padel",
+      location: "Area Nord",
+      active: 1,
+      price_socio: 15.0,
+      price_non_socio: 20.0,
+      price_lights: 5.0,
+      price_junior: 10.0,
       special_days: null,
       timetable: null,
     },
@@ -39,10 +42,10 @@ const tableData: Reservation[] = [
     is_double: false,
     is_cancelled: false,
     phone_number: "555-123-4567",
-    total_amount: 90,
+    total_amount: 90.0,
     lights_cost: 0,
     is_paid: false,
-    note: "",
+    note: "Prenotazione Singola - Padel",
     partecipants: [
       {
         id: "p101",
@@ -63,10 +66,10 @@ const tableData: Reservation[] = [
         email: "luisa.verdi@example.com",
       },
     ],
-    court_name: undefined,
-    date: undefined,
-    duration: undefined,
-    light: undefined,
+    court_name: "Campo 1",
+    date: "17/06/2025",
+    duration: "1 ora",
+    light: false,
   },
   {
     id: "2",
@@ -75,21 +78,21 @@ const tableData: Reservation[] = [
       name: "Lucia",
       surname: "Blu",
       email: "lucia.blu@example.com",
-      role: "",
-      is_active: false,
-      avatar: "",
+      role: "Player",
+      is_active: true,
+      avatar: "/images/user/user-2.jpg",
     },
     court: {
       id: "2",
       name: "Campo 2",
-      picturePath: null,
-      court_type: "",
-      location: "",
-      active: 0,
-      price_socio: 0,
-      price_non_socio: 0,
-      price_lights: 0,
-      price_junior: 0,
+      picturePath: "/images/court/court-2.jpg",
+      court_type: "Tennis",
+      location: "Area Sud",
+      active: 1,
+      price_socio: 12.0,
+      price_non_socio: 18.0,
+      price_lights: 5.0,
+      price_junior: 8.0,
       special_days: null,
       timetable: null,
     },
@@ -98,10 +101,10 @@ const tableData: Reservation[] = [
     is_double: true,
     is_cancelled: false,
     phone_number: "555-987-6543",
-    total_amount: 75,
+    total_amount: 75.0,
     lights_cost: 0,
     is_paid: false,
-    note: "",
+    note: "Doppio - Tennis",
     partecipants: [
       {
         id: "p201",
@@ -131,10 +134,10 @@ const tableData: Reservation[] = [
         email: "paolo.gialli@example.com",
       },
     ],
-    court_name: undefined,
-    date: undefined,
-    duration: undefined,
-    light: undefined,
+    court_name: "Campo 2",
+    date: "30/06/2025",
+    duration: "1 ora",
+    light: false,
   },
   {
     id: "3",
@@ -143,21 +146,21 @@ const tableData: Reservation[] = [
       name: "Francesca",
       surname: "Bruno",
       email: "francesca.bruno@example.com",
-      role: "",
-      is_active: false,
-      avatar: "",
+      role: "Socio",
+      is_active: true,
+      avatar: "/images/user/user-3.jpg",
     },
     court: {
       id: "3",
       name: "Campo 3",
-      picturePath: null,
-      court_type: "",
-      location: "",
-      active: 0,
-      price_socio: 0,
-      price_non_socio: 0,
-      price_lights: 0,
-      price_junior: 0,
+      picturePath: "/images/court/court-3.jpg",
+      court_type: "Beach Volley",
+      location: "Area Centrale",
+      active: 1,
+      price_socio: 10.0,
+      price_non_socio: 15.0,
+      price_lights: 7.0,
+      price_junior: 5.0,
       special_days: null,
       timetable: null,
     },
@@ -166,10 +169,10 @@ const tableData: Reservation[] = [
     is_double: true,
     is_cancelled: false,
     phone_number: "555-123-4567",
-    total_amount: 75,
+    total_amount: 75.0,
     lights_cost: 0,
     is_paid: true,
-    note: "",
+    note: "Doppio pagato",
     partecipants: [
       {
         id: "p301",
@@ -190,19 +193,20 @@ const tableData: Reservation[] = [
         email: "giulia.verdi@example.com",
       },
       {
-        id: null,
+        // Partecipante incompleto, riempito con valori di default
+        id: "p303",
         name: "Giovanni",
-        surname: null,
-        credit: null,
-        is_paid: null,
-        total_amount: null,
-        email: null,
+        surname: "Sconosciuto",
+        credit: 0,
+        is_paid: false,
+        total_amount: 0.0,
+        email: "giovanni.sconosciuto@example.com",
       },
     ],
-    court_name: undefined,
-    date: undefined,
-    duration: undefined,
-    light: undefined,
+    court_name: "Campo 3",
+    date: "30/06/2025",
+    duration: "1 ora",
+    light: false,
   },
   {
     id: "4",
@@ -211,21 +215,21 @@ const tableData: Reservation[] = [
       name: "Giuseppe",
       surname: "Verdi",
       email: "giuseppe.verdi@example.com",
-      role: "",
-      is_active: false,
-      avatar: "",
+      role: "Player",
+      is_active: true,
+      avatar: "/images/user/user-4.jpg",
     },
     court: {
       id: "4",
-      name: "Campo 3",
-      picturePath: null,
-      court_type: "",
-      location: "",
-      active: 0,
-      price_socio: 0,
-      price_non_socio: 0,
-      price_lights: 0,
-      price_junior: 0,
+      name: "Campo 4",
+      picturePath: "/images/court/court-4.jpg",
+      court_type: "Padel",
+      location: "Area Ovest",
+      active: 1,
+      price_socio: 15.0,
+      price_non_socio: 20.0,
+      price_lights: 5.0,
+      price_junior: 10.0,
       special_days: null,
       timetable: null,
     },
@@ -234,10 +238,10 @@ const tableData: Reservation[] = [
     is_double: true,
     is_cancelled: false,
     phone_number: "555-123-4567",
-    total_amount: 75,
+    total_amount: 75.0,
     lights_cost: 0,
     is_paid: true,
-    note: "",
+    note: "Quattro partecipanti",
     partecipants: [
       {
         id: "p401",
@@ -276,10 +280,10 @@ const tableData: Reservation[] = [
         email: "francesca.bruno@example.com",
       },
     ],
-    court_name: undefined,
-    date: undefined,
-    duration: undefined,
-    light: undefined,
+    court_name: "Campo 4",
+    date: "30/06/2025",
+    duration: "1 ora",
+    light: false,
   },
   {
     id: "5",
@@ -288,21 +292,21 @@ const tableData: Reservation[] = [
       name: "Francesca",
       surname: "Bruno",
       email: "francesca.bruno@example.com",
-      role: "",
-      is_active: false,
-      avatar: "",
+      role: "Socio",
+      is_active: true,
+      avatar: "/images/user/user-5.jpg",
     },
     court: {
       id: "5",
-      name: "Campo 3",
-      picturePath: null,
-      court_type: "",
-      location: "",
-      active: 0,
-      price_socio: 0,
-      price_non_socio: 0,
-      price_lights: 0,
-      price_junior: 0,
+      name: "Campo 5",
+      picturePath: "/images/court/court-5.jpg",
+      court_type: "Tennis",
+      location: "Area Est",
+      active: 1,
+      price_socio: 12.0,
+      price_non_socio: 18.0,
+      price_lights: 5.0,
+      price_junior: 8.0,
       special_days: null,
       timetable: null,
     },
@@ -311,10 +315,10 @@ const tableData: Reservation[] = [
     is_double: true,
     is_cancelled: false,
     phone_number: "555-123-4567",
-    total_amount: 75,
+    total_amount: 75.0,
     lights_cost: 0,
     is_paid: true,
-    note: "",
+    note: "Prenotazione con incompleto (Tennis)",
     partecipants: [
       {
         id: "p501",
@@ -335,13 +339,14 @@ const tableData: Reservation[] = [
         email: "giulia.verdi@example.com",
       },
       {
-        id: null,
+        // Partecipante incompleto, riempito con valori di default
+        id: "p503",
         name: "Giovanni",
-        surname: null,
-        credit: null,
-        is_paid: null,
-        total_amount: null,
-        email: null,
+        surname: "Sconosciuto",
+        credit: 0,
+        is_paid: false,
+        total_amount: 0.0,
+        email: "giovanni.sconosciuto@example.com",
       },
       {
         id: "p504",
@@ -353,14 +358,21 @@ const tableData: Reservation[] = [
         email: "andrea.gialli@example.com",
       },
     ],
-    court_name: undefined,
-    date: undefined,
-    duration: undefined,
-    light: undefined,
+    court_name: "Campo 5",
+    date: "30/06/2025",
+    duration: "1 ora",
+    light: false,
   },
 ];
+export default function BasicTableCollectGames() {
+  const [selectedReservations, setSelectedReservations] =
+    useState<Reservation | null>(null);
+  const [openReservations, setOpenReservations] = useState(false);
 
-export default function BasicTableOne() {
+  const handleOpenModal = (reservation: Reservation) => {
+    setSelectedReservations(reservation);
+    setOpenReservations(true);
+  };
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
       <div className="max-w-full overflow-x-auto">
@@ -410,13 +422,30 @@ export default function BasicTableOne() {
                 </TableCell>
 
                 <TableCell className="px-4 py-3  text-theme-sm dark:text-gray-400 flex items-center justify-center ">
-                  <HandCoins />
+                  <Button
+                    variant="ghost"
+                    onClick={() => handleOpenModal(reservation)}
+                    className="hover:text-brand-500 dark:hover:text-brand-500"
+                  >
+                    <HandCoins />
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </div>
+      <ReservationSummaryModal
+        open={openReservations}
+        onOpenChange={setOpenReservations}
+        startDate={selectedReservations?.startDate || ""}
+        court_name={selectedReservations?.court.name || ""}
+        is_double={selectedReservations?.is_double || false}
+        lights_cost={selectedReservations?.lights_cost || 0}
+        note={selectedReservations?.note || ""}
+        partecipants={selectedReservations?.partecipants || []}
+        total_amount={selectedReservations?.total_amount || 0}
+      />
     </div>
   );
 }

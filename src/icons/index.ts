@@ -64,6 +64,7 @@ import { ReactComponent as CalendarPlus } from "./calendar-plus.svg?react";
 import { ReactComponent as WalletMinimal } from "./wallet-minimal.svg?react";
 import { ReactComponent as X } from "./x.svg?react";
 import { ReactComponent as Camera } from "./camera.svg?react";
+import { ReactComponent as CircleAlert } from "./circle-alert.svg?react";
 
 export {
   ErrorHexaIcon,
@@ -132,4 +133,5 @@ export {
   WalletMinimal,
   X,
   Camera,
+  CircleAlert,
 };

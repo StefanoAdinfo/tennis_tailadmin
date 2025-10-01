@@ -7,6 +7,9 @@ import {
 } from "../../ui/table";
 import { Payment } from "../../../lib/type";
 import { HandCoins } from "../../../icons";
+import Button from "../../ui/button/Button";
+import { useState } from "react";
+import { UserPayMatchModal } from "../../ui/modal/UserPayMatchModal";
 
 const tableData: Payment[] = [
   {
@@ -14,6 +17,10 @@ const tableData: Payment[] = [
     name: "Stefano",
     surname: "D'aniello",
     total_amount: 61.2,
+    date: "17/06/2025",
+    email: "stefano.daniello@example.com",
+    role: "Player",
+    is_active: true,
     reservation: [
       {
         id: "1",
@@ -23,18 +30,20 @@ const tableData: Payment[] = [
           surname: "D'aniello",
           email: "stefano.daniello@example.com",
           avatar: "/images/user/user-17.jpg",
+          role: "Player",
+          is_active: true,
         },
         court: {
           id: "1",
           name: "Campo 1",
-          picturePath: null,
-          court_type: "",
-          location: "",
-          active: 0,
-          price_socio: 0,
-          price_non_socio: 0,
-          price_lights: 0,
-          price_junior: 0,
+          picturePath: "/images/court/court-1.jpg",
+          court_type: "Padel",
+          location: "Area Nord",
+          active: 1,
+          price_socio: 15.0,
+          price_non_socio: 20.0,
+          price_lights: 5.0,
+          price_junior: 10.0,
           special_days: null,
           timetable: null,
         },
@@ -45,15 +54,15 @@ const tableData: Payment[] = [
         phone_number: "555-123-4567",
         total_amount: 90.5,
         lights_cost: 0,
-        is_paid: false,
-        note: "",
+        is_paid: true,
+        note: "Prenotazione singola",
         partecipants: [
           {
             id: "1",
             name: "Stefano",
             surname: "D'aniello",
             credit: 10,
-            is_paid: false,
+            is_paid: true,
             total_amount: 20.4,
             email: "stefano.daniello@example.com",
           },
@@ -63,10 +72,14 @@ const tableData: Payment[] = [
             surname: "Verdi",
             credit: 10,
             is_paid: true,
-            total_amount: 50,
+            total_amount: 50.0,
             email: "luisa.verdi@example.com",
           },
         ],
+        court_name: "Campo 1",
+        date: "17/06/2025",
+        duration: "1 ora",
+        light: false,
       },
       {
         id: "2",
@@ -76,30 +89,32 @@ const tableData: Payment[] = [
           surname: "D'aniello",
           email: "stefano.daniello@example.com",
           avatar: "/images/user/user-17.jpg",
+          role: "Player",
+          is_active: true,
         },
         court: {
           id: "2",
           name: "Campo 2",
-          picturePath: null,
-          court_type: "",
-          location: "",
-          active: 0,
-          price_socio: 0,
-          price_non_socio: 0,
-          price_lights: 0,
-          price_junior: 0,
+          picturePath: "/images/court/court-2.jpg",
+          court_type: "Tennis",
+          location: "Area Sud",
+          active: 1,
+          price_socio: 12.0,
+          price_non_socio: 18.0,
+          price_lights: 5.0,
+          price_junior: 8.0,
           special_days: null,
           timetable: null,
         },
         startDate: "17/06/2025 - 13:00",
         endDate: "17/06/2025 - 14:00",
         is_double: false,
-        is_cancelled: false,
+        is_cancelled: true,
         phone_number: "555-123-4567",
         total_amount: 90.5,
         lights_cost: 0,
         is_paid: false,
-        note: "",
+        note: "Prenotazione singola",
         partecipants: [
           {
             id: "1",
@@ -115,11 +130,15 @@ const tableData: Payment[] = [
             name: "Tommaso",
             surname: "Verdi",
             credit: 10,
-            is_paid: true,
-            total_amount: 50,
+            is_paid: false,
+            total_amount: 50.0,
             email: "tommaso.verdi@example.com",
           },
         ],
+        court_name: "Campo 2",
+        date: "17/06/2025",
+        duration: "1 ora",
+        light: false,
       },
       {
         id: "3",
@@ -129,19 +148,20 @@ const tableData: Payment[] = [
           surname: "D'aniello",
           email: "stefano.daniello@example.com",
           avatar: "/images/user/user-17.jpg",
+          role: "Player",
+          is_active: true,
         },
-
         court: {
           id: "3",
           name: "Campo 3",
-          picturePath: null,
-          court_type: "",
-          location: "",
-          active: 0,
-          price_socio: 0,
-          price_non_socio: 0,
-          price_lights: 0,
-          price_junior: 0,
+          picturePath: "/images/court/court-3.jpg",
+          court_type: "Beach Volley",
+          location: "Area Centrale",
+          active: 1,
+          price_socio: 10.0,
+          price_non_socio: 15.0,
+          price_lights: 7.0,
+          price_junior: 5.0,
           special_days: null,
           timetable: null,
         },
@@ -153,7 +173,7 @@ const tableData: Payment[] = [
         total_amount: 90.5,
         lights_cost: 0,
         is_paid: false,
-        note: "",
+        note: "Prenotazione multipla",
         partecipants: [
           {
             id: "1",
@@ -170,7 +190,7 @@ const tableData: Payment[] = [
             surname: "Verdi",
             credit: 10,
             is_paid: true,
-            total_amount: 50,
+            total_amount: 50.0,
             email: "luisa.verdi@example.com",
           },
           {
@@ -179,7 +199,7 @@ const tableData: Payment[] = [
             surname: "Verdi",
             credit: 10,
             is_paid: true,
-            total_amount: 50,
+            total_amount: 50.0,
             email: "tommaso.verdi@example.com",
           },
           {
@@ -188,19 +208,26 @@ const tableData: Payment[] = [
             surname: "Verdi",
             credit: 10,
             is_paid: true,
-            total_amount: 50,
+            total_amount: 50.0,
             email: "giuseppe.verdi@example.com",
           },
         ],
+        court_name: "Campo 3",
+        date: "17/06/2025",
+        duration: "1 ora",
+        light: false,
       },
     ],
-    date: null,
   },
   {
     id: "2",
     name: "Luisa",
     surname: "Verdi",
-    total_amount: 150,
+    total_amount: 150.0,
+    date: "17/06/2025",
+    email: "luisa.verdi@example.com",
+    role: "Player",
+    is_active: true,
     reservation: [
       {
         id: "4",
@@ -210,18 +237,20 @@ const tableData: Payment[] = [
           surname: "Verdi",
           email: "luisa.verdi@example.com",
           avatar: "/images/user/user-17.jpg",
+          role: "Player",
+          is_active: true,
         },
         court: {
           id: "1",
           name: "Campo 1",
-          picturePath: null,
-          court_type: "",
-          location: "",
-          active: 0,
-          price_socio: 0,
-          price_non_socio: 0,
-          price_lights: 0,
-          price_junior: 0,
+          picturePath: "/images/court/court-1.jpg",
+          court_type: "Padel",
+          location: "Area Nord",
+          active: 1,
+          price_socio: 15.0,
+          price_non_socio: 20.0,
+          price_lights: 5.0,
+          price_junior: 10.0,
           special_days: null,
           timetable: null,
         },
@@ -233,7 +262,7 @@ const tableData: Payment[] = [
         total_amount: 90.5,
         lights_cost: 0,
         is_paid: false,
-        note: "",
+        note: "Prenotazione singola",
         partecipants: [
           {
             id: "2",
@@ -241,7 +270,7 @@ const tableData: Payment[] = [
             surname: "Verdi",
             credit: 10,
             is_paid: false,
-            total_amount: 50,
+            total_amount: 50.0,
             email: "luisa.verdi@example.com",
           },
           {
@@ -254,6 +283,10 @@ const tableData: Payment[] = [
             email: "stefano.daniello@example.com",
           },
         ],
+        court_name: "Campo 1",
+        date: "17/06/2025",
+        duration: "1 ora",
+        light: false,
       },
       {
         id: "5",
@@ -263,18 +296,20 @@ const tableData: Payment[] = [
           surname: "Verdi",
           email: "luisa.verdi@example.com",
           avatar: "/images/user/user-17.jpg",
+          role: "Player",
+          is_active: true,
         },
         court: {
           id: "2",
           name: "Campo 2",
-          picturePath: null,
-          court_type: "",
-          location: "",
-          active: 0,
-          price_socio: 0,
-          price_non_socio: 0,
-          price_lights: 0,
-          price_junior: 0,
+          picturePath: "/images/court/court-2.jpg",
+          court_type: "Tennis",
+          location: "Area Sud",
+          active: 1,
+          price_socio: 12.0,
+          price_non_socio: 18.0,
+          price_lights: 5.0,
+          price_junior: 8.0,
           special_days: null,
           timetable: null,
         },
@@ -286,7 +321,7 @@ const tableData: Payment[] = [
         total_amount: 90.5,
         lights_cost: 0,
         is_paid: false,
-        note: "",
+        note: "Prenotazione singola",
         partecipants: [
           {
             id: "2",
@@ -294,7 +329,7 @@ const tableData: Payment[] = [
             surname: "Verdi",
             credit: 10,
             is_paid: false,
-            total_amount: 50,
+            total_amount: 50.0,
             email: "luisa.verdi@example.com",
           },
           {
@@ -303,10 +338,14 @@ const tableData: Payment[] = [
             surname: "Verdi",
             credit: 10,
             is_paid: true,
-            total_amount: 50,
+            total_amount: 50.0,
             email: "tommaso.verdi@example.com",
           },
         ],
+        court_name: "Campo 2",
+        date: "17/06/2025",
+        duration: "1 ora",
+        light: false,
       },
       {
         id: "6",
@@ -316,18 +355,20 @@ const tableData: Payment[] = [
           surname: "Verdi",
           email: "luisa.verdi@example.com",
           avatar: "/images/user/user-17.jpg",
+          role: "Player",
+          is_active: true,
         },
         court: {
           id: "3",
           name: "Campo 3",
-          picturePath: null,
-          court_type: "",
-          location: "",
-          active: 0,
-          price_socio: 0,
-          price_non_socio: 0,
-          price_lights: 0,
-          price_junior: 0,
+          picturePath: "/images/court/court-3.jpg",
+          court_type: "Beach Volley",
+          location: "Area Centrale",
+          active: 1,
+          price_socio: 10.0,
+          price_non_socio: 15.0,
+          price_lights: 7.0,
+          price_junior: 5.0,
           special_days: null,
           timetable: null,
         },
@@ -339,7 +380,7 @@ const tableData: Payment[] = [
         total_amount: 90.5,
         lights_cost: 0,
         is_paid: false,
-        note: "",
+        note: "Prenotazione multipla",
         partecipants: [
           {
             id: "2",
@@ -347,7 +388,7 @@ const tableData: Payment[] = [
             surname: "Verdi",
             credit: 10,
             is_paid: false,
-            total_amount: 50,
+            total_amount: 50.0,
             email: "luisa.verdi@example.com",
           },
           {
@@ -365,7 +406,7 @@ const tableData: Payment[] = [
             surname: "Verdi",
             credit: 10,
             is_paid: true,
-            total_amount: 50,
+            total_amount: 50.0,
             email: "tommaso.verdi@example.com",
           },
           {
@@ -374,19 +415,26 @@ const tableData: Payment[] = [
             surname: "Verdi",
             credit: 10,
             is_paid: true,
-            total_amount: 50,
+            total_amount: 50.0,
             email: "giuseppe.verdi@example.com",
           },
         ],
+        court_name: "Campo 3",
+        date: "17/06/2025",
+        duration: "1 ora",
+        light: false,
       },
     ],
-    date: null,
   },
   {
     id: "3",
     name: "Marco",
     surname: "Rossi",
     total_amount: 45.0,
+    date: "18/06/2025",
+    email: "marco.rossi@example.com",
+    role: "Admin",
+    is_active: true,
     reservation: [
       {
         id: "7",
@@ -396,18 +444,20 @@ const tableData: Payment[] = [
           surname: "Rossi",
           email: "marco.rossi@example.com",
           avatar: "/images/user/user-17.jpg",
+          role: "Admin",
+          is_active: true,
         },
         court: {
           id: "4",
           name: "Campo 4",
-          picturePath: null,
-          court_type: "",
-          location: "",
-          active: 0,
-          price_socio: 0,
-          price_non_socio: 0,
-          price_lights: 0,
-          price_junior: 0,
+          picturePath: "/images/court/court-4.jpg",
+          court_type: "Padel",
+          location: "Area Ovest",
+          active: 1,
+          price_socio: 15.0,
+          price_non_socio: 20.0,
+          price_lights: 5.0,
+          price_junior: 10.0,
           special_days: null,
           timetable: null,
         },
@@ -419,7 +469,7 @@ const tableData: Payment[] = [
         total_amount: 45.0,
         lights_cost: 0,
         is_paid: false,
-        note: "",
+        note: "Prenotazione mattutina",
         partecipants: [
           {
             id: "3",
@@ -440,15 +490,22 @@ const tableData: Payment[] = [
             email: "stefano.daniello@example.com",
           },
         ],
+        court_name: "Campo 4",
+        date: "18/06/2025",
+        duration: "1 ora",
+        light: false,
       },
     ],
-    date: null,
   },
   {
     id: "4",
     name: "Sara",
     surname: "Bianchi",
-    total_amount: 45,
+    total_amount: 45.0,
+    date: "19/06/2025",
+    email: "sara.bianchi@example.com",
+    role: "Player",
+    is_active: true,
     reservation: [
       {
         id: "8",
@@ -458,18 +515,20 @@ const tableData: Payment[] = [
           surname: "Bianchi",
           email: "sara.bianchi@example.com",
           avatar: "/images/user/user-17.jpg",
+          role: "Player",
+          is_active: true,
         },
         court: {
           id: "5",
           name: "Campo 5",
-          picturePath: null,
-          court_type: "",
-          location: "",
-          active: 0,
-          price_socio: 0,
-          price_non_socio: 0,
-          price_lights: 0,
-          price_junior: 0,
+          picturePath: "/images/court/court-5.jpg",
+          court_type: "Tennis",
+          location: "Area Est",
+          active: 1,
+          price_socio: 12.0,
+          price_non_socio: 18.0,
+          price_lights: 5.0,
+          price_junior: 8.0,
           special_days: null,
           timetable: null,
         },
@@ -481,7 +540,7 @@ const tableData: Payment[] = [
         total_amount: 90.0,
         lights_cost: 0,
         is_paid: false,
-        note: "",
+        note: "Doppio mattutino",
         partecipants: [
           {
             id: "4",
@@ -502,15 +561,22 @@ const tableData: Payment[] = [
             email: "paolo.riva@example.com",
           },
         ],
+        court_name: "Campo 5",
+        date: "19/06/2025",
+        duration: "1 ora",
+        light: false,
       },
     ],
-    date: null,
   },
   {
     id: "5",
     name: "Davide",
     surname: "Neri",
     total_amount: 20.0,
+    date: "20/06/2025",
+    email: "davide.neri@example.com",
+    role: "Socio",
+    is_active: true,
     reservation: [
       {
         id: "9",
@@ -520,18 +586,20 @@ const tableData: Payment[] = [
           surname: "Neri",
           email: "davide.neri@example.com",
           avatar: "/images/user/user-17.jpg",
+          role: "Socio",
+          is_active: true,
         },
         court: {
           id: "6",
           name: "Campo 6",
-          picturePath: null,
-          court_type: "",
-          location: "",
-          active: 0,
-          price_socio: 0,
-          price_non_socio: 0,
-          price_lights: 0,
-          price_junior: 0,
+          picturePath: "/images/court/court-6.jpg",
+          court_type: "Padel",
+          location: "Area Nord",
+          active: 1,
+          price_socio: 15.0,
+          price_non_socio: 20.0,
+          price_lights: 5.0,
+          price_junior: 10.0,
           special_days: null,
           timetable: null,
         },
@@ -543,7 +611,7 @@ const tableData: Payment[] = [
         total_amount: 60.0,
         lights_cost: 0,
         is_paid: false,
-        note: "",
+        note: "Prenotazione pomeridiana",
         partecipants: [
           {
             id: "5",
@@ -573,13 +641,23 @@ const tableData: Payment[] = [
             email: "matteo.blu@example.com",
           },
         ],
+        court_name: "Campo 6",
+        date: "20/06/2025",
+        duration: "1 ora e 30 min",
+        light: false,
       },
     ],
-    date: null,
   },
 ];
 
 export default function BasicTableOne() {
+  const [selectedPayment, setSelectedPayment] = useState<Payment | null>(null);
+  const [openPayments, setOpenPayments] = useState(false);
+
+  const handleOpenModal = (payment: Payment) => {
+    setSelectedPayment(payment);
+    setOpenPayments(true);
+  };
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
       <div className="max-w-full overflow-x-auto">
@@ -629,13 +707,28 @@ export default function BasicTableOne() {
                 </TableCell>
 
                 <TableCell className="px-4 py-3  text-theme-sm dark:text-gray-400 flex items-center justify-center ">
-                  <HandCoins />
+                  <Button
+                    variant="ghost"
+                    onClick={() => handleOpenModal(user)}
+                    className="hover:text-brand-500 dark:hover:text-brand-500"
+                  >
+                    <HandCoins />
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </div>
+      <UserPayMatchModal
+        open={openPayments}
+        onOpenChange={setOpenPayments}
+        reservation={selectedPayment?.reservation || []}
+        id={selectedPayment?.id || ""}
+        name={selectedPayment?.name || ""}
+        surname={selectedPayment?.surname || ""}
+        total_amount={selectedPayment?.total_amount || 0}
+      />
     </div>
   );
 }

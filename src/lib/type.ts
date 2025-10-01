@@ -1,9 +1,13 @@
 export type Payment = {
+  total_amount: any;
   id: string;
   date: string | null;
   name: string;
   surname: string;
-  total_amount: number;
+  email: string;
+
+  role: string;
+  is_active: boolean;
   reservation: Reservation[];
 };
 export interface WeekSchedule {
@@ -78,9 +82,9 @@ export type User = {
   avatar: string;
 };
 export type Reservation = {
-  court_name: ReactNode;
-  date: ReactNode;
-  duration: ReactNode;
+  court_name: string;
+  date: string;
+  duration: string;
   light: any;
   id: string;
   user: User;

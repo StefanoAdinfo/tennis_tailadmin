@@ -1,7 +1,6 @@
 import { Link } from "react-router";
 import { ArrowRightIcon } from "../../icons";
 import Button from "../ui/button/Button";
-import DatePicker from "../form/date-picker";
 import { Separator } from "../ui/separator/Separator";
 
 interface ComponentCardProps {

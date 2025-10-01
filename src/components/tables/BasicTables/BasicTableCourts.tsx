@@ -9,6 +9,9 @@ import { Court } from "../../../lib/type";
 import { TrashBinIcon, PenIcon } from "../../../icons";
 import Badge from "../../ui/badge/Badge";
 import { Link } from "react-router";
+import Button from "../../ui/button/Button";
+import { Modal } from "../../ui/modal";
+import { useState } from "react";
 
 const tableData: Court[] = [
   {
@@ -154,6 +157,17 @@ function getCourtTypeLabel(courtType: string): string {
 }
 
 export default function BasicTableOne() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectCourt, setSelectCourt] = useState<Court | null>(null);
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
+  const handleOpenModal = (court: Court) => {
+    setSelectCourt(court);
+    setIsOpen(true);
+  };
+
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
       <div className="max-w-full overflow-x-auto">
@@ -181,13 +195,13 @@ export default function BasicTableOne() {
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400 "
+                className="px-5 py-3 font-medium text-gray-500 text-center text-theme-xs dark:text-gray-400 "
               >
                 Attivo
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400 flex justify-center items-center"
+                className="px-5 py-3 font-medium text-gray-500 text-center text-theme-xs dark:text-gray-400 "
               >
                 Azione
               </TableCell>
@@ -208,28 +222,56 @@ export default function BasicTableOne() {
                   {getCourtTypeLabel(court.court_type)}
                 </TableCell>
 
-                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400 ">
+                <TableCell className="px-4 py-3 text-gray-500  text-theme-sm dark:text-gray-400 text-center">
                   <Badge size="sm" color={court.active ? "success" : "error"}>
                     {court.active ? "Si" : "No"}
                   </Badge>
                 </TableCell>
 
-                <TableCell className="px-4 py-3  text-theme-sm  dark:text-gray-400  flex items-center justify-center cursor-pointer gap-4">
+                <TableCell className="px-4 py-3 text-theme-sm  dark:text-gray-400  flex items-center justify-center cursor-pointer ">
                   <Link
                     to={`/campi/modifica/${court.id}`}
                     className="hover:text-brand-500 dark:hover:text-brand-500"
                   >
-                    <PenIcon />
+                    <Button variant="ghost">
+                      <PenIcon />
+                    </Button>
                   </Link>
-                  <div className="hover:text-red-500 dark:hover:text-red-500">
+                  <Button
+                    variant="ghost"
+                    onClick={() => handleOpenModal(court)}
+                    className="hover:text-red-500 dark:hover:text-red-500"
+                  >
                     <TrashBinIcon />
-                  </div>
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </div>
+
+      <Modal
+        isOpen={isOpen}
+        onClose={handleCloseModal}
+        className="max-w-lg p-6"
+      >
+        <h5 className="text-base font-medium text-gray-800 dark:text-white/90">
+          Sei sicuro di voler eliminare {selectCourt?.name}
+        </h5>
+        <p className="mt-4 text-sm leading-normal text-gray-500 dark:text-gray-400">
+          L'azione è irreversibile
+        </p>
+
+        <div className="mt-6 flex justify-end gap-2">
+          <Button variant="outline" onClick={handleCloseModal}>
+            Annulla
+          </Button>
+          <Button variant="primary" onClick={handleCloseModal}>
+            Elimina
+          </Button>
+        </div>
+      </Modal>
     </div>
   );
 }
