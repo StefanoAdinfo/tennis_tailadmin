@@ -8,6 +8,7 @@ import {
 import { Court } from "../../../lib/type";
 import { TrashBinIcon, PenIcon } from "../../../icons";
 import Badge from "../../ui/badge/Badge";
+import { Link } from "react-router";
 
 const tableData: Court[] = [
   {
@@ -213,9 +214,16 @@ export default function BasicTableOne() {
                   </Badge>
                 </TableCell>
 
-                <TableCell className="px-4 py-3  text-theme-sm dark:text-gray-400 gap-2 flex items-center justify-center">
-                  <PenIcon />
-                  <TrashBinIcon />
+                <TableCell className="px-4 py-3  text-theme-sm  dark:text-gray-400  flex items-center justify-center cursor-pointer gap-4">
+                  <Link
+                    to={`/campi/modifica/${court.id}`}
+                    className="hover:text-brand-500 dark:hover:text-brand-500"
+                  >
+                    <PenIcon />
+                  </Link>
+                  <div className="hover:text-red-500 dark:hover:text-red-500">
+                    <TrashBinIcon />
+                  </div>
                 </TableCell>
               </TableRow>
             ))}

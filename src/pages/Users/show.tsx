@@ -444,7 +444,7 @@ export default function UsersShow() {
             </div>
 
             <div className="flex flex-col lg:flex-row items-start gap-8 ">
-              <div className="w-full lg:w-2xs px-3 py-8 shadow-none rounded-xl border border-gray-200 dark:border-gray-800">
+              <ComponentCard className="w-full lg:w-2xs ">
                 <Avatar
                   userName={"Stefano"}
                   userSurname={"D'aniello"}
@@ -463,9 +463,9 @@ export default function UsersShow() {
                   <Switch label="" />
                   <Label htmlFor="airplane-mode">Bannato</Label>
                 </div>
-              </div>
+              </ComponentCard>
               {/* Form */}
-              <div className="w-full lg:flex-1 px-3 py-8 shadow-none rounded-xl border border-gray-200 dark:border-gray-800">
+              <ComponentCard className="w-full lg:flex-1">
                 <div className="flex flex-col md:flex-row gap-4">
                   <div className="w-full">
                     <Label className="mb-1" htmlFor="name">
@@ -537,7 +537,7 @@ export default function UsersShow() {
                     Salva
                   </Button>
                 </div>
-              </div>
+              </ComponentCard>
             </div>
 
             <div className="col-span-12 space-y-6">

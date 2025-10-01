@@ -24,9 +24,11 @@ import Revenue from "./pages/Revenue";
 import Users from "./pages/Users";
 import UsersShow from "./pages/Users/show";
 import Courts from "./pages/Courts";
+import CourtsCreate from "./pages/Courts/create";
+import CourtsUpdate from "./pages/Courts/update";
 import Booking from "./pages/Booking";
+import "react-day-picker/dist/style.css";
 
-<script src="https://cdn.jsdelivr.net/npm/flowbite@2.3.0/dist/flowbite.min.js"></script>;
 export default function App() {
   return (
     <>
@@ -49,6 +51,8 @@ export default function App() {
             <Route path="/utenti" element={<Users />} />
             <Route path="/utenti/:id" element={<UsersShow />} />
             <Route path="/campi" element={<Courts />} />
+            <Route path="/campi/creazione" element={<CourtsCreate />} />
+            <Route path="/campi/modifica/:id" element={<CourtsUpdate />} />
             {/* Prenota */}
             <Route path="/prenota" element={<Booking />} />
             {/* Profile */}
