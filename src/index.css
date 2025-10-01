@@ -784,10 +784,10 @@ span.flatpickr-weekday,
 .simplebar-scrollbar.simplebar-visible:before {
   @apply opacity-100;
 }
-
+/* 
 .rdp-root {
   overflow: hidden;
-  position: relative; /* Required to position the navigation toolbar. */
+  position: relative; 
   box-sizing: border-box;
 }
 
@@ -829,6 +829,124 @@ span.flatpickr-weekday,
 }
 .rdp-month_grid {
   width: 100% !important;
-  table-layout: fixed; /* forza celle con larghezza fissa */
+  table-layout: fixed; 
   border-collapse: collapse;
+} */
+
+/* ---------------------------------------------------- */
+/* 0. Definizione della Larghezza Totale (700px) */
+/* ---------------------------------------------------- */
+
+/* La classe usata nel componente React per definire la larghezza */
+.flatpickr-custom-700 {
+  width: 700px;
+}
+
+/* Fissiamo la larghezza sul calendario e usiamo border-box */
+.flatpickr-calendar {
+  width: 700px !important;
+  max-width: none !important;
+  height: auto !important;
+  box-shadow: none;
+  /* CRUCIALE: Assicura che padding e border NON ingrandiscano il calendario oltre i 700px */
+  box-sizing: border-box !important;
+}
+
+/* ---------------------------------------------------- */
+/* 1. Contenitori Intermedi: Pulisci Margini e Altezze */
+/* ---------------------------------------------------- */
+
+/* Assicura che i contenitori interni si espandano completamente e rimuovi restrizioni */
+.flatpickr-rContainer,
+.flatpickr-innerContainer,
+.flatpickr-days {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  display: block !important; /* Resetta i comportamenti float/flex originali */
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* ---------------------------------------------------- */
+/* 2. LAYOUT GRIGLIA E DIMENSIONAMENTO DEI GIORNI (7xN) */
+/* ---------------------------------------------------- */
+
+/* Contenitori della Griglia */
+.flatpickr-weekdaycontainer,
+.dayContainer {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr) !important;
+  /* Usiamo grid-gap, ma la proprietà box-sizing di sopra lo gestirà */
+  grid-gap: 4px; /* Aumentiamo leggermente il gap per chiarezza */
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Assicura che le righe si adattino al contenuto (necessario per aspect-ratio) */
+.dayContainer {
+  grid-auto-rows: auto !important;
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* ---------------------------------------------------- */
+/* 3. STILE E FORMA DEL SINGOLO GIORNO (Quadrato Perfetto) */
+/* ---------------------------------------------------- */
+
+.flatpickr-day {
+  /* ANNULLA le regole di dimensione di Flatpickr */
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: none !important;
+
+  /* CRUCIALE: Forza la forma Quadrata in base alla larghezza della griglia */
+  aspect-ratio: 1 / 1;
+
+  /* Centratura e dimensione del Font */
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+
+  /* Il giorno è circa 100px. Impostiamo il font a circa 50px (la metà) */
+  /* Utilizziamo un'unità fissa grande per sovrascrivere. */
+  font-size: 50px !important; /* Molto grande, circa la metà dell'altezza/larghezza del giorno */
+  font-weight: bold; /* Opzionale: rende il numero più leggibile */
+
+  box-sizing: border-box; /* Necessario per il bordo */
+  border-radius: 50%; /* Rende la selezione un cerchio come nell'immagine */
+}
+
+/* ---------------------------------------------------- */
+/* 4. Stili Header e Nomi Giorni */
+/* ---------------------------------------------------- */
+
+.flatpickr-day.today,
+.flatpickr-day.selected {
+  /* Il bordo che si vede intorno al giorno selezionato */
+  box-shadow: 0 0 0 3px currentColor !important;
+}
+.flatpickr-month {
+  height: 70px;
+}
+.flatpickr-current-month .flatpickr-monthTitle {
+  font-size: 1.8rem;
+  padding-top: 15px;
+}
+.flatpickr-weekday {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 10px 0 !important;
+  font-size: 1.2rem;
+}
+
+.flatpickr-next-month,
+.flatpickr-prev-month {
+  padding: 15px 12px;
+  transform: scale(1.5);
 }

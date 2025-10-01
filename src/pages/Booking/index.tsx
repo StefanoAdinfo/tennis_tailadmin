@@ -24,13 +24,13 @@ export default function Reservation() {
   const renderStepContent = () => {
     switch (currentStep) {
       case 1:
-        return <Step1 />;
+        return <Step1 id={"1"} />;
       case 2:
         return <Step2 />;
       case 3:
         return <Step3 />;
       default:
-        return <Step1 />;
+        return <Step1 id={"1"} />;
     }
   };
   return (
@@ -40,7 +40,7 @@ export default function Reservation() {
         description="This is React.js Ecommerce Dashboard page for TailAdmin - React.js Tailwind CSS Admin Dashboard Template"
       />
       <PageBreadcrumb pageTitle="Prenota" />
-      <Separator marginY="5" color="gray" />
+      <Separator color="gray" className="my-5" />
       <div className="flex w-full mb-5 gap-4 justify-between">
         {[
           { step: 1, label: "Seleziona un giorno" },
