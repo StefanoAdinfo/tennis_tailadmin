@@ -38,7 +38,7 @@ export function CalendarHeader({ view, events }: IProps) {
               aria-label="giorno"
               title="giorno"
               variant={view === "day" ? "primary" : "outline"}
-              className="rounded-r-none [&_svg]:size-5 cursor-pointer"
+              className="rounded-r-none [&_svg]:size-4 cursor-pointer"
             >
               <i>
                 <List strokeWidth={1.8} />
@@ -50,7 +50,7 @@ export function CalendarHeader({ view, events }: IProps) {
               aria-label="settimana"
               title="settimana"
               variant={view === "week" ? "primary" : "outline"}
-              className="-ml-px rounded-none [&_svg]:size-5 cursor-pointer"
+              className="-ml-px rounded-none [&_svg]:size-4 cursor-pointer"
             >
               <i>
                 <Grid2x2 strokeWidth={1.8} />
@@ -61,8 +61,8 @@ export function CalendarHeader({ view, events }: IProps) {
               aria-label="mese"
               title="mese"
               variant={view === "month" ? "primary" : "outline"}
-              // className="-ml-px rounded-none [&_svg]:size-5 cursor-pointer"
-              className="-ml-px rounded-l-none [&_svg]:size-5 cursor-pointer"
+              // className="-ml-px rounded-none [&_svg]:size-4 cursor-pointer"
+              className="-ml-px rounded-l-none [&_svg]:size-4 cursor-pointer"
             >
               <i>
                 <Columns strokeWidth={1.8} />

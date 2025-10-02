@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import { formatDate } from "date-fns";
 import { it } from "date-fns/locale";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { useCalendar } from "~/calendar/contexts/calendar-context";
 
@@ -11,6 +10,7 @@ import type { IEvent } from "~/calendar/interfaces";
 import type { TCalendarView } from "~/calendar/types";
 import Button from "../../../components/ui/button/Button";
 import Badge from "../../../components/ui/badge/Badge";
+import { ChevronLeftIcon, ChevronRightIcon } from "~/icons";
 
 interface IProps {
   view: TCalendarView;
@@ -36,7 +36,7 @@ export function DateNavigator({ view, events }: IProps) {
 
   return (
     <div className="space-y-0.5">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 text-gray-800 dark:text-white/90">
         <span className="text-lg font-semibold">
           {month} {year}
         </span>
@@ -44,24 +44,16 @@ export function DateNavigator({ view, events }: IProps) {
       </div>
 
       <div className="flex items-center gap-2">
-        <Button
-          variant="outline"
-          className="size-6.5 px-0 [&_svg]:size-4.5"
-          onClick={handlePrevious}
-        >
-          <ChevronLeft />
+        <Button variant="outline" className="p-2!" onClick={handlePrevious}>
+          <ChevronLeftIcon />
         </Button>
 
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-muted-foreground text-gray-800 dark:text-white/90">
           {rangeText(view, selectedDate)}
         </p>
 
-        <Button
-          variant="outline"
-          className="size-6.5 px-0 [&_svg]:size-4.5"
-          onClick={handleNext}
-        >
-          <ChevronRight />
+        <Button variant="outline" className="p-2!" onClick={handleNext}>
+          <ChevronRightIcon />
         </Button>
       </div>
     </div>

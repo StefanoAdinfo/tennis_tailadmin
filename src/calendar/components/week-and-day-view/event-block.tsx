@@ -4,17 +4,22 @@ import { it } from "date-fns/locale";
 
 import { useCalendar } from "~/calendar/contexts/calendar-context";
 
-import { DraggableEvent } from "~/calendar/components/dnd/draggable-event";
-import { EventDetailsDialog } from "~/calendar/components/dialogs/event-details-dialog";
-
 import { cn } from "@/lib/utils";
 
-import { useState, type HTMLAttributes } from "react";
+import {
+  RefObject,
+  useLayoutEffect,
+  useState,
+  type HTMLAttributes,
+} from "react";
 import type { IEvent } from "~/calendar/interfaces";
 import type { VariantProps } from "class-variance-authority";
 
 import Button from "~/components/ui/button/Button";
 import { Modal } from "~/components/ui/modal";
+import { useRef } from "react";
+import { Tooltip } from "~/components/ui/tooltip/Tooltip";
+import { EventDetailsDialog } from "../dialogs/event-details-dialog";
 
 const calendarWeekEventCardVariants = cva(
   "flex select-none flex-col gap-0.5 truncate whitespace-nowrap rounded-md border px-2 py-1.5 text-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
@@ -64,7 +69,8 @@ interface IProps
 }
 
 export function EventBlock({ event, className }: IProps) {
-  const [open, setOpen] = useState(false);
+  const [openTooltip, setOpenTooltip] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const { badgeVariant } = useCalendar();
 
@@ -88,77 +94,94 @@ export function EventBlock({ event, className }: IProps) {
       if (e.currentTarget instanceof HTMLElement) e.currentTarget.click();
     }
   };
-  const handleCloseModal = () => {
-    setOpen(false);
+
+  const handleOpenModal = () => {
+    setOpenTooltip(false);
+    setOpenModal(true);
   };
 
-  return (
-    <Modal isOpen={open} onClose={handleCloseModal}>
-      <EventDetailsDialog event={event}>
-        <Button>
-          <div
-            role="button"
-            tabIndex={0}
-            onMouseEnter={() => setOpen(true)}
-            onMouseLeave={() => setTimeout(() => setOpen(false), 100)}
-            className={cn(
-              calendarWeekEventCardClasses,
-              "relative flex flex-col overflow-hidden"
-            )}
-            style={{ height: `${heightInPixels}px` }}
-            onKeyDown={handleKeyDown}
-          >
-            <div className="overflow-hidden">
-              <p>{event.court.name}</p>
-              <p>
-                {format(start, "HH:mm", { locale: it })}–{" "}
-                {format(end, "HH:mm", { locale: it })}
-              </p>
-              <p className="font-semibold">
-                {event.user.surname +
-                  " " +
-                  (event.user.name.length > 0 ? event.user.name[0] + "." : "")}
-              </p>
-              {event.partecipants.map((partecipant) => (
-                <p key={partecipant.id}>
-                  {partecipant.name} {partecipant.surname}
-                </p>
-              ))}
-            </div>
-
-            <div className="absolute bottom-0 right-0 px-1 pb-0.5 text-xs font-bold pointer-events-none bg-gradient-to-t  dark:from-neutral-950 text-neutral-500">
-              ⋯
-            </div>
-          </div>
-        </Button>
-      </EventDetailsDialog>
-
+  const TriggerContent = (
+    <>
       <div
-        className="w-64 text-sm pointer-events-none "
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
+        role="button"
+        tabIndex={0}
+        onClick={() => handleOpenModal()}
+        className={cn(
+          calendarWeekEventCardClasses,
+          "relative flex flex-col overflow-hidden cursor-pointer"
+        )}
+        style={{ height: `${heightInPixels}px` }}
+        onKeyDown={handleKeyDown}
       >
-        <p className="text-muted-foreground text-xs mb-1">
-          {format(start, "dd MMMM yyyy", { locale: it })}
-        </p>
-        <p className="font-medium">{event.court.name}</p>
-        <p>
-          {format(start, "HH:mm", { locale: it })} –{" "}
-          {format(end, "HH:mm", { locale: it })}
-        </p>
-        <p className="mt-2 font-semibold">
-          {event.user.surname +
-            " " +
-            (event.user.name.length > 0 ? event.user.name[0] + "." : "")}
-        </p>
-        <div className="mt-1">
-          {event.partecipants.map((p) => (
-            <p key={p.id}>
-              {p.name} {p.surname}
+        <div className="overflow-hidden">
+          <p>{event.court.name}</p>
+          <p>
+            {format(start, "HH:mm", { locale: it })}–{" "}
+            {format(end, "HH:mm", { locale: it })}
+          </p>
+          <p className="font-semibold">
+            {event.user.surname +
+              " " +
+              (event.user.name.length > 0 ? event.user.name[0] + "." : "")}
+          </p>
+          {event.partecipants.map((partecipant) => (
+            <p key={partecipant.id}>
+              {partecipant.name} {partecipant.surname}
             </p>
           ))}
         </div>
+
+        <div className="absolute bottom-0 right-0 px-1 pb-0.5 text-xs font-bold pointer-events-none bg-gradient-to-t  dark:from-neutral-950 text-neutral-500">
+          ⋯
+        </div>
       </div>
-    </Modal>
+      <EventDetailsDialog
+        event={event}
+        open={openModal}
+        setOpen={setOpenModal}
+      />
+    </>
+  );
+
+  const TooltipContent = (
+    <>
+      {/* 1. Data */}
+      <p className="text-muted-foreground text-xs mb-2 border-b pb-1 dark:border-gray-700/50">
+        {format(start, "dd MMMM yyyy", { locale: it })}
+      </p>
+
+      {/* 2. Campo e Orario (Bold e Grande) */}
+      <p className="font-bold text-base dark:text-white">{event.court.name}</p>
+      <p className="font-medium text-base mb-3 dark:text-white">
+        {format(start, "HH:mm", { locale: it })} –{" "}
+        {format(end, "HH:mm", { locale: it })}
+      </p>
+
+      {/* 3. Utente Principale (Più Evidenza) */}
+      <p className="mt-3 mb-1 font-bold dark:text-white">
+        {event.user.surname +
+          " " +
+          (event.user.name.length > 0 ? event.user.name[0] + "." : "")}
+      </p>
+
+      {/* 4. Partecipanti */}
+      <div className="mt-2 space-y-0.5 text-gray-700 dark:text-gray-300">
+        {event.partecipants.map((p) => (
+          <p key={p.id} className="text-sm">
+            {p.name} {p.surname}
+          </p>
+        ))}
+      </div>
+    </>
+  );
+
+  return (
+    <Tooltip
+      trigger={TriggerContent}
+      open={openTooltip}
+      setOpen={setOpenTooltip}
+    >
+      {TooltipContent}
+    </Tooltip>
   );
 }

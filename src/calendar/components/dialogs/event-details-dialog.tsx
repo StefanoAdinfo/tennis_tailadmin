@@ -5,10 +5,11 @@ import { ReservationSummaryModal } from "~/components/ui/modal/ReservationSummar
 
 interface IProps {
   event: IEvent;
-  children: React.ReactNode;
+  open: boolean;
+  setOpen: (open: boolean) => void;
 }
 
-export function EventDetailsDialog({ event, children }: IProps) {
+export function EventDetailsDialog({ event, open, setOpen }: IProps) {
   const startDateString = format(parseISO(event.startDate), "dd/MM/yyyy HH:mm");
   return (
     <ReservationSummaryModal
@@ -19,7 +20,8 @@ export function EventDetailsDialog({ event, children }: IProps) {
       note={event.note}
       partecipants={event.partecipants}
       total_amount={event.total_amount}
-      open={false}
+      open={open}
+      onOpenChange={setOpen}
     />
   );
 }
