@@ -784,10 +784,10 @@ span.flatpickr-weekday,
 .simplebar-scrollbar.simplebar-visible:before {
   @apply opacity-100;
 }
-/* 
+
 .rdp-root {
   overflow: hidden;
-  position: relative; 
+  position: relative;
   box-sizing: border-box;
 }
 
@@ -829,124 +829,155 @@ span.flatpickr-weekday,
 }
 .rdp-month_grid {
   width: 100% !important;
-  table-layout: fixed; 
+  table-layout: fixed;
   border-collapse: collapse;
-} */
-
-/* ---------------------------------------------------- */
-/* 0. Definizione della Larghezza Totale (700px) */
-/* ---------------------------------------------------- */
-
-/* La classe usata nel componente React per definire la larghezza */
-.flatpickr-custom-700 {
-  width: 700px;
 }
 
-/* Fissiamo la larghezza sul calendario e usiamo border-box */
+/* ==================================================== */
+/* 0. ROOT & MAIN CONTAINERS */
+/* ==================================================== */
+
+/* La larghezza è sempre 100% fino al max di 800px. Questo è perfetto per la reattività. */
 .flatpickr-calendar {
-  width: 700px !important;
-  max-width: none !important;
+  width: 100% !important;
+  max-width: 800px !important;
   height: auto !important;
-  box-shadow: none;
-  /* CRUCIALE: Assicura che padding e border NON ingrandiscano il calendario oltre i 700px */
+  margin: 0 auto !important;
   box-sizing: border-box !important;
+  /* (Opzionale: Un padding leggero per evitare che tocchi i bordi dello schermo piccolo) */
+  padding: 0 0.5rem;
 }
 
-/* ---------------------------------------------------- */
-/* 1. Contenitori Intermedi: Pulisci Margini e Altezze */
-/* ---------------------------------------------------- */
+.flatpickr-calendar.open,
+.flatpickr-calendar.inline {
+  height: auto !important;
+  max-height: none !important;
+}
 
-/* Assicura che i contenitori interni si espandano completamente e rimuovi restrizioni */
 .flatpickr-rContainer,
 .flatpickr-innerContainer,
 .flatpickr-days {
   width: 100% !important;
-  height: auto !important;
+  height: 100% !important;
   min-height: 0 !important;
-  display: block !important; /* Resetta i comportamenti float/flex originali */
-  padding: 0 !important;
-  margin: 0 !important;
+  display: block !important;
 }
 
-/* ---------------------------------------------------- */
-/* 2. LAYOUT GRIGLIA E DIMENSIONAMENTO DEI GIORNI (7xN) */
-/* ---------------------------------------------------- */
+/* ==================================================== */
+/* 1. HEADER (Mese, Anno e Navigazione) - Reattivo */
+/* ==================================================== */
 
-/* Contenitori della Griglia */
-.flatpickr-weekdaycontainer,
-.dayContainer {
-  display: grid !important;
-  grid-template-columns: repeat(7, 1fr) !important;
-  /* Usiamo grid-gap, ma la proprietà box-sizing di sopra lo gestirà */
-  grid-gap: 4px; /* Aumentiamo leggermente il gap per chiarezza */
-  width: 100% !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-/* Assicura che le righe si adattino al contenuto (necessario per aspect-ratio) */
-.dayContainer {
-  grid-auto-rows: auto !important;
-  width: 100% !important;
-  min-width: 100% !important;
-  max-width: 100% !important;
-}
-
-/* ---------------------------------------------------- */
-/* 3. STILE E FORMA DEL SINGOLO GIORNO (Quadrato Perfetto) */
-/* ---------------------------------------------------- */
-
-.flatpickr-day {
-  /* ANNULLA le regole di dimensione di Flatpickr */
-  margin: 0 !important;
-  padding: 0 !important;
-  width: auto !important;
-  height: auto !important;
-  max-width: none !important;
-
-  /* CRUCIALE: Forza la forma Quadrata in base alla larghezza della griglia */
-  aspect-ratio: 1 / 1;
-
-  /* Centratura e dimensione del Font */
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-
-  /* Il giorno è circa 100px. Impostiamo il font a circa 50px (la metà) */
-  /* Utilizziamo un'unità fissa grande per sovrascrivere. */
-  font-size: 50px !important; /* Molto grande, circa la metà dell'altezza/larghezza del giorno */
-  font-weight: bold; /* Opzionale: rende il numero più leggibile */
-
-  box-sizing: border-box; /* Necessario per il bordo */
-  border-radius: 50%; /* Rende la selezione un cerchio come nell'immagine */
-}
-
-/* ---------------------------------------------------- */
-/* 4. Stili Header e Nomi Giorni */
-/* ---------------------------------------------------- */
-
-.flatpickr-day.today,
-.flatpickr-day.selected {
-  /* Il bordo che si vede intorno al giorno selezionato */
-  box-shadow: 0 0 0 3px currentColor !important;
-}
-.flatpickr-month {
-  height: 70px;
-}
-.flatpickr-current-month .flatpickr-monthTitle {
-  font-size: 1.8rem;
-  padding-top: 15px;
-}
-.flatpickr-weekday {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  padding: 10px 0 !important;
-  font-size: 1.2rem;
+/* Default (Mobile First) */
+.flatpickr-current-month .cur-month,
+.flatpickr-current-month input.cur-year {
+  font-size: 1.2rem !important; /* Ridotto per cellulare */
 }
 
 .flatpickr-next-month,
 .flatpickr-prev-month {
-  padding: 15px 12px;
-  transform: scale(1.5);
+  padding: 10px 8px; /* Ridotto */
+  transform: scale(1.2); /* Scala ridotta */
+}
+.flatpickr-month {
+  height: 50px !important;
+}
+
+.flatpickr-current-month .numInputWrapper {
+  width: 8ch !important;
+  height: 3ch;
+}
+
+/* Tablet e Desktop (quando lo schermo è più grande di 640px) */
+@media (min-width: 640px) {
+  .flatpickr-current-month .cur-month,
+  .flatpickr-current-month input.cur-year {
+    font-size: 1.8rem !important; /* Ripristina la dimensione originale */
+  }
+
+  .flatpickr-next-month,
+  .flatpickr-prev-month {
+    padding: 15px 12px; /* Ripristina la dimensione originale */
+    transform: scale(1.5);
+  }
+}
+
+/* ==================================================== */
+/* 2. LAYOUT GRIGLIA (Giorni della Settimana e Giorno del Mese) - Reattivo */
+/* ==================================================== */
+
+.flatpickr-weekdaycontainer,
+.dayContainer {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr) !important;
+  width: 100% !important;
+  grid-gap: 0.5rem !important; /* Ridotto il gap per schermi piccoli */
+}
+
+/* Tablet e Desktop (per aumentare lo spazio tra i giorni) */
+@media (min-width: 768px) {
+  .flatpickr-weekdaycontainer,
+  .dayContainer {
+    grid-gap: 1rem !important; /* Ripristina il gap originale su schermi più grandi */
+  }
+}
+
+.dayContainer {
+  grid-auto-rows: auto !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Stili Nomi Giorni della Settimana */
+.flatpickr-weekday {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 5px 0 !important; /* Ridotto il padding */
+  font-size: 0.9rem !important; /* Ridotto il font */
+}
+
+/* Tablet e Desktop */
+@media (min-width: 640px) {
+  .flatpickr-weekday {
+    padding: 10px 0 !important;
+    font-size: 1.2rem !important;
+  }
+}
+
+/* ==================================================== */
+/* 3. STILE DEL SINGOLO GIORNO (flatpickr-day) - Reattivo */
+/* ==================================================== */
+
+.flatpickr-day {
+  width: auto !important;
+  height: auto !important;
+  max-width: none !important;
+
+  /* Forza la forma Quadrata */
+  aspect-ratio: 1 / 1;
+
+  /* Centratura */
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+
+  box-sizing: border-box;
+
+  /* Dimensione Font: Molto più piccolo su mobile, scala su desktop. */
+  font-size: 1.5rem !important; /* Piccolo per cellulare */
+  font-weight: bold;
+}
+
+/* Adattamento font per Tablet (schermi medi) */
+@media (min-width: 480px) {
+  .flatpickr-day {
+    font-size: 2rem !important;
+  }
+}
+
+/* Adattamento font per Desktop (schermi grandi) */
+@media (min-width: 768px) {
+  .flatpickr-day {
+    font-size: 3rem !important; /* Dimensione originale */
+  }
 }

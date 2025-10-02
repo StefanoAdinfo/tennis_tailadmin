@@ -1,3 +1,9 @@
+import Calendar from "../ui/calendar/Calendar";
+
+export default function Step1() {
+  return <Calendar id="Step1Calendar" mode="single" />;
+}
+
 // export default function Step1() {
 //   const cards = [
 //     {
@@ -122,7 +128,6 @@
 //             <div
 //               key={card.id}
 //               className={`flex flex-col items-center text-center rounded-xl shadow-none py-2 md:py-4 w-full border
-
 //                     ${
 //                       // STATO NORMALE: Sfondo bianco/scuro, bordo grigio chiaro/scuro
 //                       !card.active && !card.disabled
@@ -162,55 +167,4 @@
 //     </div>
 
 //   );
-// }
-import { useEffect, memo } from "react";
-import flatpickr from "flatpickr";
-import "flatpickr/dist/flatpickr.css";
-
-import Hook = flatpickr.Options.Hook;
-import DateOption = flatpickr.Options.DateOption;
-
-type PropsType = {
-  id: string;
-  mode?: "single" | "multiple" | "range" | "time";
-  onChange?: Hook | Hook[];
-  defaultDate?: DateOption;
-};
-
-// Ho avvolto il componente in memo per l'ottimizzazione
-function CalendarInline({ id, mode, onChange, defaultDate }: PropsType) {
-  useEffect(() => {
-    const element = document.getElementById(id);
-    if (!element) return;
-
-    const flatPickr = flatpickr(element, {
-      mode: mode || "single",
-      locale: "it",
-      static: true,
-      inline: true,
-      monthSelectorType: "static",
-      dateFormat: "d-m-Y",
-      defaultDate,
-      onChange,
-      // ------------------------------------------
-      // NUOVA OPZIONE: Impedisce la selezione di date precedenti a "oggi"
-      minDate: "today",
-      // ------------------------------------------
-    });
-
-    return () => {
-      if (!Array.isArray(flatPickr)) {
-        flatPickr.destroy();
-      }
-    };
-  }, [mode, onChange, id, defaultDate]);
-
-  return (
-    // Ho aggiunto la classe 'w-full' per farlo occupare tutto lo spazio orizzontale
-    <div id={id} className="flatpickr-inline-container flatpickr-custom-700">
-      {/* Il calendario Flatpickr verrà renderizzato qui */}
-    </div>
-  );
-}
-
-export default memo(CalendarInline);
+// }2

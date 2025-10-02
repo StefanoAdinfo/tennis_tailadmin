@@ -28,6 +28,10 @@ const tableData: Payment[] = [
           avatar: "/images/user/user-17.jpg",
           role: "Player",
           is_active: true,
+          card: "",
+          phone_number: "",
+          memeber_type: "",
+          junior: false,
         },
         court: {
           id: "1",
@@ -61,6 +65,7 @@ const tableData: Payment[] = [
             is_paid: false,
             total_amount: 20.4,
             email: "stefano.daniello@example.com",
+            avatar: null,
           },
           {
             id: "2",
@@ -70,6 +75,7 @@ const tableData: Payment[] = [
             is_paid: true,
             total_amount: 50.0,
             email: "luisa.verdi@example.com",
+            avatar: null,
           },
         ],
         court_name: "Campo 1",
@@ -87,6 +93,10 @@ const tableData: Payment[] = [
           avatar: "/images/user/user-17.jpg",
           role: "Player",
           is_active: true,
+          card: "",
+          phone_number: "",
+          memeber_type: "",
+          junior: false,
         },
         court: {
           id: "2",
@@ -120,6 +130,7 @@ const tableData: Payment[] = [
             is_paid: false,
             total_amount: 20.4,
             email: "stefano.daniello@example.com",
+            avatar: null,
           },
           {
             id: "3",
@@ -129,6 +140,7 @@ const tableData: Payment[] = [
             is_paid: true,
             total_amount: 50.0,
             email: "tommaso.verdi@example.com",
+            avatar: null,
           },
         ],
         court_name: "Campo 2",
@@ -146,6 +158,10 @@ const tableData: Payment[] = [
           avatar: "/images/user/user-17.jpg",
           role: "Player",
           is_active: true,
+          card: "",
+          phone_number: "",
+          memeber_type: "",
+          junior: false,
         },
         court: {
           id: "3",
@@ -179,6 +195,7 @@ const tableData: Payment[] = [
             is_paid: false,
             total_amount: 20.4,
             email: "stefano.daniello@example.com",
+            avatar: null,
           },
           {
             id: "2",
@@ -188,6 +205,7 @@ const tableData: Payment[] = [
             is_paid: true,
             total_amount: 50.0,
             email: "luisa.verdi@example.com",
+            avatar: null,
           },
           {
             id: "3",
@@ -197,6 +215,7 @@ const tableData: Payment[] = [
             is_paid: true,
             total_amount: 50.0,
             email: "tommaso.verdi@example.com",
+            avatar: null,
           },
           {
             id: "5",
@@ -206,6 +225,7 @@ const tableData: Payment[] = [
             is_paid: true,
             total_amount: 50.0,
             email: "giuseppe.verdi@example.com",
+            avatar: null,
           },
         ],
         court_name: "Campo 3",
@@ -235,6 +255,10 @@ const tableData: Payment[] = [
           avatar: "/images/user/user-17.jpg",
           role: "Player",
           is_active: true,
+          card: "",
+          phone_number: "",
+          memeber_type: "",
+          junior: false,
         },
         court: {
           id: "1",
@@ -268,6 +292,7 @@ const tableData: Payment[] = [
             is_paid: false,
             total_amount: 50.0,
             email: "luisa.verdi@example.com",
+            avatar: null,
           },
           {
             id: "1",
@@ -277,6 +302,7 @@ const tableData: Payment[] = [
             is_paid: false,
             total_amount: 20.4,
             email: "stefano.daniello@example.com",
+            avatar: null,
           },
         ],
         court_name: "Campo 1",
@@ -294,6 +320,10 @@ const tableData: Payment[] = [
           avatar: "/images/user/user-17.jpg",
           role: "Player",
           is_active: true,
+          card: "",
+          phone_number: "",
+          memeber_type: "",
+          junior: false,
         },
         court: {
           id: "2",
@@ -327,6 +357,7 @@ const tableData: Payment[] = [
             is_paid: false,
             total_amount: 50.0,
             email: "luisa.verdi@example.com",
+            avatar: null,
           },
           {
             id: "3",
@@ -336,6 +367,7 @@ const tableData: Payment[] = [
             is_paid: true,
             total_amount: 50.0,
             email: "tommaso.verdi@example.com",
+            avatar: null,
           },
         ],
         court_name: "Campo 2",
@@ -353,6 +385,10 @@ const tableData: Payment[] = [
           avatar: "/images/user/user-17.jpg",
           role: "Player",
           is_active: true,
+          card: "",
+          phone_number: "",
+          memeber_type: "",
+          junior: false,
         },
         court: {
           id: "3",
@@ -386,6 +422,7 @@ const tableData: Payment[] = [
             is_paid: false,
             total_amount: 50.0,
             email: "luisa.verdi@example.com",
+            avatar: null,
           },
           {
             id: "1",
@@ -395,6 +432,7 @@ const tableData: Payment[] = [
             is_paid: false,
             total_amount: 20.4,
             email: "stefano.daniello@example.com",
+            avatar: null,
           },
           {
             id: "3",
@@ -404,6 +442,7 @@ const tableData: Payment[] = [
             is_paid: true,
             total_amount: 50.0,
             email: "tommaso.verdi@example.com",
+            avatar: null,
           },
           {
             id: "5",
@@ -413,6 +452,7 @@ const tableData: Payment[] = [
             is_paid: true,
             total_amount: 50.0,
             email: "giuseppe.verdi@example.com",
+            avatar: null,
           },
         ],
         court_name: "Campo 3",
@@ -442,6 +482,10 @@ const tableData: Payment[] = [
           avatar: "/images/user/user-17.jpg",
           role: "Admin",
           is_active: true,
+          card: "",
+          phone_number: "",
+          memeber_type: "",
+          junior: false,
         },
         court: {
           id: "4",
@@ -475,6 +519,7 @@ const tableData: Payment[] = [
             is_paid: false,
             total_amount: 45.0,
             email: "marco.rossi@example.com",
+            avatar: null,
           },
           {
             id: "1",
@@ -484,6 +529,7 @@ const tableData: Payment[] = [
             is_paid: false,
             total_amount: 20.4,
             email: "stefano.daniello@example.com",
+            avatar: null,
           },
         ],
         court_name: "Campo 4",
@@ -513,6 +559,10 @@ const tableData: Payment[] = [
           avatar: "/images/user/user-17.jpg",
           role: "Player",
           is_active: true,
+          card: "",
+          phone_number: "",
+          memeber_type: "",
+          junior: false,
         },
         court: {
           id: "5",
@@ -546,6 +596,7 @@ const tableData: Payment[] = [
             is_paid: false,
             total_amount: 45.0,
             email: "sara.bianchi@example.com",
+            avatar: null,
           },
           {
             id: "6",
@@ -555,6 +606,7 @@ const tableData: Payment[] = [
             is_paid: true,
             total_amount: 45.0,
             email: "paolo.riva@example.com",
+            avatar: null,
           },
         ],
         court_name: "Campo 5",
@@ -584,6 +636,10 @@ const tableData: Payment[] = [
           avatar: "/images/user/user-17.jpg",
           role: "Socio",
           is_active: true,
+          card: "",
+          phone_number: "",
+          memeber_type: "",
+          junior: false,
         },
         court: {
           id: "6",
@@ -617,6 +673,7 @@ const tableData: Payment[] = [
             is_paid: false,
             total_amount: 20.0,
             email: "davide.neri@example.com",
+            avatar: null,
           },
           {
             id: "7",
@@ -626,6 +683,7 @@ const tableData: Payment[] = [
             is_paid: false,
             total_amount: 20.0,
             email: "luca.gialli@example.com",
+            avatar: null,
           },
           {
             id: "8",
@@ -635,6 +693,7 @@ const tableData: Payment[] = [
             is_paid: false,
             total_amount: 20.0,
             email: "matteo.blu@example.com",
+            avatar: null,
           },
         ],
         court_name: "Campo 6",
@@ -674,7 +733,7 @@ export default function BasicTableRevenue() {
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400 flex items-center justify-center"
+                className="px-5 py-3 font-medium text-gray-500 text-center text-theme-xs dark:text-gray-400 "
               >
                 Totale Versato
               </TableCell>
@@ -703,7 +762,7 @@ export default function BasicTableRevenue() {
                 <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                   {reservation.surname} {reservation.name}
                 </TableCell>
-                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                <TableCell className="px-4 py-3 text-gray-500 text-center text-theme-sm dark:text-gray-400">
                   {reservation.total_amount.toFixed(2) + " €"}
                 </TableCell>
               </TableRow>

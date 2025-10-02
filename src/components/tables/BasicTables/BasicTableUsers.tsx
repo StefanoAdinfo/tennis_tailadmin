@@ -6,9 +6,10 @@ import {
   TableRow,
 } from "../../ui/table";
 import { User } from "../../../lib/type";
-import { PenIcon } from "../../../icons";
+import { EyeIcon, PenIcon } from "../../../icons";
 import Badge from "../../ui/badge/Badge";
 import { Link } from "react-router";
+import Button from "../../ui/button/Button";
 
 const tableData: User[] = [
   {
@@ -19,6 +20,10 @@ const tableData: User[] = [
     is_active: true,
     email: "stefano.daniello@example.com",
     avatar: "/images/user/user-17.jpg",
+    card: "",
+    phone_number: "",
+    memeber_type: "",
+    junior: false,
   },
   {
     id: "2",
@@ -28,6 +33,10 @@ const tableData: User[] = [
     is_active: false,
     email: "luisa.verdi@example.com",
     avatar: "/images/user/user-18.jpg",
+    card: "",
+    phone_number: "",
+    memeber_type: "",
+    junior: false,
   },
   {
     id: "3",
@@ -37,6 +46,10 @@ const tableData: User[] = [
     is_active: true,
     email: "marco.rossi@example.com",
     avatar: "/images/user/user-21.jpg",
+    card: "",
+    phone_number: "",
+    memeber_type: "",
+    junior: false,
   },
   {
     id: "4",
@@ -46,6 +59,10 @@ const tableData: User[] = [
     is_active: false,
     email: "sara.bianchi@example.com",
     avatar: "/images/user/user-19.jpg",
+    card: "",
+    phone_number: "",
+    memeber_type: "",
+    junior: false,
   },
   {
     id: "5",
@@ -55,6 +72,10 @@ const tableData: User[] = [
     is_active: true,
     email: "davide.neri@example.com",
     avatar: "/images/user/user-20.jpg",
+    card: "",
+    phone_number: "",
+    memeber_type: "",
+    junior: false,
   },
 ];
 
@@ -127,11 +148,24 @@ export default function BasicTableRevenue() {
                   </Badge>
                 </TableCell>
 
-                <Link to={`/utenti/${user.id}`}>
-                  <TableCell className="px-4 py-3  text-theme-sm hover:text-brand-500 dark:text-gray-400 dark:hover:text-brand-500 flex items-center justify-center cursor-pointer ">
-                    <PenIcon />
-                  </TableCell>
-                </Link>
+                <TableCell className="px-4 py-3  text-theme-sm  dark:text-gray-400 flex items-center justify-center cursor-pointer ">
+                  <Link to={`/utenti/${user.id}`}>
+                    <Button
+                      variant="ghost"
+                      className="hover:text-brand-500 dark:hover:text-brand-500"
+                    >
+                      <EyeIcon />
+                    </Button>
+                  </Link>
+                  <Link to={`/utenti/${user.id}/modifica`}>
+                    <Button
+                      variant="ghost"
+                      className="hover:text-brand-500 dark:hover:text-brand-500"
+                    >
+                      <PenIcon />
+                    </Button>
+                  </Link>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

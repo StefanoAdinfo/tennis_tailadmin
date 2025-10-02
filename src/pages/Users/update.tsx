@@ -1,25 +1,16 @@
 import PageMeta from "../../components/common/PageMeta";
 import ComponentCard from "../../components/common/ComponentCard";
-// import BasicTableUsers from "../../components/tables/BasicTables/BasicTableUsers";
 import PageBreadcrumb from "../../components/common/PageBreadCrumb";
 import { useParams } from "react-router";
 import { Reservation } from "../../lib/type";
-import DataCard from "../../components/ui/card/DataCard";
-import {
-  CalendarOff,
-  CalendarPlus,
-  EnvelopeIcon,
-  EuroIcon,
-  WalletMinimal,
-} from "../../icons";
+import { EnvelopeIcon } from "../../icons";
 import Avatar from "../../components/ui/my_avatar/Avatar";
 import { Separator } from "../../components/ui/separator/Separator";
 import Switch from "../../components/form/switch/Switch";
 import Label from "../../components/form/Label";
 import Input from "../../components/form/input/InputField";
 import Select from "../../components/form/Select";
-
-import BasicTablePlayedGames from "../../components/tables/BasicTables/BasicTablePlayedGames";
+import Button from "../../components/ui/button/Button";
 
 const tableData: Reservation[] = [
   {
@@ -408,9 +399,9 @@ const tableData: Reservation[] = [
     light: false,
   },
 ];
-
 export default function UsersShow() {
   const { id } = useParams<{ id: string }>();
+  const user = tableData.find((item) => item.id === id);
 
   const optionsRole = [
     { value: "user", label: "Utente" },
@@ -425,19 +416,16 @@ export default function UsersShow() {
     console.log("Selected value:", value);
   };
 
-  // const countries = [
-  //   { code: "IT", label: "+39" },
-  //   { code: "US", label: "+1" },
-  //   { code: "GB", label: "+44" },
-  //   { code: "CA", label: "+1" },
-  //   { code: "AU", label: "+61" },
-  // ];
-  // const handlePhoneNumberChange = (phoneNumber: string) => {
-  //   console.log("Updated phone number:", phoneNumber);
-  // };
-
-  const user = tableData.find((item) => item.id === id);
-
+  //   const countries = [
+  //     { code: "IT", label: "+39" },
+  //     { code: "US", label: "+1" },
+  //     { code: "GB", label: "+44" },
+  //     { code: "CA", label: "+1" },
+  //     { code: "AU", label: "+61" },
+  //   ];
+  //   const handlePhoneNumberChange = (phoneNumber: string) => {
+  //     console.log("Updated phone number:", phoneNumber);
+  //   };
   return (
     <>
       <PageMeta
@@ -445,43 +433,12 @@ export default function UsersShow() {
         description="This is React.js Ecommerce Dashboard page for TailAdmin - React.js Tailwind CSS Admin Dashboard Template"
       />
       <PageBreadcrumb
-        pageTitle={`Dettaglio Utente: ${user?.user.name} ${user?.user.surname}`}
+        pageTitle={`Dettaglio Utente: ${tableData.find((item) => item.id === id)?.user.name || ""} ${tableData.find((item) => item.id === id)?.user.surname || ""}`}
       />
       <div className="grid grid-cols-12 gap-4 md:gap-6">
         <div className="col-span-12 space-y-6">
-          <ComponentCard title="Statistiche utente">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 md:gap-6">
-              <DataCard
-                icon={<CalendarOff />}
-                title={"Partite annullate"}
-                result={"10"}
-                badgeStatus={"success"}
-                percentage={11.01}
-              />
-              <DataCard
-                icon={<CalendarPlus />}
-                title={"Partite Prenotate"}
-                result={"89"}
-                badgeStatus={"error"}
-                percentage={1.01}
-              />
-              <DataCard
-                icon={<WalletMinimal />}
-                title={"Totale pagato"}
-                result={"2350€"}
-                badgeStatus={"success"}
-                percentage={8.01}
-              />
-              <DataCard
-                icon={<EuroIcon />}
-                title={"Totale da pagare"}
-                result={"145"}
-                badgeStatus={"error"}
-                percentage={3.01}
-              />
-            </div>
-
-            <div className="flex flex-col lg:flex-row gap-8 lg:items-stretch">
+          <ComponentCard title="Modifica i dettagli utente">
+            <div className="flex flex-col lg:flex-row items-start gap-8 lg:items-stretch">
               <ComponentCard className="w-full lg:w-2xs ">
                 <Avatar
                   avatar={user?.user.avatar}
@@ -504,7 +461,7 @@ export default function UsersShow() {
                 </div>
               </ComponentCard>
               {/* Form */}
-              <ComponentCard className="w-full lg:flex-1 flex flex-col justify-center">
+              <ComponentCard className="w-full lg:flex-1">
                 <div className="flex flex-col md:flex-row gap-4">
                   <div className="w-full">
                     <Label className="mb-1" htmlFor="name">
@@ -583,12 +540,11 @@ export default function UsersShow() {
                     />
                   </div>
                 </div>
-              </ComponentCard>
-            </div>
-
-            <div className="col-span-12 space-y-6">
-              <ComponentCard title="Partite giocate">
-                <BasicTablePlayedGames />
+                <div className="mt-5 flex justify-end">
+                  <Button className="cursor-pointer font-semibold">
+                    Salva
+                  </Button>
+                </div>
               </ComponentCard>
             </div>
           </ComponentCard>

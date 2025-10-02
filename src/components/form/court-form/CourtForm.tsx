@@ -37,11 +37,7 @@ export const CourtForm = (id?: any) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
-      {/* parte sinistra  */}
-      <ComponentCard
-        title=" Dettagli del campo"
-        className="col-span-12 md:col-span-4"
-      >
+      <ComponentCard title=" Dettagli del campo" className="col-span-12 ">
         <div className="w-full">
           <Label className="mb-1" htmlFor="name">
             Nome
@@ -88,10 +84,10 @@ export const CourtForm = (id?: any) => {
         </div>
       </ComponentCard>
 
-      {/* parte destra  */}
+      {/* parte sinistra  */}
       <ComponentCard
         title="Prezzi del campo"
-        className="col-span-12 md:col-span-8"
+        className="col-span-12 md:col-span-4"
       >
         <div className="w-full">
           <Label className="mb-1" htmlFor="price_socio">
@@ -117,6 +113,36 @@ export const CourtForm = (id?: any) => {
           </Label>
           <Input type="number" id="price_light" />
         </div>
+      </ComponentCard>
+      {/* parte destra  */}
+      <ComponentCard
+        title="Prezzi del campo doppio"
+        className="col-span-12 md:col-span-8"
+      >
+        <div className="w-full">
+          <Label className="mb-1" htmlFor="price_socio">
+            Prezzo Socio Doppio
+          </Label>
+          <Input type="number" id="price_socio" />
+        </div>
+        <div className="w-full">
+          <Label className="mb-1" htmlFor="price_not_socio">
+            Prezzo non Socio Doppio
+          </Label>
+          <Input type="number" id="price_not_socio" />
+        </div>
+        <div className="w-full">
+          <Label className="mb-1" htmlFor="price_junior">
+            Prezzo Junior Doppio
+          </Label>
+          <Input type="number" id="price_junior" />
+        </div>
+        {/* <div className="w-full">
+          <Label className="mb-1" htmlFor="price_light">
+            Prezzo luci
+          </Label>
+          <Input type="number" id="price_light" />
+        </div> */}
       </ComponentCard>
 
       {/* Orari del campo */}

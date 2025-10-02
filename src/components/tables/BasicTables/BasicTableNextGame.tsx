@@ -24,6 +24,10 @@ const tableData: Games[] = [
       name: "Lindsey",
       role: "",
       is_active: false,
+      card: "",
+      phone_number: "",
+      memeber_type: "",
+      junior: false,
     },
     date: "17/06/2025 - 13:00",
     duration: "1h",
@@ -33,6 +37,7 @@ const tableData: Games[] = [
         id: "1",
         name: "Stefano",
         surname: "D'aniello",
+        avatar: "/images/user/user-17.jpg",
         credit: 10,
         is_paid: false,
         total_amount: 20.4,
@@ -42,6 +47,7 @@ const tableData: Games[] = [
         id: "2",
         name: "Luisa",
         surname: "Verdi",
+        avatar: "/images/user/user-18.jpg",
         credit: 10,
         is_paid: true,
         total_amount: 20.4,
@@ -51,6 +57,7 @@ const tableData: Games[] = [
         id: "1",
         name: "Stefano",
         surname: "D'aniello",
+        avatar: "/images/user/user-20.jpg",
         credit: 10,
         is_paid: false,
         total_amount: 20.4,
@@ -60,6 +67,7 @@ const tableData: Games[] = [
         id: "2",
         name: "Luisa",
         surname: "Verdi",
+        avatar: "/images/user/user-21.jpg",
         credit: 10,
         is_paid: true,
         total_amount: 20.4,
@@ -78,6 +86,10 @@ const tableData: Games[] = [
       name: "Lindsey",
       role: "",
       is_active: false,
+      card: "",
+      phone_number: "",
+      memeber_type: "",
+      junior: false,
     },
     date: "18/06/2025 - 15:30",
     duration: "1h 30m",
@@ -87,6 +99,7 @@ const tableData: Games[] = [
         id: "2",
         name: "Mario",
         surname: "Rossi",
+        avatar: "/images/user/user-20.jpg",
         credit: 10,
         is_paid: false,
         total_amount: 20.4,
@@ -96,6 +109,7 @@ const tableData: Games[] = [
         id: "2",
         name: "Luisa",
         surname: "Verdi",
+        avatar: "/images/user/user-21.jpg",
         credit: 10,
         is_paid: true,
         total_amount: 20.4,
@@ -114,6 +128,10 @@ const tableData: Games[] = [
       name: "Lindsey",
       role: "",
       is_active: false,
+      card: "",
+      phone_number: "",
+      memeber_type: "",
+      junior: false,
     },
     date: "19/06/2025 - 09:00",
     duration: "2h",
@@ -123,6 +141,7 @@ const tableData: Games[] = [
         id: "3",
         name: "Luca",
         surname: "Bianchi",
+        avatar: "/images/user/user-27.jpg",
         credit: 10,
         is_paid: false,
         total_amount: 20.4,
@@ -132,6 +151,7 @@ const tableData: Games[] = [
         id: "2",
         name: "Luisa",
         surname: "Verdi",
+        avatar: "/images/user/user-21.jpg",
         credit: 10,
         is_paid: true,
         total_amount: 20.4,
@@ -150,6 +170,10 @@ const tableData: Games[] = [
       name: "Marco",
       role: "",
       is_active: false,
+      card: "",
+      phone_number: "",
+      memeber_type: "",
+      junior: false,
     },
     date: "20/06/2025 - 11:00",
     duration: "1h",
@@ -159,6 +183,7 @@ const tableData: Games[] = [
         id: "4",
         name: "Giulia",
         surname: "Verdi",
+        avatar: "/images/user/user-21.jpg",
         credit: 10,
         is_paid: false,
         total_amount: 20.4,
@@ -168,6 +193,7 @@ const tableData: Games[] = [
         id: "2",
         name: "Luisa",
         surname: "Verdi",
+        avatar: "/images/user/user-17.jpg",
         credit: 10,
         is_paid: true,
         total_amount: 20.4,
@@ -186,6 +212,10 @@ const tableData: Games[] = [
       name: "Lindsey",
       role: "",
       is_active: false,
+      card: "",
+      phone_number: "",
+      memeber_type: "",
+      junior: false,
     },
     date: "21/06/2025 - 14:00",
     duration: "1h 45m",
@@ -195,6 +225,7 @@ const tableData: Games[] = [
         id: "5",
         name: "Marco",
         surname: "Neri",
+        avatar: "/images/user/user-20.jpg",
         credit: 10,
         is_paid: false,
         total_amount: 20.4,
@@ -204,6 +235,7 @@ const tableData: Games[] = [
         id: "2",
         name: "Luisa",
         surname: "Verdi",
+        avatar: "/images/user/user-21.jpg",
         credit: 10,
         is_paid: true,
         total_amount: 20.4,
@@ -238,6 +270,12 @@ export default function BasicTableOne() {
                 className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
                 Utente
+              </TableCell>
+              <TableCell
+                isHeader
+                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+              >
+                Giocatori
               </TableCell>
               <TableCell
                 isHeader
@@ -291,6 +329,24 @@ export default function BasicTableOne() {
                         {reservation.user.name} {reservation.user.surname}
                       </span>
                     </div>
+                  </div>
+                </TableCell>
+                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                  <div className="flex -space-x-2">
+                    {reservation.partecipants.map((partecipant) => (
+                      <div
+                        key={partecipant.id}
+                        className="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900"
+                      >
+                        <img
+                          width={24}
+                          height={24}
+                          src={partecipant.avatar || ""}
+                          alt={`Team member ${partecipant.id}`}
+                          className="w-full size-6"
+                        />
+                      </div>
+                    ))}
                   </div>
                 </TableCell>
                 <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">

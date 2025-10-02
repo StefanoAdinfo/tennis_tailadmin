@@ -26,6 +26,7 @@ export type Partecipants = {
   id: string | null;
   name: string;
   surname: string | null;
+  avatar: string | null;
   credit: number | null;
   is_paid: boolean | null;
   total_amount: number | null;
@@ -80,6 +81,10 @@ export type User = {
   role: string;
   is_active: boolean;
   avatar: string;
+  card: string;
+  phone_number: string;
+  memeber_type: string;
+  junior: boolean;
 };
 export type Reservation = {
   court_name: string;

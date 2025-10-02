@@ -24,13 +24,13 @@ export default function Reservation() {
   const renderStepContent = () => {
     switch (currentStep) {
       case 1:
-        return <Step1 id={"1"} />;
+        return <Step1 />;
       case 2:
         return <Step2 />;
       case 3:
         return <Step3 />;
       default:
-        return <Step1 id={"1"} />;
+        return <Step1 />;
     }
   };
   return (

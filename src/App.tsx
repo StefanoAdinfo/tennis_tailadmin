@@ -23,6 +23,8 @@ import ReservationCollect from "./pages/ToCollect/ReservationCollect";
 import Revenue from "./pages/Revenue";
 import Users from "./pages/Users";
 import UsersShow from "./pages/Users/show";
+import UsersUpdate from "./pages/Users/update";
+
 import Courts from "./pages/Courts";
 import CourtsCreate from "./pages/Courts/create";
 import CourtsUpdate from "./pages/Courts/update";
@@ -50,6 +52,7 @@ export default function App() {
             {/* Anagrafica */}
             <Route path="/utenti" element={<Users />} />
             <Route path="/utenti/:id" element={<UsersShow />} />
+            <Route path="/utenti/:id/modifica" element={<UsersUpdate />} />
             <Route path="/campi" element={<Courts />} />
             <Route path="/campi/creazione" element={<CourtsCreate />} />
             <Route path="/campi/modifica/:id" element={<CourtsUpdate />} />
