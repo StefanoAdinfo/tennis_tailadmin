@@ -38,7 +38,7 @@ function CalendarInline({ id, mode, onChange, defaultDate }: PropsType) {
     };
   }, [mode, onChange, id, defaultDate]);
 
-  return <div id={id} className="flatpickr-inline-container"></div>;
+  return <div id={id} />;
 }
 
 export default memo(CalendarInline);

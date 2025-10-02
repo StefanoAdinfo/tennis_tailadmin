@@ -30,67 +30,82 @@ import CourtsCreate from "./pages/Courts/create";
 import CourtsUpdate from "./pages/Courts/update";
 import Booking from "./pages/Booking";
 import "react-day-picker/dist/style.css";
+import { CalendarProvider } from "@/calendar/contexts/calendar-context";
+import { getEvents, get_Courts } from "~/calendar/requests";
+
+// Fetch your events and users data
+const events = await getEvents();
+const courts = await get_Courts();
+
+// Rimuove la prima lettera e la rende grande e sostituisci - con spazio
+// g = global verifica tutta la stringa
+const capitalize = (str: string) =>
+  str.charAt(0).toUpperCase() + str.slice(1).replace(/-/g, " ");
 
 export default function App() {
+  // Divide la stringa ogni volta che trova uno slash /, restituendo un array, e eleimina gli elementi vuoti con filter(Boolean)
+  const segments = location.pathname.split("/").filter(Boolean);
   return (
     <>
-      <Router>
-        <ScrollToTop />
-        <Routes>
-          {/* Dashboard Layout */}
-          <Route element={<AppLayout />}>
-            {/* Menu  */}
-            <Route index path="/" element={<Home />} />
-            <Route path="/calendario" element={<Calendar />} />
-            {/* Pagamenti */}
-            <Route path="/utenti-da-incassare" element={<UsersCollect />} />
-            <Route
-              path="/partite-da-incassare"
-              element={<ReservationCollect />}
-            />
-            <Route path="/incassi" element={<Revenue />} />
-            {/* Anagrafica */}
-            <Route path="/utenti" element={<Users />} />
-            <Route path="/utenti/:id" element={<UsersShow />} />
-            <Route path="/utenti/:id/modifica" element={<UsersUpdate />} />
-            <Route path="/campi" element={<Courts />} />
-            <Route path="/campi/creazione" element={<CourtsCreate />} />
-            <Route path="/campi/modifica/:id" element={<CourtsUpdate />} />
-            {/* Prenota */}
-            <Route path="/prenota" element={<Booking />} />
-            {/* Profile */}
-            <Route path="/profile" element={<UserProfiles />} />
+      <CalendarProvider courts={courts} events={events}>
+        <Router>
+          <ScrollToTop />
+          <Routes>
+            {/* Dashboard Layout */}
+            <Route element={<AppLayout />}>
+              {/* Menu  */}
+              <Route index path="/" element={<Home />} />
+              <Route path="/calendario" element={<Calendar />} />
+              {/* Pagamenti */}
+              <Route path="/utenti-da-incassare" element={<UsersCollect />} />
+              <Route
+                path="/partite-da-incassare"
+                element={<ReservationCollect />}
+              />
+              <Route path="/incassi" element={<Revenue />} />
+              {/* Anagrafica */}
+              <Route path="/utenti" element={<Users />} />
+              <Route path="/utenti/:id" element={<UsersShow />} />
+              <Route path="/utenti/:id/modifica" element={<UsersUpdate />} />
+              <Route path="/campi" element={<Courts />} />
+              <Route path="/campi/creazione" element={<CourtsCreate />} />
+              <Route path="/campi/modifica/:id" element={<CourtsUpdate />} />
+              {/* Prenota */}
+              <Route path="/prenota" element={<Booking />} />
+              {/* Profile */}
+              <Route path="/profile" element={<UserProfiles />} />
 
-            {/* Others Page */}
-            <Route path="/blank" element={<Blank />} />
+              {/* Others Page */}
+              <Route path="/blank" element={<Blank />} />
 
-            {/* Forms */}
-            <Route path="/form-elements" element={<FormElements />} />
+              {/* Forms */}
+              <Route path="/form-elements" element={<FormElements />} />
 
-            {/* Tables */}
-            <Route path="/basic-tables" element={<BasicTables />} />
+              {/* Tables */}
+              <Route path="/basic-tables" element={<BasicTables />} />
 
-            {/* Ui Elements */}
-            <Route path="/alerts" element={<Alerts />} />
-            <Route path="/avatars" element={<Avatars />} />
-            <Route path="/badge" element={<Badges />} />
-            <Route path="/buttons" element={<Buttons />} />
-            <Route path="/images" element={<Images />} />
-            <Route path="/videos" element={<Videos />} />
+              {/* Ui Elements */}
+              <Route path="/alerts" element={<Alerts />} />
+              <Route path="/avatars" element={<Avatars />} />
+              <Route path="/badge" element={<Badges />} />
+              <Route path="/buttons" element={<Buttons />} />
+              <Route path="/images" element={<Images />} />
+              <Route path="/videos" element={<Videos />} />
 
-            {/* Charts */}
-            <Route path="/line-chart" element={<LineChart />} />
-            <Route path="/bar-chart" element={<BarChart />} />
-          </Route>
+              {/* Charts */}
+              <Route path="/line-chart" element={<LineChart />} />
+              <Route path="/bar-chart" element={<BarChart />} />
+            </Route>
 
-          {/* Auth Layout */}
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
+            {/* Auth Layout */}
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
 
-          {/* Fallback Route */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
+            {/* Fallback Route */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Router>
+      </CalendarProvider>
     </>
   );
 }

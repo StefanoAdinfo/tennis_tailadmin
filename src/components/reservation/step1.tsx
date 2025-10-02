@@ -1,7 +1,7 @@
 import Calendar from "../ui/calendar/Calendar";
 
 export default function Step1() {
-  return <Calendar id="Step1Calendar" mode="single" />;
+  return <Calendar id="Step1Calendar" key={"Step1Calendar"} />;
 }
 
 // export default function Step1() {

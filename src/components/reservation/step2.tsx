@@ -99,7 +99,7 @@ export default function Step2() {
       <div className="flex-1">
         {timeSlots.map((ts, index) => {
           return (
-            <>
+            <div key={index}>
               <div className="mb-8">
                 <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">
                   {ts.name}
@@ -126,7 +126,7 @@ export default function Step2() {
               {index + 1 < timeSlots.length && (
                 <hr className="my-8 border-gray-200 dark:border-gray-700" />
               )}
-            </>
+            </div>
           );
         })}
       </div>
