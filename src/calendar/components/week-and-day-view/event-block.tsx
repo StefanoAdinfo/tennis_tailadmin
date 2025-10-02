@@ -6,18 +6,10 @@ import { useCalendar } from "~/calendar/contexts/calendar-context";
 
 import { cn } from "@/lib/utils";
 
-import {
-  RefObject,
-  useLayoutEffect,
-  useState,
-  type HTMLAttributes,
-} from "react";
+import { useState, type HTMLAttributes } from "react";
 import type { IEvent } from "~/calendar/interfaces";
 import type { VariantProps } from "class-variance-authority";
 
-import Button from "~/components/ui/button/Button";
-import { Modal } from "~/components/ui/modal";
-import { useRef } from "react";
 import { Tooltip } from "~/components/ui/tooltip/Tooltip";
 import { EventDetailsDialog } from "../dialogs/event-details-dialog";
 

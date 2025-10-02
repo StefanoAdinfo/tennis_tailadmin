@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 
 import type { IEvent } from "~/calendar/interfaces";
 import type { VariantProps } from "class-variance-authority";
+import { useState } from "react";
 
 const eventBadgeVariants = cva(
   "mx-1 flex size-auto h-6.5 select-none items-center justify-between gap-1.5 truncate whitespace-nowrap rounded-md border px-2 text-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
@@ -83,6 +84,7 @@ export function MonthEventBadge({
   position: propPosition,
 }: IProps) {
   const { badgeVariant } = useCalendar();
+  const [openModal, setOpenModal] = useState(false);
 
   const itemStart = startOfDay(parseISO(event.startDate));
   const itemEnd = endOfDay(parseISO(event.endDate));
@@ -123,10 +125,16 @@ export function MonthEventBadge({
   };
 
   return (
-    <EventDetailsDialog event={event}>
+    <>
+      <EventDetailsDialog
+        event={event}
+        open={openModal}
+        setOpen={setOpenModal}
+      />
       <div
         role="button"
         tabIndex={0}
+        onClick={() => setOpenModal(true)}
         className={eventBadgeClasses}
         onKeyDown={handleKeyDown}
       >
@@ -163,6 +171,6 @@ export function MonthEventBadge({
           </span>
         )}
       </div>
-    </EventDetailsDialog>
+    </>
   );
 }
