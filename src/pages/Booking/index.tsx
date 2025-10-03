@@ -6,7 +6,6 @@ import Button from "../../components/ui/button/Button";
 import Step1 from "../../components/reservation/step1";
 import Step2 from "../../components/reservation/step2";
 import Step3 from "../../components/reservation/step3";
-import PageBreadcrumb from "../../components/common/PageBreadCrumb";
 
 export default function Reservation() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -35,7 +34,6 @@ export default function Reservation() {
   };
   return (
     <>
-      <PageBreadcrumb pageTitle="Prenota" />
       <Separator color="gray" className="my-5" />
       <div className="flex w-full mb-5 gap-4 justify-between">
         {[

@@ -1,6 +1,4 @@
-import PageMeta from "../../components/common/PageMeta";
 import ComponentCard from "../../components/common/ComponentCard";
-import PageBreadcrumb from "../../components/common/PageBreadCrumb";
 import { useParams } from "react-router";
 import { Reservation } from "../../lib/type";
 import { EnvelopeIcon } from "../../icons";
@@ -428,9 +426,6 @@ export default function UsersShow() {
   //   };
   return (
     <>
-      <PageBreadcrumb
-        pageTitle={`Dettaglio Utente: ${tableData.find((item) => item.id === id)?.user.name || ""} ${tableData.find((item) => item.id === id)?.user.surname || ""}`}
-      />
       <div className="grid grid-cols-12 gap-4 md:gap-6">
         <div className="col-span-12 space-y-6">
           <ComponentCard title="Modifica i dettagli utente">

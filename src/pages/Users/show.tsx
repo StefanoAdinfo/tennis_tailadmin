@@ -2,7 +2,7 @@ import PageMeta from "../../components/common/PageMeta";
 import ComponentCard from "../../components/common/ComponentCard";
 // import BasicTableUsers from "../../components/tables/BasicTables/BasicTableUsers";
 import PageBreadcrumb from "../../components/common/PageBreadCrumb";
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import { Reservation } from "../../lib/type";
 import DataCard from "../../components/ui/card/DataCard";
 import {
@@ -440,9 +440,6 @@ export default function UsersShow() {
 
   return (
     <>
-      <PageBreadcrumb
-        pageTitle={`Dettaglio Utente: ${user?.user.name} ${user?.user.surname}`}
-      />
       <div className="grid grid-cols-12 gap-4 md:gap-6">
         <div className="col-span-12 space-y-6">
           <ComponentCard title="Statistiche utente">
@@ -506,7 +503,12 @@ export default function UsersShow() {
                     <Label className="mb-1" htmlFor="name">
                       Nome
                     </Label>
-                    <Input type="text" id="name" value={user?.user.name} />
+                    <Input
+                      type="text"
+                      id="name"
+                      onChange={(e) => console.log(e.target.value)}
+                      value={user?.user.name}
+                    />
                   </div>
                   <div className="w-full">
                     <Label className="mb-1" htmlFor="surname">
@@ -515,6 +517,7 @@ export default function UsersShow() {
                     <Input
                       type="text"
                       id="surname"
+                      onChange={(e) => console.log(e.target.value)}
                       value={user?.user.surname}
                     />
                   </div>
@@ -525,9 +528,10 @@ export default function UsersShow() {
                     <Label className="mb-1">Email</Label>
                     <div className="relative">
                       <Input
-                        placeholder="info@gmail.com"
+                        placeholder="inserisci la tua email"
                         type="text"
                         className="pl-[62px]"
+                        onChange={(e) => console.log(e.target.value)}
                         value={user?.user.email}
                       />
                       <span className="absolute left-0 top-1/2 -translate-y-1/2 border-r border-gray-200 px-3.5 py-3 text-gray-500 dark:border-gray-800 dark:text-gray-400">
@@ -546,6 +550,7 @@ export default function UsersShow() {
                     <Input
                       type="phone"
                       id="phone"
+                      onChange={(e) => console.log(e.target.value)}
                       value={user?.user.phone_number}
                     />
                   </div>
@@ -556,7 +561,12 @@ export default function UsersShow() {
                     <Label className="mb-1" htmlFor="card">
                       Tessera
                     </Label>
-                    <Input type="text" id="card" value={user?.user.card} />
+                    <Input
+                      type="text"
+                      id="card"
+                      onChange={(e) => console.log(e.target.value)}
+                      value={user?.user.card}
+                    />
                   </div>
                   <div className="w-full">
                     <Label className="mb-1">Ruolo</Label>
