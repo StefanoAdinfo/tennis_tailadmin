@@ -32,6 +32,9 @@ import Booking from "./pages/Booking";
 import "react-day-picker/dist/style.css";
 import { CalendarProvider } from "@/calendar/contexts/calendar-context";
 import { getEvents, get_Courts } from "~/calendar/requests";
+import { Toaster } from "sonner";
+import ForgotPassword from "./pages/AuthPages/ForgotPassword";
+import ResendActivationEmail from "./pages/AuthPages/ResendActivationEmail";
 
 // Fetch your events and users data
 const events = await getEvents();
@@ -48,6 +51,7 @@ export default function App() {
   return (
     <>
       <CalendarProvider courts={courts} events={events}>
+        <Toaster position="top-center" richColors duration={3000} />
         <Router>
           <ScrollToTop />
           <Routes>
@@ -100,6 +104,11 @@ export default function App() {
             {/* Auth Layout */}
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/reset-password" element={<ForgotPassword />} />
+            <Route
+              path="/resend-activation-email"
+              element={<ResendActivationEmail />}
+            />
 
             {/* Fallback Route */}
             <Route path="*" element={<NotFound />} />
