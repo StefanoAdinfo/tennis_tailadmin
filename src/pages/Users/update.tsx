@@ -458,7 +458,12 @@ export default function UsersShow() {
                     <Label className="mb-1" htmlFor="name">
                       Nome
                     </Label>
-                    <Input type="text" id="name" value={user?.user.name} />
+                    <Input
+                      type="text"
+                      id="name"
+                      value={user?.user.name}
+                      onChange={(e) => {}}
+                    />
                   </div>
                   <div className="w-full">
                     <Label className="mb-1" htmlFor="surname">
@@ -468,6 +473,7 @@ export default function UsersShow() {
                       type="text"
                       id="surname"
                       value={user?.user.surname}
+                      onChange={(e) => {}}
                     />
                   </div>
                 </div>
@@ -481,6 +487,7 @@ export default function UsersShow() {
                         type="text"
                         className="pl-[62px]"
                         value={user?.user.email}
+                        onChange={(e) => {}}
                       />
                       <span className="absolute left-0 top-1/2 -translate-y-1/2 border-r border-gray-200 px-3.5 py-3 text-gray-500 dark:border-gray-800 dark:text-gray-400">
                         <EnvelopeIcon className="size-6" />
@@ -499,6 +506,7 @@ export default function UsersShow() {
                       type="phone"
                       id="phone"
                       value={user?.user.phone_number}
+                      onChange={(e) => {}}
                     />
                   </div>
                 </div>
@@ -508,7 +516,12 @@ export default function UsersShow() {
                     <Label className="mb-1" htmlFor="card">
                       Tessera
                     </Label>
-                    <Input type="text" id="card" value={user?.user.card} />
+                    <Input
+                      type="text"
+                      id="card"
+                      value={user?.user.card}
+                      onChange={(e) => {}}
+                    />
                   </div>
                   <div className="w-full">
                     <Label className="mb-1">Ruolo</Label>

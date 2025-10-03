@@ -37,14 +37,14 @@ export const CourtForm = (id?: any) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
-      <ComponentCard title=" Dettagli del campo" className="col-span-12 ">
+      <ComponentCard title="Dettagli" className="col-span-12 ">
         <div className="w-full">
           <Label className="mb-1" htmlFor="name">
             Nome
           </Label>
           <Input type="text" id="name" />
         </div>
-        <div className="flex flex-col md:flex-row gap-4 mt-4">
+        <div className="flex flex-col md:flex-row gap-4">
           <div className="w-full">
             <Label className="mb-1">Ruolo</Label>
             <Select
@@ -84,30 +84,54 @@ export const CourtForm = (id?: any) => {
         </div>
       </ComponentCard>
 
-      {/* parte sinistra  */}
-      <ComponentCard
-        title="Prezzi del campo"
-        className="col-span-12 md:col-span-4"
-      >
-        <div className="w-full">
-          <Label className="mb-1" htmlFor="price_socio">
-            Prezzo Socio
-          </Label>
-          <Input type="number" id="price_socio" />
+      <ComponentCard title="Prezzi" className="col-span-12">
+        <div className="flex flex-col md:flex-row gap-x-4">
+          <div className="w-full">
+            <div className="w-full mb-4">
+              <Label className="mb-1" htmlFor="price_socio">
+                Prezzo Socio
+              </Label>
+              <Input type="number" id="price_socio" />
+            </div>
+            <div className="w-full mb-4">
+              <Label className="mb-1" htmlFor="price_not_socio">
+                Prezzo non Socio
+              </Label>
+              <Input type="number" id="price_not_socio" />
+            </div>
+            <div className="w-full mb-4">
+              <Label className="mb-1" htmlFor="price_junior">
+                Prezzo Junior
+              </Label>
+              <Input type="number" id="price_junior" />
+            </div>
+          </div>
+
+          <div className="w-full">
+            <div className="w-full mb-4">
+              <Label className="mb-1" htmlFor="price_socio_doppio">
+                {" "}
+                Prezzo Socio Doppio
+              </Label>
+              <Input type="number" id="price_socio_doppio" />
+            </div>
+            <div className="w-full mb-4">
+              <Label className="mb-1" htmlFor="price_not_socio_doppio">
+                {" "}
+                Prezzo non Socio Doppio
+              </Label>
+              <Input type="number" id="price_not_socio_doppio" />
+            </div>
+            <div className="w-full mb-4">
+              <Label className="mb-1" htmlFor="price_junior_doppio">
+                {" "}
+                Prezzo Junior Doppio
+              </Label>
+              <Input type="number" id="price_junior_doppio" />
+            </div>
+          </div>
         </div>
-        <div className="w-full">
-          <Label className="mb-1" htmlFor="price_not_socio">
-            Prezzo non Socio
-          </Label>
-          <Input type="number" id="price_not_socio" />
-        </div>
-        <div className="w-full">
-          <Label className="mb-1" htmlFor="price_junior">
-            Prezzo Junior
-          </Label>
-          <Input type="number" id="price_junior" />
-        </div>
-        <div className="w-full">
+        <div className="w-full mb-4">
           <Label className="mb-1" htmlFor="price_light">
             Prezzo luci
           </Label>
@@ -115,39 +139,10 @@ export const CourtForm = (id?: any) => {
         </div>
       </ComponentCard>
       {/* parte destra  */}
-      <ComponentCard
-        title="Prezzi del campo doppio"
-        className="col-span-12 md:col-span-8"
-      >
-        <div className="w-full">
-          <Label className="mb-1" htmlFor="price_socio">
-            Prezzo Socio Doppio
-          </Label>
-          <Input type="number" id="price_socio" />
-        </div>
-        <div className="w-full">
-          <Label className="mb-1" htmlFor="price_not_socio">
-            Prezzo non Socio Doppio
-          </Label>
-          <Input type="number" id="price_not_socio" />
-        </div>
-        <div className="w-full">
-          <Label className="mb-1" htmlFor="price_junior">
-            Prezzo Junior Doppio
-          </Label>
-          <Input type="number" id="price_junior" />
-        </div>
-        {/* <div className="w-full">
-          <Label className="mb-1" htmlFor="price_light">
-            Prezzo luci
-          </Label>
-          <Input type="number" id="price_light" />
-        </div> */}
-      </ComponentCard>
 
-      {/* Orari del campo */}
+      {/* Orari*/}
 
-      <ComponentCard title="Orari del campo" className="col-span-12">
+      <ComponentCard title="Orari" className="col-span-12">
         <OpeningHours schedule={schedule} onChange={setSchedule} />
       </ComponentCard>
 

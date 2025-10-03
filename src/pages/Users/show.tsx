@@ -506,7 +506,7 @@ export default function UsersShow() {
                     <Input
                       type="text"
                       id="name"
-                      onChange={(e) => console.log(e.target.value)}
+                      onChange={(e) => {}}
                       value={user?.user.name}
                     />
                   </div>
@@ -517,7 +517,7 @@ export default function UsersShow() {
                     <Input
                       type="text"
                       id="surname"
-                      onChange={(e) => console.log(e.target.value)}
+                      onChange={(e) => {}}
                       value={user?.user.surname}
                     />
                   </div>
@@ -531,7 +531,7 @@ export default function UsersShow() {
                         placeholder="inserisci la tua email"
                         type="text"
                         className="pl-[62px]"
-                        onChange={(e) => console.log(e.target.value)}
+                        onChange={(e) => {}}
                         value={user?.user.email}
                       />
                       <span className="absolute left-0 top-1/2 -translate-y-1/2 border-r border-gray-200 px-3.5 py-3 text-gray-500 dark:border-gray-800 dark:text-gray-400">
@@ -550,7 +550,7 @@ export default function UsersShow() {
                     <Input
                       type="phone"
                       id="phone"
-                      onChange={(e) => console.log(e.target.value)}
+                      onChange={(e) => {}}
                       value={user?.user.phone_number}
                     />
                   </div>
@@ -564,7 +564,7 @@ export default function UsersShow() {
                     <Input
                       type="text"
                       id="card"
-                      onChange={(e) => console.log(e.target.value)}
+                      onChange={(e) => {}}
                       value={user?.user.card}
                     />
                   </div>

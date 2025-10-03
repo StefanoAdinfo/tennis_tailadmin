@@ -4,6 +4,7 @@ import AppHeader from "./AppHeader";
 import Backdrop from "./Backdrop";
 import AppSidebar from "./AppSidebar";
 import PageBreadcrumb from "~/components/common/PageBreadCrumb";
+import { useState } from "react";
 
 const LayoutContent: React.FC = () => {
   const { isExpanded, isHovered, isMobileOpen } = useSidebar();
@@ -14,10 +15,18 @@ const LayoutContent: React.FC = () => {
   const capitalize = (str: string) =>
     str.charAt(0).toUpperCase() + str.slice(1).replace(/-/g, " ");
 
-  const urls = segments.map((segment) => ({
-    name: capitalize(segment),
-    path: `/${segment}`,
-  }));
+  // console.log(segments);
+
+  const urls = segments.map((segment, i) => {
+    const prevPath = [...segments].splice(0, i).join("/");
+    // console.log(prevPath);
+    return {
+      name: capitalize(segment),
+      path: `${prevPath}/${segment}`,
+    };
+  });
+
+  if (urls.length > 0) urls[urls.length - 1].path = "";
 
   return (
     <div className="min-h-screen xl:flex">
