@@ -6,7 +6,7 @@ import {
   TableRow,
 } from "../../ui/table";
 import { Reservation } from "../../../lib/type";
-import { HandCoins } from "../../../icons";
+import { EuroIcon, HandCoins } from "../../../icons";
 import { useState } from "react";
 import { ReservationSummaryModal } from "../../ui/modal/ReservationSummaryModal";
 import Button from "../../ui/button/Button";
@@ -427,7 +427,7 @@ export default function BasicTableCollectGames() {
                     onClick={() => handleOpenModal(reservation)}
                     className="hover:text-brand-500 dark:hover:text-brand-500"
                   >
-                    <HandCoins />
+                    <EuroIcon />
                   </Button>
                 </TableCell>
               </TableRow>

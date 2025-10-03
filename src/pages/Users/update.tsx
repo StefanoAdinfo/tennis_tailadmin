@@ -428,10 +428,6 @@ export default function UsersShow() {
   //   };
   return (
     <>
-      <PageMeta
-        title="React.js Ecommerce Dashboard | TailAdmin - React.js Admin Dashboard Template"
-        description="This is React.js Ecommerce Dashboard page for TailAdmin - React.js Tailwind CSS Admin Dashboard Template"
-      />
       <PageBreadcrumb
         pageTitle={`Dettaglio Utente: ${tableData.find((item) => item.id === id)?.user.name || ""} ${tableData.find((item) => item.id === id)?.user.surname || ""}`}
       />

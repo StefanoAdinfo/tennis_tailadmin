@@ -6,7 +6,7 @@ import {
   TableRow,
 } from "../../ui/table";
 import { Payment } from "../../../lib/type";
-import { HandCoins } from "../../../icons";
+import { EuroIcon, HandCoins } from "../../../icons";
 import Button from "../../ui/button/Button";
 import { useState } from "react";
 import { UserPayMatchModal } from "../../ui/modal/UserPayMatchModal";
@@ -712,7 +712,7 @@ export default function BasicTableOne() {
                     onClick={() => handleOpenModal(user)}
                     className="hover:text-brand-500 dark:hover:text-brand-500"
                   >
-                    <HandCoins />
+                    <EuroIcon />
                   </Button>
                 </TableCell>
               </TableRow>

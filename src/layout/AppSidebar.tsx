@@ -144,25 +144,42 @@ const AppSidebar: React.FC = () => {
   );
 
   useEffect(() => {
-    let submenuMatched = false;
+    let submenuMatch: {
+      type: "main" | "payment" | "others" | "anagrafica";
+      index: number;
+    } | null = null;
     ["main", "others", "anagrafica", "payment"].forEach((menuType) => {
-      const items = menuType === "main" ? navItems : othersItems;
+      let items = null;
+      switch (menuType) {
+        case "main":
+          items = navItems;
+          break;
+        case "payment":
+          items = paymentItems;
+          break;
+        case "others":
+          items = othersItems;
+          break;
+        case "anagrafica":
+          items = anagraficaItems;
+          break;
+      }
       items.forEach((nav, index) => {
         if (nav.subItems) {
           nav.subItems.forEach((subItem) => {
             if (isActive(subItem.path)) {
-              setOpenSubmenu({
+              submenuMatch = {
                 type: menuType as "main" | "others" | "anagrafica" | "payment",
                 index,
-              });
-              submenuMatched = true;
+              };
             }
           });
         }
       });
     });
-
-    if (!submenuMatched) {
+    if (submenuMatch) {
+      setOpenSubmenu(submenuMatch);
+    } else {
       setOpenSubmenu(null);
     }
   }, [location, isActive]);
@@ -337,34 +354,37 @@ const AppSidebar: React.FC = () => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className={`py-8 flex ${
+        className={`py-4 flex ${
           !isExpanded && !isHovered ? "lg:justify-center" : "justify-start"
         }`}
       >
-        <Link to="/">
+        <Link to="/" className="w-full flex items-center">
           {isExpanded || isHovered || isMobileOpen ? (
-            <>
+            <div className="flex items-center gap-1">
               <img
                 className="dark:hidden"
-                src="/images/logo/logo.svg"
+                src="/images/logo/logo.png"
                 alt="Logo"
-                width={150}
-                height={40}
+                width={80}
+                height={80}
               />
               <img
                 className="hidden dark:block"
-                src="/images/logo/logo-dark.svg"
+                src="/images/logo/logo.png"
                 alt="Logo"
-                width={150}
-                height={40}
+                width={80}
+                height={80}
               />
-            </>
+              <h2 className="text-xl font-semibold leading-none text-gray-800 dark:text-white">
+                Tennis Club Ottaviano
+              </h2>
+            </div>
           ) : (
             <img
-              src="/images/logo/logo-icon.svg"
+              src="/images/logo/logo.png"
               alt="Logo"
-              width={32}
-              height={32}
+              width={50}
+              height={50}
             />
           )}
         </Link>
@@ -423,7 +443,7 @@ const AppSidebar: React.FC = () => {
               {renderMenuItems(anagraficaItems, "anagrafica")}
             </div>
 
-            <div className="">
+            {/* <div className="">
               <h2
                 className={`mb-4 text-xs uppercase flex leading-[20px] text-gray-400 ${
                   !isExpanded && !isHovered
@@ -438,7 +458,7 @@ const AppSidebar: React.FC = () => {
                 )}
               </h2>
               {renderMenuItems(othersItems, "others")}
-            </div>
+            </div> */}
           </div>
         </nav>
       </div>

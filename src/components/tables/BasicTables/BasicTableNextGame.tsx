@@ -55,7 +55,7 @@ const tableData: Games[] = [
         email: "luisa.verdi@example.com",
       },
       {
-        id: "1",
+        id: "3",
         name: "Stefano",
         surname: "D'aniello",
         avatar: "/images/user/user-20.jpg",
@@ -65,7 +65,7 @@ const tableData: Games[] = [
         email: "stefano.daniello@example.com",
       },
       {
-        id: "2",
+        id: "4",
         name: "Luisa",
         surname: "Verdi",
         avatar: "/images/user/user-21.jpg",
@@ -97,7 +97,7 @@ const tableData: Games[] = [
     light: false,
     partecipants: [
       {
-        id: "2",
+        id: "5",
         name: "Mario",
         surname: "Rossi",
         avatar: "/images/user/user-20.jpg",
@@ -107,7 +107,7 @@ const tableData: Games[] = [
         email: "mario.rossi@example.com",
       },
       {
-        id: "2",
+        id: "6",
         name: "Luisa",
         surname: "Verdi",
         avatar: "/images/user/user-21.jpg",
@@ -139,7 +139,7 @@ const tableData: Games[] = [
     light: true,
     partecipants: [
       {
-        id: "3",
+        id: "7",
         name: "Luca",
         surname: "Bianchi",
         avatar: "/images/user/user-27.jpg",
@@ -149,7 +149,7 @@ const tableData: Games[] = [
         email: "luca.bianchi@example.com",
       },
       {
-        id: "2",
+        id: "8",
         name: "Luisa",
         surname: "Verdi",
         avatar: "/images/user/user-21.jpg",
@@ -181,7 +181,7 @@ const tableData: Games[] = [
     light: false,
     partecipants: [
       {
-        id: "4",
+        id: "9",
         name: "Giulia",
         surname: "Verdi",
         avatar: "/images/user/user-21.jpg",
@@ -191,7 +191,7 @@ const tableData: Games[] = [
         email: "giulia.verdi@example.com",
       },
       {
-        id: "2",
+        id: "10",
         name: "Luisa",
         surname: "Verdi",
         avatar: "/images/user/user-17.jpg",
@@ -223,7 +223,7 @@ const tableData: Games[] = [
     light: true,
     partecipants: [
       {
-        id: "5",
+        id: "11",
         name: "Marco",
         surname: "Neri",
         avatar: "/images/user/user-20.jpg",
@@ -233,7 +233,7 @@ const tableData: Games[] = [
         email: "marco.neri@example.com",
       },
       {
-        id: "2",
+        id: "12",
         name: "Luisa",
         surname: "Verdi",
         avatar: "/images/user/user-21.jpg",
@@ -327,7 +327,7 @@ export default function BasicTableOne() {
           {/* Table Body */}
           <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
             {tableData.map((reservation) => (
-              <TableRow key={reservation.id}>
+              <TableRow key={`reservation-${reservation.id}`}>
                 <TableCell className="px-5 py-4 sm:px-6 text-start">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 overflow-hidden rounded-full">
@@ -351,7 +351,7 @@ export default function BasicTableOne() {
                       <div className="flex -space-x-2 cursor-pointer">
                         {reservation.partecipants.map((partecipant) => (
                           <div
-                            key={partecipant.id}
+                            key={`partecipant-${partecipant.id}`}
                             className="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900"
                           >
                             <img
@@ -386,8 +386,6 @@ export default function BasicTableOne() {
                               className="w-full h-full object-cover"
                             />
                           </div>
-
-                          {/* Nome e Cognome */}
                           <span>
                             {`${partecipant.name} ${partecipant.surname}`}
                           </span>

@@ -5,7 +5,6 @@ import EcommerceMetrics from "../../components/ecommerce/EcommerceMetrics";
 // import RecentOrders from "../../components/ecommerce/RecentOrders";
 // import DemographicCard from "../../components/ecommerce/DemographicCard";
 // import BasicTableOne from "../../components/tables/BasicTables/BasicTableOne";
-import PageMeta from "../../components/common/PageMeta";
 import ComponentCard from "../../components/common/ComponentCard";
 import BasicTableCollectGames from "../../components/tables/BasicTables/BasicTableCollectGames";
 import BasicTableCollectUsers from "../../components/tables/BasicTables/BasicTableCollectUsers";
@@ -14,10 +13,6 @@ import BasicTableNextGame from "../../components/tables/BasicTables/BasicTableNe
 export default function Home() {
   return (
     <>
-      <PageMeta
-        title="React.js Ecommerce Dashboard | TailAdmin - React.js Admin Dashboard Template"
-        description="This is React.js Ecommerce Dashboard page for TailAdmin - React.js Tailwind CSS Admin Dashboard Template"
-      />
       <div className="grid grid-cols-12 gap-4 md:gap-6">
         <div className="col-span-12 space-y-6 ">
           <EcommerceMetrics />
@@ -25,7 +20,7 @@ export default function Home() {
 
         <div className="col-span-12 md:col-span-6 space-y-6">
           <ComponentCard
-            title="Partite da incasare"
+            title="Partite da incassare"
             buttonShow
             to="/partite-da-incassare"
           >
@@ -35,7 +30,7 @@ export default function Home() {
 
         <div className="col-span-12 md:col-span-6 space-y-6">
           <ComponentCard
-            title="Utenti da incasare"
+            title="Utenti da incassare"
             buttonShow
             to="/utenti-da-incassare"
           >

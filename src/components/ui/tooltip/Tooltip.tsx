@@ -43,8 +43,6 @@ function useTooltipPosition(
 
     const spaceBelow = viewportHeight - triggerRect.bottom;
     const spaceAbove = triggerRect.top;
-    const spaceLeft = triggerRect.left;
-    const spaceRight = viewportWidth - triggerRect.right;
 
     let position = "bottom";
 
@@ -104,7 +102,6 @@ export function Tooltip({
   closeDelay = 50,
 }: ITooltipProps) {
   const triggerRef = useRef<HTMLDivElement>(null);
-  const tooltipRef = useRef<HTMLDivElement>(null);
 
   // Usa l'hook per calcolare le classi di posizione
   const { positionClasses } = useTooltipPosition(triggerRef, open);

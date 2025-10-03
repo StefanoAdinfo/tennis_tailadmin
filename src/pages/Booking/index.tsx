@@ -35,10 +35,6 @@ export default function Reservation() {
   };
   return (
     <>
-      <PageMeta
-        title="React.js Ecommerce Dashboard | TailAdmin - React.js Admin Dashboard Template"
-        description="This is React.js Ecommerce Dashboard page for TailAdmin - React.js Tailwind CSS Admin Dashboard Template"
-      />
       <PageBreadcrumb pageTitle="Prenota" />
       <Separator color="gray" className="my-5" />
       <div className="flex w-full mb-5 gap-4 justify-between">

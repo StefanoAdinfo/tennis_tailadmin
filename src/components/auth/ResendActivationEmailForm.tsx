@@ -74,7 +74,7 @@ export default function ResendActivationEmailForm() {
 
                 <div>
                   <Button className="w-full" size="sm" disabled={isLoading}>
-                    {isLoading ? "Invio in corso..." : "Invia Istruzioni"}
+                    {isLoading ? "Invio in corso..." : "Invia"}
                   </Button>
                 </div>
               </div>
