@@ -38,8 +38,8 @@ export function DayCell({ cell, events, eventPositions }: IProps) {
     <DroppableDayCell cell={cell}>
       <div
         className={cn(
-          "flex h-full flex-col gap-1 border-r border-t py-1.5 lg:py-2",
-          isSunday && "border-r-0"
+          "flex h-full flex-col gap-1 border-r border-t border-gray-200 dark:border-gray-800 py-1.5 lg:py-2",
+          isSunday && "border-r-0 border-gray-200 dark:border-gray-800"
         )}
       >
         <span

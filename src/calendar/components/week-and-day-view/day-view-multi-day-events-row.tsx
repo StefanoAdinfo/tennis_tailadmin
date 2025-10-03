@@ -49,9 +49,9 @@ export function DayViewMultiDayEventsRow({
   if (multiDayEventsInDay.length === 0) return null;
 
   return (
-    <div className="flex border-b">
+    <div className="flex border-b border-gray-200 dark:border-gray-800">
       <div className="w-18"></div>
-      <div className="flex flex-1 flex-col gap-1 border-l py-1">
+      <div className="flex flex-1 flex-col gap-1 border-l border-gray-200 dark:border-gray-800 py-1">
         {multiDayEventsInDay.map((event) => {
           const eventStart = startOfDay(parseISO(event.startDate));
           const eventEnd = startOfDay(parseISO(event.endDate));

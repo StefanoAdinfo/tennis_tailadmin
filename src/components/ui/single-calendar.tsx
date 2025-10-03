@@ -2,13 +2,13 @@
 
 import * as React from "react";
 import { DayPicker } from "react-day-picker";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { it } from "date-fns/locale";
 
 import { cn } from "@/lib/utils";
 
 import type { PropsSingle } from "react-day-picker";
 import { format } from "date-fns";
+import { ChevronLeftIcon, ChevronRightIcon } from "~/icons";
 
 function SingleCalendar({
   className,
@@ -31,18 +31,21 @@ function SingleCalendar({
       formatters={{
         formatCaption: (month, options) => {
           const label = format(month, "LLLL yyyy", { locale: options?.locale });
-          return label.charAt(0).toUpperCase() + label.slice(1); // Capitalizza prima lettera
+          return label.charAt(0).toUpperCase() + label.slice(1);
         },
       }}
       components={{
         Chevron: (props) => {
           if (props.orientation === "left") {
             return (
-              <ChevronLeft className={cn("h-4 w-4", className)} {...props} />
+              <ChevronLeftIcon
+                className={cn("h-4 w-4", className)}
+                {...props}
+              />
             );
           }
           return (
-            <ChevronRight className={cn("h-4 w-4", className)} {...props} />
+            <ChevronRightIcon className={cn("h-4 w-4", className)} {...props} />
           );
         },
       }}

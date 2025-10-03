@@ -95,8 +95,8 @@ export function WeekViewMultiDayEventsRow({
 
   return (
     <div className="hidden overflow-hidden sm:flex">
-      <div className="w-18 border-b"></div>
-      <div className="grid flex-1 grid-cols-7 divide-x border-b border-l">
+      <div className="w-18 border-b border-gray-200 dark:border-gray-800"></div>
+      <div className="grid flex-1 grid-cols-7 divide-x border-b border-l border-gray-200 dark:border-gray-800">
         {weekDays.map((day, dayIndex) => (
           <div
             key={day.toISOString()}

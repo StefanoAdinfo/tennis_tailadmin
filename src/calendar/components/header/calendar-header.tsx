@@ -1,12 +1,3 @@
-import {
-  Columns,
-  Grid3x3,
-  List,
-  Plus,
-  Grid2x2,
-  CalendarRange,
-} from "lucide-react";
-
 import { CourtSelect } from "~/calendar/components/header/court-select";
 import { TodayButton } from "~/calendar/components/header/today-button";
 import { DateNavigator } from "~/calendar/components/header/date-navigator";
@@ -15,6 +6,7 @@ import type { IEvent } from "~/calendar/interfaces";
 import type { TCalendarView } from "~/calendar/types";
 import { useCalendar } from "~/calendar/contexts/calendar-context";
 import Button from "~/components/ui/button/Button";
+import { Columns2, Grid2x2, List } from "~/icons";
 
 interface IProps {
   view: TCalendarView;
@@ -24,7 +16,7 @@ interface IProps {
 export function CalendarHeader({ view, events }: IProps) {
   const { setViewCalendar } = useCalendar();
   return (
-    <div className="flex flex-col gap-4 border-b p-4 lg:flex-row lg:items-center lg:justify-between">
+    <div className="flex flex-col gap-4 border-b border-gray-200 dark:border-gray-800 p-4 lg:flex-row lg:items-center lg:justify-between">
       <div className="flex items-center gap-3">
         <TodayButton />
         <DateNavigator view={view} events={events} />
@@ -65,7 +57,7 @@ export function CalendarHeader({ view, events }: IProps) {
               className="-ml-px rounded-l-none [&_svg]:size-4 cursor-pointer"
             >
               <i>
-                <Columns strokeWidth={1.8} />
+                <Columns2 strokeWidth={1.8} />
               </i>
             </Button>
 

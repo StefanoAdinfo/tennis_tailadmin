@@ -54,7 +54,7 @@ export function YearViewMonth({ month, events }: IProps) {
         {monthName.charAt(0).toUpperCase() + monthName.slice(1)}
       </button>
 
-      <div className="flex-1 space-y-2 rounded-b-lg border border-t-0 p-3">
+      <div className="flex-1 space-y-2 rounded-b-lg border border-t-0 border-gray-200 dark:border-gray-800 p-3">
         <div className="grid grid-cols-7 gap-x-0.5 text-center">
           {weekDays.map((day, index) => (
             <div

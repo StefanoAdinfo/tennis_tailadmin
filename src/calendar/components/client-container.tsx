@@ -136,7 +136,7 @@ export function ClientContainer({ view }: IProps) {
   }, [filteredEvents]);
 
   return (
-    <div className="overflow-hidden rounded-xl border">
+    <div className="overflow-hidden rounded-xl  border border-gray-200 dark:border-gray-800 bg-white dark:bg-white/[0.03] text-gray-800 dark:text-white/90">
       <CalendarHeader view={view} events={filteredEvents} />
 
       <DndProviderWrapper>

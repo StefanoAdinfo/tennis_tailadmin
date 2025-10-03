@@ -42,7 +42,7 @@ export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center border-b py-4 text-sm text-muted-foreground sm:hidden">
+      <div className="flex flex-col items-center justify-center border-b border-gray-200 dark:border-gray-800 py-4 text-sm text-muted-foreground sm:hidden">
         <p>
           La visualizzazione settimanale non è disponibile sui dispositivi con
           schermo ridotto.
@@ -58,13 +58,13 @@ export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
           />
 
           {/* Week header */}
-          <div className="relative z-20 flex border-b">
+          <div className="relative z-20 flex border-b border-gray-200 dark:border-gray-800">
             <div className="w-18"></div>
-            <div className="grid flex-1 grid-cols-7 divide-x border-l">
+            <div className="grid flex-1 grid-cols-7 divide-x border-l border-gray-200 dark:border-gray-800">
               {weekDays.map((day, index) => (
                 <span
                   key={index}
-                  className="py-2 text-center text-xs font-medium text-muted-foreground"
+                  className="py-2 text-center text-xs font-medium text-muted-foreground border-gray-200 dark:border-gray-800"
                 >
                   {format(day, "EE", { locale: it })}{" "}
                   <span className="ml-1 font-semibold text-foreground">
@@ -76,7 +76,7 @@ export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
           </div>
         </div>
 
-        <div className="h-[736px] overflow-y-auto">
+        <div className="h-[736px] overflow-y-auto ">
           <div className="flex overflow-hidden">
             {/* Hours column */}
             <div className="relative w-18">
@@ -96,7 +96,7 @@ export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
             </div>
 
             {/* Week grid */}
-            <div className="relative flex-1 border-l">
+            <div className="relative flex-1 border-l border-gray-200 dark:border-gray-800">
               <div className="grid grid-cols-7 divide-x">
                 {weekDays.map((day, dayIndex) => {
                   const dayEvents = singleDayEvents.filter(
@@ -107,7 +107,10 @@ export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
                   const groupedEvents = groupEvents(dayEvents);
 
                   return (
-                    <div key={dayIndex} className="relative">
+                    <div
+                      key={dayIndex}
+                      className="relative border-gray-200 dark:border-gray-800"
+                    >
                       {hours.map((hour, index) => {
                         const isDisabled = !isWorkingHour(
                           day,
@@ -125,10 +128,10 @@ export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
                             style={{ height: "76px" }}
                           >
                             {index !== 0 && (
-                              <div className="pointer-events-none absolute inset-x-0 top-0 border-b"></div>
+                              <div className="pointer-events-none absolute inset-x-0 top-0 border-b border-gray-200 dark:border-gray-800"></div>
                             )}
 
-                            <div className="pointer-events-none absolute inset-x-0 top-1/2 border-b border-dashed"></div>
+                            <div className="pointer-events-none absolute inset-x-0 top-1/2 border-b border-dashed border-gray-200 dark:border-gray-800"></div>
                           </div>
                         );
                       })}

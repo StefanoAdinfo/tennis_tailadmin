@@ -1,13 +1,3 @@
-import {
-  Calendar,
-  CircleCheck,
-  CircleCheckBig,
-  Clock,
-  Lightbulb,
-  Phone,
-  User,
-  Users,
-} from "lucide-react";
 import { parseISO, areIntervalsOverlapping, format } from "date-fns";
 import { it } from "date-fns/locale";
 
@@ -28,7 +18,14 @@ import {
 } from "~/calendar/helpers";
 
 import type { IEvent } from "~/calendar/interfaces";
-import { CourtIcon } from "~/icons";
+import {
+  CircleCheck,
+  Clock,
+  CourtIcon,
+  Lightbulb,
+  Phone,
+  Users,
+} from "~/icons";
 import { SingleCalendar } from "~/components/ui/single-calendar";
 
 interface IProps {
@@ -68,9 +65,9 @@ export function CalendarDayView({ singleDayEvents, multiDayEvents }: IProps) {
           />
 
           {/* Day header */}
-          <div className="relative z-20 flex border-b">
+          <div className="relative z-20 flex border-b border-gray-200 dark:border-gray-800">
             <div className="w-18"></div>
-            <span className="flex-1 border-l py-2 text-center text-xs font-medium text-muted-foreground">
+            <span className="flex-1 border-l border-gray-200 dark:border-gray-800 py-2 text-center text-xs font-medium text-muted-foreground">
               {format(selectedDate, "EE", { locale: it })}{" "}
               <span className="font-semibold text-foreground">
                 {format(selectedDate, "d", { locale: it })}
@@ -99,7 +96,7 @@ export function CalendarDayView({ singleDayEvents, multiDayEvents }: IProps) {
             </div>
 
             {/* Day grid */}
-            <div className="relative flex-1 border-l">
+            <div className="relative flex-1 border-l border-gray-200 dark:border-gray-800">
               <div className="relative">
                 {hours.map((hour, index) => {
                   const isDisabled = !isWorkingHour(
@@ -118,7 +115,7 @@ export function CalendarDayView({ singleDayEvents, multiDayEvents }: IProps) {
                       style={{ height: "76px" }}
                     >
                       {index !== 0 && (
-                        <div className="pointer-events-none absolute inset-x-0 top-0 border-b"></div>
+                        <div className="pointer-events-none absolute inset-x-0 top-0 border-b border-gray-200 dark:border-gray-800"></div>
                       )}
                     </div>
                   );
@@ -175,8 +172,8 @@ export function CalendarDayView({ singleDayEvents, multiDayEvents }: IProps) {
         </div>
       </div>
 
-      <div className="hidden w-64 divide-y border-l md:block ">
-        <div className="mx-auto w-fit p-2">
+      <div className="hidden w-64 divide-y border-l border-gray-200 dark:border-gray-800 md:block ">
+        <div className="mx-auto w-fit p-2 border-b border-gray-200 dark:border-gray-800">
           <SingleCalendar
             mode="single"
             selected={selectedDate}

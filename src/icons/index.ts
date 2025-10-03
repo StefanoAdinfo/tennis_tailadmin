@@ -65,6 +65,14 @@ import { ReactComponent as WalletMinimal } from "./wallet-minimal.svg?react";
 import { ReactComponent as X } from "./x.svg?react";
 import { ReactComponent as Camera } from "./camera.svg?react";
 import { ReactComponent as CircleAlert } from "./circle-alert.svg?react";
+import { ReactComponent as List } from "./list.svg?react";
+import { ReactComponent as Grid2x2 } from "./grid-2x2.svg?react";
+import { ReactComponent as Columns2 } from "./columns-2.svg?react";
+import { ReactComponent as Phone } from "./phone.svg?react";
+import { ReactComponent as Users } from "./users.svg?react";
+import { ReactComponent as Lightbulb } from "./users.svg?react";
+import { ReactComponent as Clock } from "./clock.svg?react";
+import { ReactComponent as CircleCheck } from "./circle-check.svg?react";
 
 export {
   ErrorHexaIcon,
@@ -134,4 +142,12 @@ export {
   X,
   Camera,
   CircleAlert,
+  List,
+  Grid2x2,
+  Columns2,
+  Phone,
+  Users,
+  Lightbulb,
+  Clock,
+  CircleCheck,
 };
