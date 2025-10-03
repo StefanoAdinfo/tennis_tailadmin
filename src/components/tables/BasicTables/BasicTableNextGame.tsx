@@ -11,6 +11,7 @@ import { TrashBinIcon } from "../../../icons";
 import Button from "../../ui/button/Button";
 import { useState } from "react";
 import { Modal } from "../../ui/modal";
+import { Tooltip } from "~/components/ui/tooltip/Tooltip";
 
 const tableData: Games[] = [
   {
@@ -246,10 +247,23 @@ const tableData: Games[] = [
 ];
 
 export default function BasicTableOne() {
+  const [openTooltipMap, setOpenTooltipMap] = useState<{
+    [key: string]: boolean;
+  }>({});
   const [isOpen, setIsOpen] = useState(false);
   const [selectReservation, setSelectReservation] = useState<Games | null>(
     null
   );
+
+  const handleSetOpenTooltip = (
+    reservationId: string | number,
+    isOpen: boolean
+  ) => {
+    setOpenTooltipMap((prevMap) => ({
+      ...prevMap,
+      [reservationId]: isOpen,
+    }));
+  };
 
   const handleCloseModal = () => {
     setIsOpen(false);
@@ -332,22 +346,55 @@ export default function BasicTableOne() {
                   </div>
                 </TableCell>
                 <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                  <div className="flex -space-x-2">
-                    {reservation.partecipants.map((partecipant) => (
-                      <div
-                        key={partecipant.id}
-                        className="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900"
-                      >
-                        <img
-                          width={24}
-                          height={24}
-                          src={partecipant.avatar || ""}
-                          alt={`Team member ${partecipant.id}`}
-                          className="w-full size-6"
-                        />
+                  <Tooltip
+                    trigger={
+                      <div className="flex -space-x-2 cursor-pointer">
+                        {reservation.partecipants.map((partecipant) => (
+                          <div
+                            key={partecipant.id}
+                            className="w-6 h-6 overflow-hidden border-2 border-white rounded-full dark:border-gray-900"
+                          >
+                            <img
+                              width={24}
+                              height={24}
+                              src={partecipant.avatar || ""}
+                              alt={`Partecipante ${partecipant.name}`}
+                              className="w-full size-6 object-cover"
+                            />
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
+                    }
+                    open={openTooltipMap[reservation.id] || false}
+                    setOpen={(isOpen: boolean) =>
+                      handleSetOpenTooltip(reservation.id, isOpen)
+                    }
+                  >
+                    <div className="flex flex-col p-1 text-sm text-gray-700 dark:text-gray-200">
+                      <strong className="mb-1">Partecipanti:</strong>
+                      {reservation.partecipants.map((partecipant) => (
+                        <div
+                          key={partecipant.id}
+                          className="flex items-center gap-2 py-0.5 whitespace-nowrap"
+                        >
+                          <div className="w-5 h-5 overflow-hidden rounded-full flex-shrink-0">
+                            <img
+                              width={20}
+                              height={20}
+                              src={partecipant.avatar || ""}
+                              alt={partecipant.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+
+                          {/* Nome e Cognome */}
+                          <span>
+                            {`${partecipant.name} ${partecipant.surname}`}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </Tooltip>
                 </TableCell>
                 <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                   {reservation.court_name}

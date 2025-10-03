@@ -832,6 +832,11 @@ span.flatpickr-weekday,
   table-layout: fixed;
   border-collapse: collapse;
 }
+.rdp-chevron {
+  fill: transparent !important;
+}
+
+/* Flat Picker Css */
 
 /* ==================================================== */
 /* 0. ROOT & MAIN CONTAINERS */
