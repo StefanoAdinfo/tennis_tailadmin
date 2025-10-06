@@ -157,16 +157,16 @@ function getCourtTypeLabel(courtType: string): string {
 }
 
 export default function BasicTableOne() {
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   const [selectCourt, setSelectCourt] = useState<Court | null>(null);
 
-  const handleCloseModal = () => {
-    setIsOpen(false);
-  };
-  const handleOpenModal = (court: Court) => {
-    setSelectCourt(court);
-    setIsOpen(true);
-  };
+  // const handleCloseModal = () => {
+  //   setIsOpen(false);
+  // };
+  // const handleOpenModal = (court: Court) => {
+  //   setSelectCourt(court);
+  //   setIsOpen(true);
+  // };
 
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
@@ -230,20 +230,20 @@ export default function BasicTableOne() {
 
                 <TableCell className="px-4 py-3 text-theme-sm  dark:text-gray-400  flex items-center justify-center cursor-pointer ">
                   <Link
-                    to={`/campi/${court.id}/modifica`}
+                    to={`/campi/${court.id}`}
                     className="hover:text-brand-500 dark:hover:text-brand-500"
                   >
                     <Button variant="ghost">
                       <PenIcon />
                     </Button>
                   </Link>
-                  <Button
+                  {/* <Button
                     variant="ghost"
                     onClick={() => handleOpenModal(court)}
                     className="hover:text-red-500 dark:hover:text-red-500"
                   >
                     <TrashBinIcon />
-                  </Button>
+                  </Button> */}
                 </TableCell>
               </TableRow>
             ))}
@@ -251,7 +251,7 @@ export default function BasicTableOne() {
         </Table>
       </div>
 
-      <Modal
+      {/* <Modal
         isOpen={isOpen}
         onClose={handleCloseModal}
         className="max-w-lg p-6"
@@ -271,7 +271,7 @@ export default function BasicTableOne() {
             Elimina
           </Button>
         </div>
-      </Modal>
+      </Modal> */}
     </div>
   );
 }

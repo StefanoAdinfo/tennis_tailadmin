@@ -6,15 +6,21 @@ import Select from "../Select";
 import TextArea from "../input/TextArea";
 import { ClosedDay, WeekSchedule } from "../../../lib/type";
 import OpeningHours from "./OpeningHours";
-import { PlusIcon } from "../../../icons";
+import { PlusIcon, TrashBinIcon } from "../../../icons";
 import Button from "../../ui/button/Button";
 import ClosedDays from "./ClosedDays";
-export const CourtForm = (id?: any) => {
+import { Modal } from "~/components/ui/modal";
+export const CourtForm = (id: any) => {
   const [message, setMessage] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   const [closedDays, setClosedDays] = useState<ClosedDay[]>([]);
   const [openModal, setOpenModal] = useState(false);
   const [schedule, setSchedule] = useState<WeekSchedule>({});
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
 
   const optionsCourtType = [
     { value: "terra_rossa", label: "Terra rossa" },
@@ -37,7 +43,19 @@ export const CourtForm = (id?: any) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
-      <ComponentCard title="Dettagli" className="col-span-12 ">
+      <ComponentCard
+        title={` ${id.id ? "Modifica campo" : "Aggiungi campo"}`}
+        buttonShow={id.id ? true : false}
+        customButton={
+          <Button
+            className="bg-red-600 hover:bg-red-800"
+            onClick={() => setIsOpen(true)}
+          >
+            Elimina campo
+          </Button>
+        }
+        className="col-span-12"
+      >
         <div className="w-full">
           <Label className="mb-1" htmlFor="name">
             Nome
@@ -141,7 +159,6 @@ export const CourtForm = (id?: any) => {
       {/* parte destra  */}
 
       {/* Orari*/}
-
       <ComponentCard title="Orari" className="col-span-12">
         <OpeningHours schedule={schedule} onChange={setSchedule} />
       </ComponentCard>
@@ -167,6 +184,32 @@ export const CourtForm = (id?: any) => {
           openModal={openModal}
         />
       </ComponentCard>
+
+      <div className="col-span-12 flex justify-end">
+        <Button variant="primary">{id.id ? "Modifica" : "Crea"}</Button>
+      </div>
+
+      <Modal
+        isOpen={isOpen}
+        onClose={handleCloseModal}
+        className="max-w-lg p-6"
+      >
+        <h5 className="text-lg font-medium text-gray-800 dark:text-white/90 my-2">
+          Sei sicuro di voler eliminare questo Campo?
+        </h5>
+        <p className="mt-4 text-sm leading-normal text-gray-500 dark:text-gray-400">
+          L'azione è irreversibile
+        </p>
+
+        <div className="mt-6 flex justify-end gap-2">
+          <Button variant="outline" onClick={handleCloseModal}>
+            Annulla
+          </Button>
+          <Button variant="primary" onClick={handleCloseModal}>
+            Elimina
+          </Button>
+        </div>
+      </Modal>
     </div>
   );
 };

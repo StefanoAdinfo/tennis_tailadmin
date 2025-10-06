@@ -4,6 +4,7 @@ import { CourtForm } from "../../components/form/court-form/CourtForm";
 
 export default function Upadte() {
   const { id } = useParams<{ id: string }>();
+  console.log(id);
   return (
     <>
       <div className="grid grid-cols-12 gap-4 md:gap-6">

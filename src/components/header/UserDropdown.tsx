@@ -24,10 +24,10 @@ export default function UserDropdown() {
           avatar="/images/user/default-avatar.svg"
           userName={"Mario"}
           userSurname={"Rossi"}
-          size={45}
+          size={35}
         />
 
-        <span className="block mr-1 font-medium text-theme-sm ml-1">Mario</span>
+        <span className="block mx-2 font-medium text-theme-sm">Mario</span>
         <svg
           className={`stroke-gray-500 dark:stroke-gray-400 transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
@@ -67,7 +67,7 @@ export default function UserDropdown() {
             <DropdownItem
               onItemClick={closeDropdown}
               tag="a"
-              to="/profile"
+              to="/profilo"
               className="flex items-center gap-3 px-3 py-2 font-medium text-gray-700 rounded-lg group text-theme-sm hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
             >
               <svg

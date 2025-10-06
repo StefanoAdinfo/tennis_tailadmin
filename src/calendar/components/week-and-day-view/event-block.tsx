@@ -123,7 +123,7 @@ export function EventBlock({ event, className }: IProps) {
           ))}
         </div>
 
-        <div className="absolute bottom-0 right-0 px-1 pb-0.5 text-xs font-bold pointer-events-none bg-gradient-to-t  dark:from-neutral-950 text-neutral-500">
+        <div className="absolute bottom-0 right-0 px-1 text-xs font-bold pointer-events-none bg-gradient-to-t  text-neutral-500 dark:text-neutral-400">
           ⋯
         </div>
       </div>

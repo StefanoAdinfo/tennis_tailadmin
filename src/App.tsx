@@ -73,11 +73,11 @@ export default function App() {
               {/* <Route path="/utenti/:id/modifica" element={<UsersUpdate />} /> */}
               <Route path="/campi" element={<Courts />} />
               <Route path="/campi/creazione" element={<CourtsCreate />} />
-              <Route path="/campi/:id/modifica" element={<CourtsUpdate />} />
+              <Route path="/campi/:id" element={<CourtsUpdate />} />
               {/* Prenota */}
               <Route path="/prenota" element={<Booking />} />
               {/* Profile */}
-              <Route path="/profile" element={<UserProfiles />} />
+              <Route path="/profilo" element={<UserProfiles />} />
 
               {/* Others Page */}
               <Route path="/blank" element={<Blank />} />

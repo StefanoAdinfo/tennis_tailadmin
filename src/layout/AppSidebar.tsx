@@ -73,8 +73,8 @@ const anagraficaItems: NavItem[] = [
 const othersItems: NavItem[] = [
   {
     icon: <UserCircleIcon />,
-    name: "User Profile",
-    path: "/profile",
+    name: "Profilo",
+    path: "/profilo",
   },
   {
     name: "Forms",
