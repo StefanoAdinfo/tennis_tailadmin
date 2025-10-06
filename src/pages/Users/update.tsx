@@ -428,7 +428,9 @@ export default function UsersShow() {
     <>
       <div className="grid grid-cols-12 gap-4 md:gap-6">
         <div className="col-span-12 space-y-6">
-          <ComponentCard title="Modifica i dettagli utente">
+          <ComponentCard
+            title={`Modifica utente : ${user?.user.name} ${user?.user.surname}`}
+          >
             <div className="flex flex-col lg:flex-row items-start gap-8 lg:items-stretch">
               <ComponentCard className="w-full lg:w-2xs ">
                 <Avatar

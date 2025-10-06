@@ -157,14 +157,6 @@ export default function BasicTableRevenue() {
                       <EyeIcon />
                     </Button>
                   </Link>
-                  <Link to={`/utenti/${user.id}/modifica`}>
-                    <Button
-                      variant="ghost"
-                      className="hover:text-brand-500 dark:hover:text-brand-500"
-                    >
-                      <PenIcon />
-                    </Button>
-                  </Link>
                 </TableCell>
               </TableRow>
             ))}

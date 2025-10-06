@@ -9,13 +9,49 @@ import ComponentCard from "../../components/common/ComponentCard";
 import BasicTableCollectGames from "../../components/tables/BasicTables/BasicTableCollectGames";
 import BasicTableCollectUsers from "../../components/tables/BasicTables/BasicTableCollectUsers";
 import BasicTableNextGame from "../../components/tables/BasicTables/BasicTableNextGame";
+import DataCard from "~/components/ui/card/DataCard";
+import { WalletMinimal, EuroIcon, CalendarPlus, CalendarOff } from "~/icons";
 
 export default function Home() {
   return (
     <>
       <div className="grid grid-cols-12 gap-4 md:gap-6">
         <div className="col-span-12 space-y-6 ">
-          <EcommerceMetrics />
+          {/* <EcommerceMetrics /> */}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 md:gap-6">
+            <DataCard
+              icon={<WalletMinimal />}
+              title={"Totale Incassato"}
+              result={"10"}
+              badgeStatus={"success"}
+              percentage={11.01}
+              bgIcon="bg-yellow-200 dark:bg-yellow-600"
+            />
+            <DataCard
+              icon={<EuroIcon />}
+              title={"Totale da incassare"}
+              result={"89"}
+              badgeStatus={"error"}
+              percentage={1.01}
+              bgIcon="bg-blue-200 dark:bg-blue-800"
+            />
+            <DataCard
+              icon={<CalendarPlus />}
+              title={"Totale Partite"}
+              result={"2350€"}
+              badgeStatus={"success"}
+              percentage={8.01}
+              bgIcon="bg-green-200 dark:bg-green-800"
+            />
+            <DataCard
+              icon={<CalendarOff />}
+              title={"Partite Annullate"}
+              result={"145"}
+              badgeStatus={"error"}
+              percentage={3.01}
+              bgIcon="bg-red-200 dark:bg-red-800"
+            />
+          </div>
         </div>
 
         <div className="col-span-12 md:col-span-6 space-y-6">

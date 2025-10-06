@@ -2,14 +2,15 @@ import PageMeta from "../../components/common/PageMeta";
 import ComponentCard from "../../components/common/ComponentCard";
 // import BasicTableUsers from "../../components/tables/BasicTables/BasicTableUsers";
 import PageBreadcrumb from "../../components/common/PageBreadCrumb";
-import { useLocation, useParams } from "react-router";
-import { Reservation } from "../../lib/type";
+import { Link, useLocation, useParams } from "react-router";
+import { Reservation, User } from "../../lib/type";
 import DataCard from "../../components/ui/card/DataCard";
 import {
   CalendarOff,
   CalendarPlus,
   EnvelopeIcon,
   EuroIcon,
+  PenIcon,
   WalletMinimal,
 } from "../../icons";
 import Avatar from "../../components/ui/my_avatar/Avatar";
@@ -20,6 +21,10 @@ import Input from "../../components/form/input/InputField";
 import Select from "../../components/form/Select";
 
 import BasicTablePlayedGames from "../../components/tables/BasicTables/BasicTablePlayedGames";
+import Button from "~/components/ui/button/Button";
+import { useState } from "react";
+import { Modal } from "~/components/ui/modal";
+import { h } from "@fullcalendar/core/preact.js";
 
 const tableData: Reservation[] = [
   {
@@ -409,9 +414,13 @@ const tableData: Reservation[] = [
   },
 ];
 
-export default function UsersShow() {
-  const { id } = useParams<{ id: string }>();
+interface formProps {
+  user: User;
+  disabled?: boolean;
+  className?: string;
+}
 
+const UserFrom = ({ user, disabled, className }: formProps) => {
   const optionsRole = [
     { value: "user", label: "Utente" },
     { value: "cashier", label: "Cassiere" },
@@ -424,6 +433,120 @@ export default function UsersShow() {
   const handleSelectChange = (value: string) => {
     console.log("Selected value:", value);
   };
+  return (
+    <form action="" className={`${className}`}>
+      <div className="flex flex-col md:flex-row gap-4">
+        <div className="w-full">
+          <Label className="mb-1" htmlFor="name">
+            Nome
+          </Label>
+          <Input
+            type="text"
+            id="name"
+            onChange={(e) => {}}
+            value={user.name}
+            disabled={disabled}
+          />
+        </div>
+        <div className="w-full">
+          <Label className="mb-1" htmlFor="surname">
+            Cognome
+          </Label>
+          <Input
+            type="text"
+            id="surname"
+            onChange={(e) => {}}
+            value={user.surname}
+            disabled={disabled}
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-4 mt-4">
+        <div className="w-full">
+          <Label className="mb-1">Email</Label>
+          <div className="relative">
+            <Input
+              placeholder="inserisci la tua email"
+              type="text"
+              className="pl-[62px]"
+              onChange={(e) => {}}
+              value={user.email}
+              disabled={disabled}
+            />
+            <span className="absolute left-0 top-1/2 -translate-y-1/2 border-r border-gray-200 px-3.5 py-3 text-gray-500 dark:border-gray-800 dark:text-gray-400">
+              <EnvelopeIcon className="size-6" />
+            </span>
+          </div>
+        </div>
+        <div className="w-full">
+          <Label className="mb-1">Telefono</Label>
+          {/* <PhoneInput
+                      selectPosition="start"
+                      countries={countries}
+                      placeholder="+1 (555) 000-0000"
+                      onChange={handlePhoneNumberChange}
+                    /> */}
+          <Input
+            type="phone"
+            id="phone"
+            onChange={(e) => {}}
+            value={user.phone_number}
+            disabled={disabled}
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-col xl:flex-row gap-4 mt-4">
+        <div className="w-full">
+          <Label className="mb-1" htmlFor="card">
+            Tessera
+          </Label>
+          <Input
+            type="text"
+            id="card"
+            onChange={(e) => {}}
+            value={user.card}
+            disabled={disabled}
+          />
+        </div>
+        <div className="w-full">
+          <Label className="mb-1">Ruolo</Label>
+          <Select
+            options={optionsRole}
+            placeholder="Select an option"
+            onChange={handleSelectChange}
+            className="dark:bg-dark-900"
+            defaultValue={user.role}
+            disabled={disabled}
+          />
+        </div>
+        <div className="w-full">
+          <Label className="mb-1">Membro</Label>
+          <Select
+            options={optionsMember}
+            placeholder="Select an option"
+            onChange={handleSelectChange}
+            className="dark:bg-dark-900"
+            defaultValue={user.memeber_type}
+            disabled={disabled}
+          />
+        </div>
+      </div>
+      {!disabled && (
+        <div className="flex justify-end">
+          <Button variant="primary" className="mt-4">
+            Modifica
+          </Button>
+        </div>
+      )}
+    </form>
+  );
+};
+
+export default function UsersShow() {
+  const { id } = useParams<{ id: string }>();
+  const [open, setOpen] = useState(false);
 
   // const countries = [
   //   { code: "IT", label: "+39" },
@@ -432,50 +555,24 @@ export default function UsersShow() {
   //   { code: "CA", label: "+1" },
   //   { code: "AU", label: "+61" },
   // ];
-  // const handlePhoneNumberChange = (phoneNumber: string) => {
-  //   console.log("Updated phone number:", phoneNumber);
-  // };
+  const handleCloseModal = () => {
+    setOpen(false);
+  };
 
   const user = tableData.find((item) => item.id === id);
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <>
       <div className="grid grid-cols-12 gap-4 md:gap-6">
         <div className="col-span-12 space-y-6">
-          <ComponentCard title="Statistiche utente">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 md:gap-6">
-              <DataCard
-                icon={<CalendarOff />}
-                title={"Partite annullate"}
-                result={"10"}
-                badgeStatus={"success"}
-                percentage={11.01}
-              />
-              <DataCard
-                icon={<CalendarPlus />}
-                title={"Partite Prenotate"}
-                result={"89"}
-                badgeStatus={"error"}
-                percentage={1.01}
-              />
-              <DataCard
-                icon={<WalletMinimal />}
-                title={"Totale pagato"}
-                result={"2350€"}
-                badgeStatus={"success"}
-                percentage={8.01}
-              />
-              <DataCard
-                icon={<EuroIcon />}
-                title={"Totale da pagare"}
-                result={"145"}
-                badgeStatus={"error"}
-                percentage={3.01}
-              />
-            </div>
-
-            <div className="flex flex-col lg:flex-row gap-8 lg:items-stretch">
-              <ComponentCard className="w-full lg:w-2xs ">
+          <ComponentCard
+            title={`Utente: ${user?.user.name + " " + user?.user.surname}`}
+          >
+            <div className="flex flex-col lg:flex-row gap-8 items-start">
+              <ComponentCard className="w-full lg:w-2xs">
                 <Avatar
                   avatar={user?.user.avatar}
                   userName={"Stefano"}
@@ -498,98 +595,53 @@ export default function UsersShow() {
               </ComponentCard>
               {/* Form */}
               <ComponentCard className="w-full lg:flex-1 flex flex-col justify-center">
-                <div className="flex flex-col md:flex-row gap-4">
-                  <div className="w-full">
-                    <Label className="mb-1" htmlFor="name">
-                      Nome
-                    </Label>
-                    <Input
-                      type="text"
-                      id="name"
-                      onChange={(e) => {}}
-                      value={user?.user.name}
-                    />
-                  </div>
-                  <div className="w-full">
-                    <Label className="mb-1" htmlFor="surname">
-                      Cognome
-                    </Label>
-                    <Input
-                      type="text"
-                      id="surname"
-                      onChange={(e) => {}}
-                      value={user?.user.surname}
-                    />
-                  </div>
+                <div className="flex justify-end">
+                  <Button
+                    title="Modifica utente"
+                    onClick={() => setOpen(true)}
+                    variant="primary"
+                    className="hover:text-gray-300 dark:hover:text-gray-300 py-3! px-4!"
+                  >
+                    <PenIcon />
+                  </Button>
                 </div>
-
-                <div className="flex flex-col md:flex-row gap-4 mt-4">
-                  <div className="w-full">
-                    <Label className="mb-1">Email</Label>
-                    <div className="relative">
-                      <Input
-                        placeholder="inserisci la tua email"
-                        type="text"
-                        className="pl-[62px]"
-                        onChange={(e) => {}}
-                        value={user?.user.email}
-                      />
-                      <span className="absolute left-0 top-1/2 -translate-y-1/2 border-r border-gray-200 px-3.5 py-3 text-gray-500 dark:border-gray-800 dark:text-gray-400">
-                        <EnvelopeIcon className="size-6" />
-                      </span>
-                    </div>
-                  </div>
-                  <div className="w-full">
-                    <Label className="mb-1">Telefono</Label>
-                    {/* <PhoneInput
-                      selectPosition="start"
-                      countries={countries}
-                      placeholder="+1 (555) 000-0000"
-                      onChange={handlePhoneNumberChange}
-                    /> */}
-                    <Input
-                      type="phone"
-                      id="phone"
-                      onChange={(e) => {}}
-                      value={user?.user.phone_number}
-                    />
-                  </div>
-                </div>
-
-                <div className="flex flex-col xl:flex-row gap-4 mt-4">
-                  <div className="w-full">
-                    <Label className="mb-1" htmlFor="card">
-                      Tessera
-                    </Label>
-                    <Input
-                      type="text"
-                      id="card"
-                      onChange={(e) => {}}
-                      value={user?.user.card}
-                    />
-                  </div>
-                  <div className="w-full">
-                    <Label className="mb-1">Ruolo</Label>
-                    <Select
-                      options={optionsRole}
-                      placeholder="Select an option"
-                      onChange={handleSelectChange}
-                      className="dark:bg-dark-900"
-                      defaultValue={user?.user.role}
-                    />
-                  </div>
-                  <div className="w-full">
-                    <Label className="mb-1">Membro</Label>
-                    <Select
-                      options={optionsMember}
-                      placeholder="Select an option"
-                      onChange={handleSelectChange}
-                      className="dark:bg-dark-900"
-                      defaultValue={user?.user.memeber_type}
-                    />
-                  </div>
-                </div>
+                <UserFrom user={user?.user} disabled />
               </ComponentCard>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 md:gap-6 lg:grid-cols-4 ">
+              <DataCard
+                icon={<CalendarOff />}
+                title={"Partite annullate"}
+                result={"10"}
+                badgeStatus={"success"}
+                percentage={11.01}
+                bgIcon="bg-yellow-200 dark:bg-yellow-600"
+              />
+              <DataCard
+                icon={<CalendarPlus />}
+                title={"Partite Prenotate"}
+                result={"89"}
+                badgeStatus={"error"}
+                percentage={1.01}
+                bgIcon="bg-blue-200 dark:bg-blue-800"
+              />
+              <DataCard
+                icon={<WalletMinimal />}
+                title={"Totale pagato"}
+                result={"2350€"}
+                badgeStatus={"success"}
+                percentage={8.01}
+                bgIcon="bg-green-200 dark:bg-green-800"
+              />
+              <DataCard
+                icon={<EuroIcon />}
+                title={"Totale da pagare"}
+                result={"145"}
+                badgeStatus={"error"}
+                percentage={3.01}
+                bgIcon="bg-red-200 dark:bg-red-800"
+              />
             </div>
 
             <div className="col-span-12 space-y-6">
@@ -600,6 +652,14 @@ export default function UsersShow() {
           </ComponentCard>
         </div>
       </div>
+
+      <Modal isOpen={open} onClose={handleCloseModal} className="max-w-lg p-6">
+        <h3 className="text-2xl font-medium text-gray-800 dark:text-white/90 py-2 ">
+          Modifica utente : {user?.user.name} {user?.user.surname}
+        </h3>
+
+        <UserFrom user={user?.user} className="my-3" />
+      </Modal>
     </>
   );
 }

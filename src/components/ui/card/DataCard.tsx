@@ -10,6 +10,7 @@ interface DataCardProps {
   result: string;
   badgeStatus: BadgeColor;
   percentage: number;
+  bgIcon: string;
 }
 
 export default function EcommerceMetrics({
@@ -18,17 +19,22 @@ export default function EcommerceMetrics({
   result,
   badgeStatus,
   percentage,
+  bgIcon,
 }: DataCardProps) {
   const iconWithClasses = React.cloneElement(icon as any, {
     className: "text-gray-800 size-6 dark:text-white/90",
   });
   return (
-    <div className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] md:p-6">
-      <div className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-xl dark:bg-gray-800">
+    <div
+      className={`rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] md:p-6`}
+    >
+      <div
+        className={`flex items-center justify-center w-12 h-12 rounded-xl ${bgIcon ? bgIcon : "bg-gray-100  dark:bg-gray-800"}`}
+      >
         {iconWithClasses}
       </div>
 
-      <div className="flex items-end justify-between mt-5">
+      <div className="flex items-end justify-between flex-wrap mt-5">
         <div>
           <span className="text-sm text-gray-500 dark:text-gray-400">
             {title}
@@ -37,10 +43,10 @@ export default function EcommerceMetrics({
             {result}
           </h4>
         </div>
-        <Badge color={badgeStatus}>
+        {/* <Badge color={badgeStatus}>
           {badgeStatus === "success" ? <ArrowUpIcon /> : <ArrowDownIcon />}{" "}
           {percentage}%
-        </Badge>
+        </Badge> */}
       </div>
     </div>
   );

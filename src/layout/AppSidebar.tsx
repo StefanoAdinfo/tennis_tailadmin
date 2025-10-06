@@ -139,7 +139,19 @@ const AppSidebar: React.FC = () => {
 
   // const isActive = (path: string) => location.pathname === path;
   const isActive = useCallback(
-    (path: string) => location.pathname === path,
+    (path: string) => {
+      //  Match esatto (per percorsi come / e anche percorsi come /incassi)
+      if (location.pathname === path) {
+        return true;
+      }
+
+      //  Match per sottopercorsi (es. /utenti match su /utenti/1/modifica)
+      if (path !== "/") {
+        return location.pathname.startsWith(path + "/");
+      }
+
+      return false;
+    },
     [location.pathname]
   );
 

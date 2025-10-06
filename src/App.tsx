@@ -70,7 +70,7 @@ export default function App() {
               {/* Anagrafica */}
               <Route path="/utenti" element={<Users />} />
               <Route path="/utenti/:id" element={<UsersShow />} />
-              <Route path="/utenti/:id/modifica" element={<UsersUpdate />} />
+              {/* <Route path="/utenti/:id/modifica" element={<UsersUpdate />} /> */}
               <Route path="/campi" element={<Courts />} />
               <Route path="/campi/creazione" element={<CourtsCreate />} />
               <Route path="/campi/:id/modifica" element={<CourtsUpdate />} />

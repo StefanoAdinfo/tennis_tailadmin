@@ -230,7 +230,7 @@ export default function BasicTableOne() {
 
                 <TableCell className="px-4 py-3 text-theme-sm  dark:text-gray-400  flex items-center justify-center cursor-pointer ">
                   <Link
-                    to={`/campi/modifica/${court.id}`}
+                    to={`/campi/${court.id}/modifica`}
                     className="hover:text-brand-500 dark:hover:text-brand-500"
                   >
                     <Button variant="ghost">

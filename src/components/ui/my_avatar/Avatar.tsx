@@ -4,6 +4,7 @@ interface avatarProps {
   userName: string;
   userSurname: string;
   size: number;
+  showIcon?: boolean;
 }
 
 export default function Avatar({
@@ -11,6 +12,7 @@ export default function Avatar({
   userName,
   userSurname,
   size,
+  showIcon = false,
 }: avatarProps) {
   const getInitials = (name: string, surname: string) => {
     if (name && surname) {
@@ -52,15 +54,16 @@ export default function Avatar({
             </div>
           )}
         </div>
-
-        <div
-          className="absolute bottom-0 right-0
+        {showIcon && (
+          <div
+            className="absolute bottom-0 right-0
                    transform translate-x-1 translate-y-1
                    text-gray-600 dark:text-gray-200 bg-white dark:bg-gray-700 p-[3px]
                    rounded-full border border-gray-300 dark:border-gray-600"
-        >
-          <Camera className="size-5" />
-        </div>
+          >
+            <Camera className="size-5" />
+          </div>
+        )}
       </div>
     </div>
   );
