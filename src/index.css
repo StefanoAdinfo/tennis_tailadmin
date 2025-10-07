@@ -797,6 +797,13 @@ span.flatpickr-weekday,
   @apply opacity-100;
 }
 
+.border-inline-style {
+  border-inline-start: 1px solid rgba(255, 0, 0) !important;
+  border-inline-end: 1px solid rgba(255, 0, 0) !important;
+}
+
+/* React date picker */
+
 .rdp-root {
   overflow: hidden;
   position: relative;
@@ -821,8 +828,10 @@ span.flatpickr-weekday,
 }
 
 .rdp-day_button {
-  width: 32px;
-  height: 32px;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 5px !important;
+  border: none !important;
   margin: auto;
   background: none;
   padding: 0;
@@ -833,12 +842,20 @@ span.flatpickr-weekday,
   justify-content: center;
   align-items: center;
   display: flex;
-
-  width: 32px;
-  height: 32px;
-  border: 2px solid transparent;
-  border-radius: 100%;
 }
+
+.rdp-selected > .rdp-day_button {
+  @apply bg-brand-500! text-white!;
+}
+
+.rdp-day_button:hover {
+  @apply bg-gray-200 dark:bg-gray-800;
+}
+
+.rdp-today > .rdp-day_button {
+  @apply bg-gray-200 dark:bg-gray-800 dark:text-white text-black;
+}
+
 .rdp-month_grid {
   width: 100% !important;
   table-layout: fixed;
@@ -846,155 +863,4 @@ span.flatpickr-weekday,
 }
 .rdp-chevron {
   fill: transparent !important;
-}
-
-/* Flat Picker Css */
-
-/* ==================================================== */
-/* 0. ROOT & MAIN CONTAINERS */
-/* ==================================================== */
-
-/* La larghezza è sempre 100% fino al max di 800px. Questo è perfetto per la reattività. */
-.flatpickr-calendar {
-  width: 100% !important;
-  max-width: 800px !important;
-  height: auto !important;
-  margin: 0 auto !important;
-  box-sizing: border-box !important;
-  /* (Opzionale: Un padding leggero per evitare che tocchi i bordi dello schermo piccolo) */
-  padding: 0 0.5rem;
-}
-
-.flatpickr-calendar.open,
-.flatpickr-calendar.inline {
-  height: auto !important;
-  max-height: none !important;
-}
-
-.flatpickr-rContainer,
-.flatpickr-innerContainer,
-.flatpickr-days {
-  width: 100% !important;
-  height: 100% !important;
-  min-height: 0 !important;
-  display: block !important;
-}
-
-/* ==================================================== */
-/* 1. HEADER (Mese, Anno e Navigazione) - Reattivo */
-/* ==================================================== */
-
-/* Default (Mobile First) */
-.flatpickr-current-month .cur-month,
-.flatpickr-current-month input.cur-year {
-  font-size: 1.2rem !important; /* Ridotto per cellulare */
-}
-
-.flatpickr-next-month,
-.flatpickr-prev-month {
-  padding: 10px 8px; /* Ridotto */
-  transform: scale(1.2); /* Scala ridotta */
-}
-.flatpickr-month {
-  height: 50px !important;
-}
-
-.flatpickr-current-month .numInputWrapper {
-  width: 8ch !important;
-  height: 3ch;
-}
-
-/* Tablet e Desktop (quando lo schermo è più grande di 640px) */
-@media (min-width: 640px) {
-  .flatpickr-current-month .cur-month,
-  .flatpickr-current-month input.cur-year {
-    font-size: 1.8rem !important; /* Ripristina la dimensione originale */
-  }
-
-  .flatpickr-next-month,
-  .flatpickr-prev-month {
-    padding: 15px 12px; /* Ripristina la dimensione originale */
-    transform: scale(1.5);
-  }
-}
-
-/* ==================================================== */
-/* 2. LAYOUT GRIGLIA (Giorni della Settimana e Giorno del Mese) - Reattivo */
-/* ==================================================== */
-
-.flatpickr-weekdaycontainer,
-.dayContainer {
-  display: grid !important;
-  grid-template-columns: repeat(7, 1fr) !important;
-  width: 100% !important;
-  grid-gap: 0.5rem !important; /* Ridotto il gap per schermi piccoli */
-}
-
-/* Tablet e Desktop (per aumentare lo spazio tra i giorni) */
-@media (min-width: 768px) {
-  .flatpickr-weekdaycontainer,
-  .dayContainer {
-    grid-gap: 1rem !important; /* Ripristina il gap originale su schermi più grandi */
-  }
-}
-
-.dayContainer {
-  grid-auto-rows: auto !important;
-  min-width: 100% !important;
-  max-width: 100% !important;
-}
-
-/* Stili Nomi Giorni della Settimana */
-.flatpickr-weekday {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  padding: 5px 0 !important; /* Ridotto il padding */
-  font-size: 0.9rem !important; /* Ridotto il font */
-}
-
-/* Tablet e Desktop */
-@media (min-width: 640px) {
-  .flatpickr-weekday {
-    padding: 10px 0 !important;
-    font-size: 1.2rem !important;
-  }
-}
-
-/* ==================================================== */
-/* 3. STILE DEL SINGOLO GIORNO (flatpickr-day) - Reattivo */
-/* ==================================================== */
-
-.flatpickr-day {
-  width: auto !important;
-  height: auto !important;
-  max-width: none !important;
-
-  /* Forza la forma Quadrata */
-  aspect-ratio: 1 / 1;
-
-  /* Centratura */
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-
-  box-sizing: border-box;
-
-  /* Dimensione Font: Molto più piccolo su mobile, scala su desktop. */
-  font-size: 1.5rem !important; /* Piccolo per cellulare */
-  font-weight: bold;
-}
-
-/* Adattamento font per Tablet (schermi medi) */
-@media (min-width: 480px) {
-  .flatpickr-day {
-    font-size: 2rem !important;
-  }
-}
-
-/* Adattamento font per Desktop (schermi grandi) */
-@media (min-width: 768px) {
-  .flatpickr-day {
-    font-size: 3rem !important; /* Dimensione originale */
-  }
 }

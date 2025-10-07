@@ -6,7 +6,10 @@ import type { IEvent } from "~/calendar/interfaces";
 import type { TCalendarView } from "~/calendar/types";
 import { useCalendar } from "~/calendar/contexts/calendar-context";
 import Button from "~/components/ui/button/Button";
-import { Columns2, Grid2x2, List } from "~/icons";
+import { Columns2, Grid2x2, List, PlusIcon } from "~/icons";
+import { AddEventDialog } from "../dialogs/add-event-dialog";
+import { useDisclosure } from "~/hooks/use-disclosure";
+import { useState } from "react";
 
 interface IProps {
   view: TCalendarView;
@@ -15,6 +18,7 @@ interface IProps {
 
 export function CalendarHeader({ view, events }: IProps) {
   const { setViewCalendar } = useCalendar();
+  const [oepn, setOpen] = useState(false);
   return (
     <div className="flex flex-col gap-4 border-b border-gray-200 dark:border-gray-800 p-4 lg:flex-row lg:items-center lg:justify-between">
       <div className="flex items-center gap-3">
@@ -91,14 +95,13 @@ export function CalendarHeader({ view, events }: IProps) {
           </div>
 
           <CourtSelect />
+          {/* <Button variant="primary" onClick={() => setOpen(true)}>
+            <PlusIcon />
+            <span className="ml-2 text-sm">Aggiungi </span>
+          </Button> */}
         </div>
 
-        {/* <AddEventDialog>
-          <Button className="w-full sm:w-auto">
-            <Plus />
-            Add Event
-          </Button>
-        </AddEventDialog> */}
+        <AddEventDialog open={oepn} setOpen={setOpen} />
       </div>
     </div>
   );

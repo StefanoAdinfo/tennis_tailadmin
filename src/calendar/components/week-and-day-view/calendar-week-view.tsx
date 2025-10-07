@@ -9,9 +9,11 @@ import {
 
 import { useCalendar } from "~/calendar/contexts/calendar-context";
 
+import { AddEventDialog } from "@/calendar/components/dialogs/add-event-dialog";
 import { EventBlock } from "~/calendar/components/week-and-day-view/event-block";
 import { CalendarTimeline } from "~/calendar/components/week-and-day-view/calendar-time-line";
 import { WeekViewMultiDayEventsRow } from "~/calendar/components/week-and-day-view/week-view-multi-day-events-row";
+import { DroppableTimeBlock } from "@/calendar/components/dnd/droppable-time-block";
 
 import { cn } from "@/lib/utils";
 import {
@@ -23,6 +25,7 @@ import {
 
 import type { IEvent } from "~/calendar/interfaces";
 import { it } from "date-fns/locale";
+import { useState } from "react";
 
 interface IProps {
   singleDayEvents: IEvent[];
@@ -31,6 +34,20 @@ interface IProps {
 
 export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
   const { selectedDate, workingHours, visibleHours } = useCalendar();
+
+  const [openModalMap, setOpenModalMap] = useState<{
+    [key: string]: boolean;
+  }>({});
+
+  const handleSetOpenModal = (
+    reservationId: string | number,
+    isOpen: boolean
+  ) => {
+    setOpenModalMap((prevMap) => ({
+      ...prevMap,
+      [reservationId]: isOpen,
+    }));
+  };
 
   const { hours, earliestEventHour, latestEventHour } = getVisibleHours(
     visibleHours,
@@ -43,11 +60,13 @@ export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
   return (
     <>
       <div className="flex flex-col items-center justify-center border-b border-gray-200 dark:border-gray-800 py-4 text-sm text-muted-foreground sm:hidden">
-        <p>
+        <p className="text-center">
           La visualizzazione settimanale non è disponibile sui dispositivi con
           schermo ridotto.
         </p>
-        <p>Passa alla visualizzazione giornaliera o mensile.</p>
+        <p className="text-center">
+          Passa alla visualizzazione giornaliera o mensile.
+        </p>
       </div>
 
       <div className="hidden flex-col sm:flex">
@@ -97,7 +116,7 @@ export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
 
             {/* Week grid */}
             <div className="relative flex-1 border-l border-gray-200 dark:border-gray-800">
-              <div className="grid grid-cols-7 divide-x">
+              <div className="grid grid-cols-7 divide-x border-gray-200 dark:border-gray-800">
                 {weekDays.map((day, dayIndex) => {
                   const dayEvents = singleDayEvents.filter(
                     (event) =>
@@ -107,11 +126,8 @@ export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
                   const groupedEvents = groupEvents(dayEvents);
 
                   return (
-                    <div
-                      key={dayIndex}
-                      className="relative border-gray-200 dark:border-gray-800"
-                    >
-                      {hours.map((hour, index) => {
+                    <div key={dayIndex} className="relative">
+                      {hours.map((hour) => {
                         const isDisabled = !isWorkingHour(
                           day,
                           hour,
@@ -122,16 +138,68 @@ export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
                           <div
                             key={hour}
                             className={cn(
-                              "relative",
+                              "relative border-gray-200 dark:border-gray-800",
                               isDisabled && "bg-calendar-disabled-hour"
                             )}
-                            style={{ height: "76px" }}
+                            style={{ height: "96px" }}
                           >
-                            {index !== 0 && (
-                              <div className="pointer-events-none absolute inset-x-0 top-0 border-b border-gray-200 dark:border-gray-800"></div>
-                            )}
+                            {/* Slot 1: minuto 0 */}
+                            {(() => {
+                              const slotKey = `${format(day, "yyyy-MM-dd")}-${hour}-0`;
+                              return (
+                                <DroppableTimeBlock
+                                  date={day}
+                                  hour={hour}
+                                  minute={0}
+                                >
+                                  <div
+                                    role="button"
+                                    className="absolute inset-x-0 top-0 h-[48px] cursor-pointer transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+                                    onClick={() =>
+                                      handleSetOpenModal(slotKey, true)
+                                    }
+                                  />
+                                  <AddEventDialog
+                                    startDate={day}
+                                    startTime={{ hour, minute: 0 }}
+                                    open={openModalMap[slotKey] || false}
+                                    setOpen={(isOpen: boolean) =>
+                                      handleSetOpenModal(slotKey, isOpen)
+                                    }
+                                  />
+                                </DroppableTimeBlock>
+                              );
+                            })()}
 
-                            <div className="pointer-events-none absolute inset-x-0 top-1/2 border-b border-dashed border-gray-200 dark:border-gray-800"></div>
+                            {/* Slot 2: minuto 30 */}
+                            {(() => {
+                              const slotKey = `${format(day, "yyyy-MM-dd")}-${hour}-30`;
+                              return (
+                                <DroppableTimeBlock
+                                  date={day}
+                                  hour={hour}
+                                  minute={30}
+                                >
+                                  <div
+                                    role="button"
+                                    className="absolute inset-x-0 top-[48px] h-[48px] cursor-pointer transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+                                    onClick={() =>
+                                      handleSetOpenModal(slotKey, true)
+                                    }
+                                  />
+                                  <AddEventDialog
+                                    startDate={day}
+                                    startTime={{ hour, minute: 30 }}
+                                    open={openModalMap[slotKey] || false}
+                                    setOpen={(isOpen: boolean) =>
+                                      handleSetOpenModal(slotKey, isOpen)
+                                    }
+                                  />
+                                </DroppableTimeBlock>
+                              );
+                            })()}
+
+                            <div className="pointer-events-none absolute inset-x-0 top-1/2 border-b border-dashed border-gray-200 dark:border-gray-800" />
                           </div>
                         );
                       })}

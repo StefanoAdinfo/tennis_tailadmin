@@ -157,10 +157,7 @@ export default function Step3() {
 
           {/* 5. SWITCH ILLUMINAZIONE */}
           <div className="flex max-w-md items-center gap-4 text-gray-800 dark:text-gray-200">
-            <Switch
-              // Lo switch deve usare il brand-600 quando attivo (solitamente gestito internamente)
-              label={""}
-            />
+            <Switch label={""} />
             <span>Illuminazione</span>
           </div>
         </form>

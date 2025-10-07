@@ -62,7 +62,7 @@ export function DroppableTimeBlock({
   return (
     <div
       ref={drop as unknown as React.RefObject<HTMLDivElement>}
-      className={cn("h-[24px]", isOver && canDrop && "bg-accent/50")}
+      className={cn("h-[48px]", isOver && canDrop && "bg-accent/50 ")}
     >
       {children}
     </div>

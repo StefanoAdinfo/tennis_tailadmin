@@ -2,7 +2,7 @@
 
 import { format, parseISO } from "date-fns";
 import { cva } from "class-variance-authority";
-import { Clock, Text, User } from "lucide-react";
+// import { Clock, Text, User } from "lucide-react";
 
 import { useCalendar } from "~/calendar/contexts/calendar-context";
 
@@ -10,6 +10,7 @@ import { EventDetailsDialog } from "~/calendar/components/dialogs/event-details-
 
 import type { IEvent } from "~/calendar/interfaces";
 import type { VariantProps } from "class-variance-authority";
+import { Clock, UserIcon } from "~/icons";
 
 const agendaEventCardVariants = cva(
   "flex select-none items-center justify-between gap-3 rounded-md border p-3 text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
@@ -82,7 +83,7 @@ export function AgendaEventCard({
   };
 
   return (
-    <EventDetailsDialog event={event}>
+    <EventDetailsDialog event={event} open={false} setOpen={() => {}}>
       <div
         role="button"
         tabIndex={0}
@@ -108,12 +109,12 @@ export function AgendaEventCard({
                   Day {eventCurrentDay} of {eventTotalDays} •{" "}
                 </span>
               )}
-              {event.title}
+              {event.startDate && format(startDate, "dd/MM/yyyy")}
             </p>
           </div>
 
           <div className="mt-1 flex items-center gap-1">
-            <User className="size-3 shrink-0" />
+            <UserIcon className="size-3 shrink-0" />
             <p className="text-xs text-foreground">{event.court.name}</p>
           </div>
 
@@ -125,8 +126,8 @@ export function AgendaEventCard({
           </div>
 
           <div className="flex items-center gap-1">
-            <Text className="size-3 shrink-0" />
-            <p className="text-xs text-foreground">{event.description}</p>
+            {/* <Text className="size-3 shrink-0" /> */}
+            <p className="text-xs text-foreground">{event.total_amount}</p>
           </div>
         </div>
       </div>

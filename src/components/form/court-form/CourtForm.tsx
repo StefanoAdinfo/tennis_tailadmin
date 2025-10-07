@@ -64,7 +64,7 @@ export const CourtForm = (id: any) => {
         </div>
         <div className="flex flex-col md:flex-row gap-4">
           <div className="w-full">
-            <Label className="mb-1">Ruolo</Label>
+            <Label className="mb-1">Tipologia</Label>
             <Select
               options={optionsCourtType}
               placeholder="Seleziona un opzione"
@@ -73,7 +73,7 @@ export const CourtForm = (id: any) => {
             />
           </div>
           <div className="w-full">
-            <Label className="mb-1">Ruolo</Label>
+            <Label className="mb-1">Posizione</Label>
             <Select
               options={optionsCourtPosition}
               placeholder="Seleziona un opzione"

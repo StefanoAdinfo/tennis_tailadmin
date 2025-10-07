@@ -7,6 +7,7 @@ interface IProps {
   event: IEvent;
   open: boolean;
   setOpen: (open: boolean) => void;
+  children?: React.ReactNode;
 }
 
 export function EventDetailsDialog({ event, open, setOpen }: IProps) {

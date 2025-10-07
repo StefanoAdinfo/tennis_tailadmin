@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { CalendarX2 } from "lucide-react";
 import { parseISO, format, endOfDay, startOfDay, isSameMonth } from "date-fns";
 
 import { useCalendar } from "~/calendar/contexts/calendar-context";
@@ -7,6 +6,7 @@ import { useCalendar } from "~/calendar/contexts/calendar-context";
 import { AgendaDayGroup } from "~/calendar/components/agenda-view/agenda-day-group";
 
 import type { IEvent } from "~/calendar/interfaces";
+import { CalendarPlus } from "~/icons";
 
 interface IProps {
   singleDayEvents: IEvent[];
@@ -88,7 +88,7 @@ export function CalendarAgendaView({
 
         {!hasAnyEvents && (
           <div className="flex flex-col items-center justify-center gap-2 py-20 text-muted-foreground">
-            <CalendarX2 className="size-10" />
+            <CalendarPlus className="size-10" />
             <p className="text-sm md:text-base">
               Nessun evento programmato per il mese selezionato.
             </p>
