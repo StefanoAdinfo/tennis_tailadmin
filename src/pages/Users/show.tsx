@@ -24,23 +24,22 @@ import BasicTablePlayedGames from "../../components/tables/BasicTables/BasicTabl
 import Button from "~/components/ui/button/Button";
 import { useState } from "react";
 import { Modal } from "~/components/ui/modal";
-import { h } from "@fullcalendar/core/preact.js";
 
 const tableData: Reservation[] = [
   {
     id: "1",
     user: {
       id: "1",
-      name: "Giuseppe",
-      surname: "Verdi",
-      email: "giuseppe.verdi@example.com",
-      role: "utente",
-      memeber_type: "socio",
+      name: "Mario",
+      surname: "Rossi",
+      role: "admin",
       is_active: true,
+      email: "mario.rossi@gmail.com",
+      avatar: "/images/user/default-avatar.svg",
+      card: "124657`p19",
+      phone_number: "1234567890",
+      memeber_type: "admin",
       junior: false,
-      avatar: "/images/user/user-35.jpg",
-      card: "141124214124",
-      phone_number: "555-123-4567",
     },
     court: {
       id: "1",
@@ -96,16 +95,16 @@ const tableData: Reservation[] = [
     id: "2",
     user: {
       id: "2",
-      name: "Lucia",
-      surname: "Blu",
-      email: "lucia.blu@example.com",
-      role: "utente",
-      memeber_type: "socio",
-      is_active: true,
+      name: "Luisa",
+      surname: "Verdi",
+      role: "admin",
+      is_active: false,
+      email: "luisa.verdi@example.com",
+      avatar: "/images/user/user-18.jpg",
+      card: "14819`112",
+      phone_number: "1234567890",
+      memeber_type: "user",
       junior: false,
-      avatar: "/images/user/user-35.jpg",
-      card: "141124214124",
-      phone_number: "555-123-4567",
     },
     court: {
       id: "2",

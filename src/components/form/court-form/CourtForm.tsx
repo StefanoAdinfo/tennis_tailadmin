@@ -47,10 +47,7 @@ export const CourtForm = (id: any) => {
         title={` ${id.id ? "Modifica campo" : "Aggiungi campo"}`}
         buttonShow={id.id ? true : false}
         customButton={
-          <Button
-            className="bg-red-600 hover:bg-red-800"
-            onClick={() => setIsOpen(true)}
-          >
+          <Button variant="danger" onClick={() => setIsOpen(true)}>
             Elimina campo
           </Button>
         }
@@ -205,7 +202,7 @@ export const CourtForm = (id: any) => {
           <Button variant="outline" onClick={handleCloseModal}>
             Annulla
           </Button>
-          <Button variant="primary" onClick={handleCloseModal}>
+          <Button variant="danger" onClick={handleCloseModal}>
             Elimina
           </Button>
         </div>

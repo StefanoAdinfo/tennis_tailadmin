@@ -22,6 +22,10 @@ const tableData: Reservation[] = [
       role: "Player",
       is_active: true,
       avatar: "/images/user/user-1.jpg",
+      card: "",
+      phone_number: "",
+      memeber_type: "",
+      junior: false,
     },
     court: {
       id: "1",
@@ -55,6 +59,7 @@ const tableData: Reservation[] = [
         is_paid: false,
         total_amount: 20.4,
         email: "mario.rossi@example.com",
+        avatar: "",
       },
       {
         id: "p102",
@@ -64,6 +69,7 @@ const tableData: Reservation[] = [
         is_paid: true,
         total_amount: 20.4,
         email: "luisa.verdi@example.com",
+        avatar: "",
       },
     ],
     court_name: "Campo 1",
@@ -81,6 +87,10 @@ const tableData: Reservation[] = [
       role: "Player",
       is_active: true,
       avatar: "/images/user/user-2.jpg",
+      card: "",
+      phone_number: "",
+      memeber_type: "",
+      junior: false,
     },
     court: {
       id: "2",
@@ -114,6 +124,7 @@ const tableData: Reservation[] = [
         is_paid: false,
         total_amount: 20.4,
         email: "giovanni.bianchi@example.com",
+        avatar: "",
       },
       {
         id: "p202",
@@ -123,6 +134,7 @@ const tableData: Reservation[] = [
         is_paid: true,
         total_amount: 20.4,
         email: "anna.neri@example.com",
+        avatar: "",
       },
       {
         id: "p203",
@@ -132,6 +144,7 @@ const tableData: Reservation[] = [
         is_paid: true,
         total_amount: 20.4,
         email: "paolo.gialli@example.com",
+        avatar: "",
       },
     ],
     court_name: "Campo 2",
@@ -149,6 +162,10 @@ const tableData: Reservation[] = [
       role: "Socio",
       is_active: true,
       avatar: "/images/user/user-3.jpg",
+      card: "",
+      phone_number: "",
+      memeber_type: "",
+      junior: false,
     },
     court: {
       id: "3",
@@ -182,6 +199,7 @@ const tableData: Reservation[] = [
         is_paid: true,
         total_amount: 20.4,
         email: "andrea.gialli@example.com",
+        avatar: "",
       },
       {
         id: "p302",
@@ -191,6 +209,7 @@ const tableData: Reservation[] = [
         is_paid: true,
         total_amount: 20.4,
         email: "giulia.verdi@example.com",
+        avatar: "",
       },
       {
         // Partecipante incompleto, riempito con valori di default
@@ -201,6 +220,7 @@ const tableData: Reservation[] = [
         is_paid: false,
         total_amount: 0.0,
         email: "giovanni.sconosciuto@example.com",
+        avatar: "",
       },
     ],
     court_name: "Campo 3",
@@ -218,6 +238,10 @@ const tableData: Reservation[] = [
       role: "Player",
       is_active: true,
       avatar: "/images/user/user-4.jpg",
+      card: "",
+      phone_number: "",
+      memeber_type: "",
+      junior: false,
     },
     court: {
       id: "4",
@@ -251,6 +275,7 @@ const tableData: Reservation[] = [
         is_paid: true,
         total_amount: 20.4,
         email: "giuseppe.verdi@example.com",
+        avatar: "",
       },
       {
         id: "p402",
@@ -260,6 +285,7 @@ const tableData: Reservation[] = [
         is_paid: true,
         total_amount: 20.4,
         email: "giulia.verdi@example.com",
+        avatar: "",
       },
       {
         id: "p403",
@@ -269,6 +295,7 @@ const tableData: Reservation[] = [
         is_paid: true,
         total_amount: 20.4,
         email: "andrea.gialli@example.com",
+        avatar: "",
       },
       {
         id: "p404",
@@ -278,6 +305,7 @@ const tableData: Reservation[] = [
         is_paid: true,
         total_amount: 20.4,
         email: "francesca.bruno@example.com",
+        avatar: "",
       },
     ],
     court_name: "Campo 4",
@@ -295,6 +323,10 @@ const tableData: Reservation[] = [
       role: "Socio",
       is_active: true,
       avatar: "/images/user/user-5.jpg",
+      card: "",
+      phone_number: "",
+      memeber_type: "",
+      junior: false,
     },
     court: {
       id: "5",
@@ -328,6 +360,7 @@ const tableData: Reservation[] = [
         is_paid: true,
         total_amount: 20.4,
         email: "francesca.bruno@example.com",
+        avatar: "",
       },
       {
         id: "p502",
@@ -337,6 +370,7 @@ const tableData: Reservation[] = [
         is_paid: true,
         total_amount: 20.4,
         email: "giulia.verdi@example.com",
+        avatar: "",
       },
       {
         // Partecipante incompleto, riempito con valori di default
@@ -347,6 +381,7 @@ const tableData: Reservation[] = [
         is_paid: false,
         total_amount: 0.0,
         email: "giovanni.sconosciuto@example.com",
+        avatar: "",
       },
       {
         id: "p504",
@@ -356,6 +391,7 @@ const tableData: Reservation[] = [
         is_paid: true,
         total_amount: 20.4,
         email: "andrea.gialli@example.com",
+        avatar: "",
       },
     ],
     court_name: "Campo 5",
@@ -382,25 +418,25 @@ export default function BasicTableCollectGames() {
             <TableRow>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
-              >
-                Campo
-              </TableCell>
-              <TableCell
-                isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                className="px-4 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
                 Data
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                className="px-4 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+              >
+                Campo
+              </TableCell>
+              <TableCell
+                isHeader
+                className="px-4 py-3 font-medium text-gray-500 text-center text-theme-xs dark:text-gray-400"
               >
                 Totale
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400 flex items-center justify-center"
+                className="px-4 py-3 font-medium text-gray-500 text-center text-theme-xs dark:text-gray-400"
               >
                 Azione
               </TableCell>
@@ -412,22 +448,22 @@ export default function BasicTableCollectGames() {
             {tableData.map((reservation) => (
               <TableRow key={reservation.id}>
                 <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                  {reservation.court.name}
-                </TableCell>
-                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                   {reservation.startDate}
                 </TableCell>
                 <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                  {reservation.court.name}
+                </TableCell>
+                <TableCell className="px-4 py-3 text-gray-500 text-center text-theme-sm dark:text-gray-400">
                   {reservation.total_amount.toFixed(2) + " €"}
                 </TableCell>
 
-                <TableCell className="px-4 py-3  text-theme-sm dark:text-gray-400 flex items-center justify-center ">
+                <TableCell className="px-4 py-3 text-theme-sm dark:text-gray-400 text-center">
                   <Button
                     variant="ghost"
                     onClick={() => handleOpenModal(reservation)}
-                    className="hover:text-brand-500 dark:hover:text-brand-500"
+                    className="text-green-500 hover:underline text-xs"
                   >
-                    <EuroIcon />
+                    PAGA
                   </Button>
                 </TableCell>
               </TableRow>

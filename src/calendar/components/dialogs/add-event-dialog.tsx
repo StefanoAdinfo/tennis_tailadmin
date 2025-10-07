@@ -217,7 +217,7 @@ export function AddEventDialog({
       {!showRiepilogo ? (
         <div id="create-event">
           <h5 className="text-lg font-medium text-gray-800 dark:text-white/90 my-2">
-            Crea un nuovo evento per il:{" "}
+            Prenota per il:{" "}
             {startDate ? format(startDate, "dd/MM/yyyy", { locale: it }) : ""}
           </h5>
           <div className="grid gap-4 py-4">
@@ -410,7 +410,7 @@ export function AddEventDialog({
               indietro
             </Button>
             <Button variant="primary" onClick={handleCloseModal}>
-              Crea evento
+              Prenota
             </Button>
           </div>
         </div>

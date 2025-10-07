@@ -281,43 +281,43 @@ export default function BasicTableOne() {
             <TableRow>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                className="px-4 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
                 Utente
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                className="px-4 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
                 Partecianti
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                className="px-4 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
                 Campo
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                className="px-4 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
                 Data
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                className="px-4 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
                 Durata
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                className="px-4 py-3 font-medium text-gray-500 text-center text-theme-xs dark:text-gray-400"
               >
                 Luci
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-center text-theme-xs dark:text-gray-400 "
+                className="px-4 py-3 font-medium text-gray-500 text-center text-theme-xs dark:text-gray-400 "
               >
                 Azione
               </TableCell>
@@ -328,7 +328,7 @@ export default function BasicTableOne() {
           <TableBody className="divide-y divide-gray-100 dark:divide-white/[0.05]">
             {tableData.map((reservation) => (
               <TableRow key={`reservation-${reservation.id}`}>
-                <TableCell className="px-5 py-4 sm:px-6 text-start">
+                <TableCell className="px-4 py-4 sm:px-6 text-start">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 overflow-hidden rounded-full">
                       <img
@@ -403,7 +403,7 @@ export default function BasicTableOne() {
                 <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                   {reservation.duration}
                 </TableCell>
-                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                <TableCell className="px-4 py-3 text-gray-500 text-center text-theme-sm dark:text-gray-400">
                   <Badge
                     size="sm"
                     color={reservation.light ? "success" : "error"}
@@ -416,9 +416,9 @@ export default function BasicTableOne() {
                   <Button
                     variant="ghost"
                     onClick={() => handleOpenModal(reservation)}
-                    className="hover:text-red-500 dark:hover:text-red-500"
+                    className="text-red-500 hover:underline text-xs"
                   >
-                    <TrashBinIcon />
+                    ANNULLA
                   </Button>
                 </TableCell>
               </TableRow>
@@ -451,8 +451,10 @@ export default function BasicTableOne() {
             .join(", ")}
         </p>
 
-        <div className="mt-6 flex  justify-end ">
-          <Button onClick={handleCloseModal}>Annulla partita</Button>
+        <div className="mt-6 flex justify-end ">
+          <Button onClick={handleCloseModal} variant="danger">
+            Annulla partita
+          </Button>
         </div>
       </Modal>
     </div>

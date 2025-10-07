@@ -77,7 +77,7 @@ export default function App() {
               {/* Prenota */}
               <Route path="/prenota" element={<Booking />} />
               {/* Profile */}
-              <Route path="/profilo" element={<UserProfiles />} />
+              {/* <Route path="/profilo" element={<UserProfiles />} /> */}
 
               {/* Others Page */}
               <Route path="/blank" element={<Blank />} />

@@ -14,15 +14,15 @@ import Button from "../../ui/button/Button";
 const tableData: User[] = [
   {
     id: "1",
-    name: "Stefano",
-    surname: "D'aniello",
+    name: "Mario",
+    surname: "Rossi",
     role: "admin",
     is_active: true,
-    email: "stefano.daniello@example.com",
+    email: "mario.rossi@gmail.com",
     avatar: "/images/user/user-17.jpg",
-    card: "",
-    phone_number: "",
-    memeber_type: "",
+    card: "124657`p19",
+    phone_number: "1234567890",
+    memeber_type: "admin",
     junior: false,
   },
   {
@@ -77,6 +77,19 @@ const tableData: User[] = [
     memeber_type: "",
     junior: false,
   },
+  {
+    id: "1",
+    name: "Stefano",
+    surname: "D'aniello",
+    role: "admin",
+    is_active: true,
+    email: "stefano.daniello@example.com",
+    avatar: "/images/user/user-17.jpg",
+    card: "",
+    phone_number: "",
+    memeber_type: "",
+    junior: false,
+  },
 ];
 
 export default function BasicTableRevenue() {
@@ -89,37 +102,37 @@ export default function BasicTableRevenue() {
             <TableRow>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                className="px-4 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
                 Cognome
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                className="px-4 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
                 Nome
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                className="px-4 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
                 Email
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                className="px-4 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
                 Ruolo
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                className="px-4 py-3 font-medium text-gray-500 text-center text-theme-xs dark:text-gray-400"
               >
                 Attivo
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400 flex items-center justify-center"
+                className="px-4 py-3 font-medium text-gray-500 text-center text-theme-xs dark:text-gray-400"
               >
                 Azione
               </TableCell>
@@ -142,19 +155,19 @@ export default function BasicTableRevenue() {
                 <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                   {user.role[0].toUpperCase() + user.role.slice(1)}
                 </TableCell>
-                <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                <TableCell className="px-4 py-3 text-gray-500 text-center text-theme-sm dark:text-gray-400">
                   <Badge size="sm" color={user.is_active ? "success" : "error"}>
                     {user.is_active ? "Si" : "No"}
                   </Badge>
                 </TableCell>
 
-                <TableCell className="px-4 py-3  text-theme-sm  dark:text-gray-400 flex items-center justify-center cursor-pointer ">
+                <TableCell className="px-4 py-3  text-theme-sm dark:text-gray-400 text-center cursor-pointer">
                   <Link to={`/utenti/${user.id}`}>
                     <Button
                       variant="ghost"
-                      className="hover:text-brand-500 dark:hover:text-brand-500"
+                      className="text-brand-500 dark:text-brand-400 hover:underline text-xs"
                     >
-                      <EyeIcon />
+                      DETTAGLI
                     </Button>
                   </Link>
                 </TableCell>

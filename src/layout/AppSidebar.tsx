@@ -474,11 +474,11 @@ const AppSidebar: React.FC = () => {
           </div>
         </nav>
       </div>
-      {isExpanded || isHovered || isMobileOpen ? (
+      {/* {isExpanded || isHovered || isMobileOpen ? (
         <Link to="/prenota" className="mt-auto w-full mb-5">
           <Button className="w-full">Prenota</Button>
         </Link>
-      ) : null}
+      ) : null} */}
     </aside>
   );
 };

@@ -177,31 +177,31 @@ export default function BasicTableOne() {
             <TableRow>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                className="px-4 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
                 Nome
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                className="px-4 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
                 Locazione
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+                className="px-4 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
                 Tipo
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-center text-theme-xs dark:text-gray-400 "
+                className="px-4 py-3 font-medium text-gray-500 text-center text-theme-xs dark:text-gray-400 "
               >
                 Attivo
               </TableCell>
               <TableCell
                 isHeader
-                className="px-5 py-3 font-medium text-gray-500 text-center text-theme-xs dark:text-gray-400 "
+                className="px-4 py-3 font-medium text-gray-500 text-center text-theme-xs dark:text-gray-400 "
               >
                 Azione
               </TableCell>
@@ -227,14 +227,16 @@ export default function BasicTableOne() {
                     {court.active ? "Si" : "No"}
                   </Badge>
                 </TableCell>
-
-                <TableCell className="px-4 py-3 text-theme-sm  dark:text-gray-400  flex items-center justify-center cursor-pointer ">
+                <TableCell className="px-4 py-3 text-theme-sm dark:text-gray-400 flex items-center justify-center cursor-pointer">
                   <Link
                     to={`/campi/${court.id}`}
                     className="hover:text-brand-500 dark:hover:text-brand-500"
                   >
-                    <Button variant="ghost">
-                      <PenIcon />
+                    <Button
+                      variant="ghost"
+                      className="text-yellow-600 dark:text-yellow-500 hover:underline text-xs"
+                    >
+                      MODIFICA
                     </Button>
                   </Link>
                   {/* <Button
