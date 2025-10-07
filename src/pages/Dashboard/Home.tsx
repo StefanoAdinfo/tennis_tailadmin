@@ -11,6 +11,9 @@ import BasicTableCollectUsers from "../../components/tables/BasicTables/BasicTab
 import BasicTableNextGame from "../../components/tables/BasicTables/BasicTableNextGame";
 import DataCard from "~/components/ui/card/DataCard";
 import { WalletMinimal, EuroIcon, CalendarPlus, CalendarOff } from "~/icons";
+import FilterTableProva from "~/components/tables/FilterTables/FilterTableProva";
+import BasicTableOne from "~/components/tables/BasicTables/BasicTableOne";
+import BasicTableOneCopy from "~/components/tables/BasicTables/BasicTableOneCopy";
 
 export default function Home() {
   return (
@@ -82,6 +85,11 @@ export default function Home() {
             buttonText="Calendario"
           >
             <BasicTableNextGame />
+          </ComponentCard>
+        </div>
+        <div className="col-span-12 space-y-6">
+          <ComponentCard title="Tabella Basic TAble">
+            <BasicTableOneCopy />
           </ComponentCard>
         </div>
 
