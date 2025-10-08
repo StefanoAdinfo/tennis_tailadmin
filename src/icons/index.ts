@@ -73,6 +73,7 @@ import { ReactComponent as Users } from "./users.svg?react";
 import { ReactComponent as Lightbulb } from "./users.svg?react";
 import { ReactComponent as Clock } from "./clock.svg?react";
 import { ReactComponent as CircleCheck } from "./circle-check.svg?react";
+import { ReactComponent as ArrowUpDown } from "./arrow-up-down.svg?react";
 
 export {
   ErrorHexaIcon,
@@ -150,4 +151,5 @@ export {
   Lightbulb,
   Clock,
   CircleCheck,
+  ArrowUpDown,
 };

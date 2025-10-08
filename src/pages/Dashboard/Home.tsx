@@ -14,6 +14,8 @@ import { WalletMinimal, EuroIcon, CalendarPlus, CalendarOff } from "~/icons";
 import FilterTableProva from "~/components/tables/FilterTables/FilterTableProva";
 import BasicTableOne from "~/components/tables/BasicTables/BasicTableOne";
 import BasicTableOneCopy from "~/components/tables/BasicTables/BasicTableOneCopy";
+import TanstackTable from "~/components/tables/TanstackTable/TanstackTable";
+import TanstackTableNextGame from "~/components/tables/TanstackTable/TanstackTableUser";
 
 export default function Home() {
   return (
@@ -87,9 +89,10 @@ export default function Home() {
             <BasicTableNextGame />
           </ComponentCard>
         </div>
+
         <div className="col-span-12 space-y-6">
-          <ComponentCard title="Tabella Basic TAble">
-            <BasicTableOneCopy />
+          <ComponentCard title="Tabella Tanstack Table">
+            <TanstackTable />
           </ComponentCard>
         </div>
 

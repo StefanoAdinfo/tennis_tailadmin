@@ -135,6 +135,7 @@ export default function BasicTableOne() {
               >
                 Team
               </TableCell>
+
               <TableCell
                 isHeader
                 className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
@@ -202,8 +203,8 @@ export default function BasicTableOne() {
                       order.status === "Active"
                         ? "success"
                         : order.status === "Pending"
-                        ? "warning"
-                        : "error"
+                          ? "warning"
+                          : "error"
                     }
                   >
                     {order.status}
