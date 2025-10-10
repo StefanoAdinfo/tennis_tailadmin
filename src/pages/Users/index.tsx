@@ -1,38 +1,22 @@
-import TanstackTableUser from "~/components/tables/TanstackTable/TanstackTableUser";
 import ComponentCard from "../../components/common/ComponentCard";
-import BasicTableUsers from "../../components/tables/BasicTables/BasicTableUsers";
 import TsTable from "~/components/tables/TanstackTable/TSTable";
 import {
   PaginationState,
   ColumnFiltersState,
   SortingState,
   ColumnDef,
+  Row,
 } from "@tanstack/react-table";
 import { useEffect, useMemo, useState } from "react";
 import React from "react";
 import Badge from "~/components/ui/badge/Badge";
 import { Link } from "react-router";
 import Button from "~/components/ui/button/Button";
-
-interface Person {
-  surname: string;
-  name: string;
-  email: string;
-  role: string;
-  is_active: string;
-}
-
-interface Meta {
-  current_page: number;
-  last_page: number;
-  per_page: number;
-  total: number;
-}
+import { Meta } from "~/lib/type";
 
 export default function UsersIndex() {
-  const token =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS50ZW5uaXNjbHVib3R0YXZpYW5vLml0L2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNzU5OTM4MzcyLCJleHAiOjE3NTk5NDE5NzIsIm5iZiI6MTc1OTkzODM3MiwianRpIjoiN0k5MHZFdWpwY2JHaFRNRyIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3IiwiZW1haWwiOiJzLmRhbmllbGxvQGFkaW5mby5pdCJ9.sOQ-oq4ceN1vPmvsVM_y0j_astjoMQUggHB1rzr9wyQ";
-  const [data, setData] = useState<Person[]>([]);
+  const token = import.meta.env.VITE_TOKEN;
+  const [data, setData] = useState<any[]>([]);
 
   const [meta, setMeta] = useState<Meta | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -47,7 +31,7 @@ export default function UsersIndex() {
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
-  const columns = useMemo<ColumnDef<Person>[]>(
+  const columns = useMemo<ColumnDef<any>[]>(
     () => [
       {
         header: "Cognome",
@@ -135,7 +119,7 @@ export default function UsersIndex() {
         params.append(paramName, paramValue);
       });
 
-      const apiUrl = `https://api.tennisclubottaviano.it/api/users?${params.toString()}&page=${page}`;
+      const apiUrl = `${import.meta.env.VITE_API_URL}/api/users?${params.toString()}&page=${page}`;
 
       try {
         const response = await fetch(apiUrl, {
@@ -199,6 +183,7 @@ export default function UsersIndex() {
               setColumnFilters={setColumnFilters}
               pageCount={meta ? meta.last_page : 0}
               rowCount={meta ? meta.total : 0}
+              perPage={meta ? meta.per_page : 0}
             />
           </ComponentCard>
         </div>

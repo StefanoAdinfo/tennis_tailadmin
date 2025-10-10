@@ -116,11 +116,11 @@ export function EventBlock({ event, className }: IProps) {
               " " +
               (event.user.name.length > 0 ? event.user.name[0] + "." : "")}
           </p>
-          {event.partecipants.map((partecipant) => (
+          {/* {event.partecipants.map((partecipant) => (
             <p key={partecipant.id}>
               {partecipant.name} {partecipant.surname}
             </p>
-          ))}
+          ))} */}
         </div>
 
         <div className="absolute bottom-0 right-0 px-1 text-xs font-bold pointer-events-none bg-gradient-to-t  text-neutral-500 dark:text-neutral-400">
@@ -158,11 +158,11 @@ export function EventBlock({ event, className }: IProps) {
 
       {/* 4. Partecipanti */}
       <div className="mt-2 space-y-0.5 text-gray-700 dark:text-gray-300">
-        {event.partecipants.map((p) => (
+        {/* {event.partecipants.map((p) => (
           <p key={p.id} className="text-sm">
             {p.name} {p.surname}
           </p>
-        ))}
+        ))} */}
       </div>
     </>
   );

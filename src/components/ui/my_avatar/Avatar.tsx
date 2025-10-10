@@ -38,7 +38,7 @@ export default function Avatar({
       >
         <div
           className="w-full h-full rounded-full flex overflow-hidden
-                   border-2 border-gray-400 dark:border-white bg-gray-200
+                  bg-gray-200
                    dark:bg-gray-800 justify-center items-center"
         >
           {avatar ? (

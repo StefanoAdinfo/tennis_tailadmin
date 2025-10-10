@@ -95,12 +95,12 @@ export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
           </div>
         </div>
 
-        <div className="h-[736px] overflow-y-auto ">
+        <div>
           <div className="flex overflow-hidden">
             {/* Hours column */}
             <div className="relative w-18">
               {hours.map((hour, index) => (
-                <div key={hour} className="relative" style={{ height: "76px" }}>
+                <div key={hour} className="relative" style={{ height: "96px" }}>
                   <div className="absolute -top-3 right-2 flex h-6 items-center">
                     {index !== 0 && (
                       <span className="text-xs text-muted-foreground">
@@ -127,13 +127,12 @@ export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
 
                   return (
                     <div key={dayIndex} className="relative">
-                      {hours.map((hour) => {
+                      {/* {hours.map((hour) => {
                         const isDisabled = !isWorkingHour(
                           day,
                           hour,
                           workingHours
                         );
-
                         return (
                           <div
                             key={hour}
@@ -143,7 +142,6 @@ export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
                             )}
                             style={{ height: "96px" }}
                           >
-                            {/* Slot 1: minuto 0 */}
                             {(() => {
                               const slotKey = `${format(day, "yyyy-MM-dd")}-${hour}-0`;
                               return (
@@ -170,8 +168,6 @@ export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
                                 </DroppableTimeBlock>
                               );
                             })()}
-
-                            {/* Slot 2: minuto 30 */}
                             {(() => {
                               const slotKey = `${format(day, "yyyy-MM-dd")}-${hour}-30`;
                               return (
@@ -198,6 +194,81 @@ export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
                                 </DroppableTimeBlock>
                               );
                             })()}
+
+                            <div className="pointer-events-none absolute inset-x-0 top-1/2 border-b border-dashed border-gray-200 dark:border-gray-800" />
+                          </div>
+                        );
+                      })} */}
+
+                      {hours.map((hour, index) => {
+                        const isDisabled = !isWorkingHour(
+                          day,
+                          hour,
+                          workingHours
+                        );
+
+                        return (
+                          <div
+                            key={hour}
+                            className={cn(
+                              "relative border-gray-200 dark:border-gray-800",
+                              isDisabled && "bg-calendar-disabled-hour"
+                            )}
+                            style={{ height: "96px" }}
+                          >
+                            {index !== 0 && (
+                              <div className="pointer-events-none absolute inset-x-0 top-0 border-b"></div>
+                            )}
+
+                            <DroppableTimeBlock
+                              date={day}
+                              hour={hour}
+                              minute={0}
+                            >
+                              <div
+                                role="button"
+                                className="absolute inset-x-0 top-0 h-[48px] cursor-pointer transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+                                // onClick={() =>
+                                //   handleSetOpenModal(slotKey, true)
+                                // }
+                              />
+                              <AddEventDialog
+                                startDate={day}
+                                startTime={{ hour, minute: 0 }}
+                                open={false}
+                                setOpen={(isOpen: boolean) => {}}
+                                // open={openModalMap[slotKey] || false}
+                                // setOpen={(isOpen: boolean) =>
+                                //   handleSetOpenModal(slotKey, isOpen)
+                                // }
+                              ></AddEventDialog>
+                            </DroppableTimeBlock>
+
+                            <div className="pointer-events-none absolute inset-x-0 top-1/2 border-b border-dashed border-gray-200 dark:border-gray-800"></div>
+
+                            <DroppableTimeBlock
+                              date={day}
+                              hour={hour}
+                              minute={30}
+                            >
+                              <div
+                                role="button"
+                                className="absolute inset-x-0 top-48 h-[48px] cursor-pointer transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+                                // onClick={() =>
+                                //   handleSetOpenModal(slotKey, true)
+                                // }
+                              />
+                              <AddEventDialog
+                                startDate={day}
+                                startTime={{ hour, minute: 30 }}
+                                open={false}
+                                setOpen={(isOpen: boolean) => {}}
+                                // open={openModalMap[slotKey] || false}
+                                // setOpen={(isOpen: boolean) =>
+                                //   handleSetOpenModal(slotKey, isOpen)
+                                // }
+                              ></AddEventDialog>
+                            </DroppableTimeBlock>
 
                             <div className="pointer-events-none absolute inset-x-0 top-1/2 border-b border-dashed border-gray-200 dark:border-gray-800" />
                           </div>

@@ -7,8 +7,6 @@ export default function Filter({ column }: { column: Column<any, unknown> }) {
   const columnFilterValue = column.getFilterValue();
   const { filterVariant } = column.columnDef.meta ?? {};
 
-  console.log(column.id);
-
   const handleSelectChange = (value: string) => {
     column.setFilterValue(value);
   };

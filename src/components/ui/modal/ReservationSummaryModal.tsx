@@ -71,7 +71,7 @@ export function ReservationSummaryModal({
           <div className="col-span-1">Da pagare</div>
           <div className="col-span-1">Paga</div>
         </div>
-        {partecipants.map((partecipant) => (
+        {/* {partecipants.map((partecipant) => (
           <div
             key={partecipant.id}
             className={`grid grid-cols-4 items-center border border-gray-300 border-dashed rounded-xl py-3 px-4 gap-3 ${
@@ -80,7 +80,7 @@ export function ReservationSummaryModal({
                 : "dark:bg-white/[0.03]"
             }`}
           >
-            {/* Colonna 1: Nome + icona */}
+
             <div className="flex items-center gap-3">
               {partecipant.is_paid === true ? (
                 <CheckLineIcon className="text-white bg-green-500 rounded-full flex-none w-5 h-5 md:w-4 md:h-4 p-0.5" />
@@ -91,13 +91,15 @@ export function ReservationSummaryModal({
               )}
 
               <h3 className="text-gray-800 dark:text-white/90">
-                {`${partecipant.name} ${
-                  partecipant.email === null ? "" : partecipant.surname
+                {`${partecipant.surname} ${
+                  partecipant.email === null
+                    ? ""
+                    : partecipant.surname.split(" ")[1]
                 }`}
               </h3>
             </div>
 
-            {/* Colonna 2: Totale */}
+
             <div className="flex justify-center">
               <span
                 className={`${
@@ -106,8 +108,8 @@ export function ReservationSummaryModal({
                     : "text-red-500"
                 }`}
               >
-                {partecipant.credit}
-                {partecipant.email === null ? "" : "€"}
+                {partecipant.credit || 0}
+                {partecipant.email === null ? "" : " €"}
               </span>
             </div>
 
@@ -121,10 +123,10 @@ export function ReservationSummaryModal({
                     }`}
                     value={
                       partecipant.email === null ||
-                      partecipant.total_amount === null ||
+                      partecipant.amount === null ||
                       partecipant.is_paid
                         ? 0
-                        : partecipant.total_amount
+                        : partecipant.amount
                     }
                     disabled={partecipant.is_paid || partecipant.email === null}
                   />
@@ -141,7 +143,7 @@ export function ReservationSummaryModal({
               </>
             ) : null}
           </div>
-        ))}
+        ))} */}
       </div>
 
       <Separator className="my-4" />

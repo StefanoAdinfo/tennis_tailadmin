@@ -67,25 +67,21 @@ export function CalendarHeader({ view, events }: IProps) {
 
             {/* <Button
               onClick={() => setViewCalendar("year")}
-              asChild
               aria-label="anno"
               title="anno"
-              size="icon"
-              variant={view === "year" ? "default" : "outline"}
+              variant={view === "year" ? "primary" : "outline"}
               className="-ml-px rounded-none [&_svg]:size-5 cursor-pointer"
             >
               <i>
-                <Columns strokeWidth={1.8} />
+                <Columns2 strokeWidth={1.8} />
               </i>
             </Button>
 
             <Button
               onClick={() => setViewCalendar("agenda")}
-              asChild
               aria-label="agenda"
               title="agenda"
-              size="icon"
-              variant={view === "agenda" ? "default" : "outline"}
+              variant={view === "agenda" ? "primary" : "outline"}
               className="-ml-px rounded-l-none [&_svg]:size-5 cursor-pointer"
             >
               <i>

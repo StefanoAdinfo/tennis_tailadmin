@@ -4,9 +4,5 @@ import { useCalendar } from "~/calendar/contexts/calendar-context";
 
 export default function Calendario() {
   const { viewCalendar } = useCalendar();
-  return (
-    <>
-      <ClientContainer view={viewCalendar} />
-    </>
-  );
+  return <ClientContainer view={viewCalendar} />;
 }

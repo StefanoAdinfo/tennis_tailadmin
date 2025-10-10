@@ -76,7 +76,7 @@ export function CalendarDayView({ singleDayEvents, multiDayEvents }: IProps) {
           </div>
         </div>
 
-        <div className="h-[800px] overflow-y-auto">
+        <div>
           <div className="flex">
             {/* Hours column */}
             <div className="relative w-18">
