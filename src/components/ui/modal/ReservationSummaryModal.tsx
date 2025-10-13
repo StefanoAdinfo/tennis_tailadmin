@@ -151,6 +151,18 @@ export function ReservationSummaryModal({
         <h4 className="text-2xl font-semibold">Totale</h4>
         <h4 className="text-2xl font-semibold">{total_amount}€</h4>
       </div>
+      <div className="flex justify-end mt-4">
+        <Button>Paga</Button>
+      </div>
+      <Separator className="my-4" />
+      <h5 className="text-lg font-semibold text-gray-800 dark:text-white/90 mb-4">
+        Azioni Pericolose
+      </h5>
+      <div className="flex items-center justify-start gap-2">
+        <Button variant="danger">Annulla Partita</Button>
+        <Button variant="danger">Elimina Partita</Button>
+      </div>
+      <Separator className="mt-4" />
     </Modal>
   );
 }

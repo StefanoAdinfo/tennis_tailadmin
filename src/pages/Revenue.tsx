@@ -235,8 +235,11 @@ export default function Revenue() {
                             }
                           )}
                         </div>
-                        <Tooltip id={`incassi-tooltip-${r.id}`}>
-                          <div className="flex flex-col p-1 text-sm text-gray-700 dark:text-gray-200">
+                        <Tooltip
+                          id={`incassi-tooltip-${r.id}`}
+                          className="border border-gray-100 dark:border-gray-700/50 bg-white! dark:bg-gray-800! rounded-xl! shadow-2xl pointer-events-auto p-4 text-gray-700! dark:text-gray-400!"
+                        >
+                          <div className="flex flex-col">
                             <strong className="mb-1">Partecipanti:</strong>
                             {r.reservation_participant.reservation.reservation_participants.map(
                               (partecipant, i) => {

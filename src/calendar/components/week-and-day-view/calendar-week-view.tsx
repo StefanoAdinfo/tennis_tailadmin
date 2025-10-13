@@ -206,7 +206,8 @@ export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
                           hour,
                           workingHours
                         );
-
+                        const slotKey0 = `${format(day, "yyyy-MM-dd")}-${hour}-0`;
+                        const slotKey30 = `${format(day, "yyyy-MM-dd")}-${hour}-30`;
                         return (
                           <div
                             key={hour}
@@ -217,7 +218,7 @@ export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
                             style={{ height: "96px" }}
                           >
                             {index !== 0 && (
-                              <div className="pointer-events-none absolute inset-x-0 top-0 border-b"></div>
+                              <div className="pointer-events-none absolute inset-x-0 top-0 border-b border-gray-200 dark:border-gray-800"></div>
                             )}
 
                             <DroppableTimeBlock
@@ -228,19 +229,17 @@ export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
                               <div
                                 role="button"
                                 className="absolute inset-x-0 top-0 h-[48px] cursor-pointer transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
-                                // onClick={() =>
-                                //   handleSetOpenModal(slotKey, true)
-                                // }
+                                onClick={() =>
+                                  handleSetOpenModal(slotKey0, true)
+                                }
                               />
                               <AddEventDialog
                                 startDate={day}
                                 startTime={{ hour, minute: 0 }}
-                                open={false}
-                                setOpen={(isOpen: boolean) => {}}
-                                // open={openModalMap[slotKey] || false}
-                                // setOpen={(isOpen: boolean) =>
-                                //   handleSetOpenModal(slotKey, isOpen)
-                                // }
+                                open={openModalMap[slotKey0] || false}
+                                setOpen={(isOpen: boolean) =>
+                                  handleSetOpenModal(slotKey0, isOpen)
+                                }
                               ></AddEventDialog>
                             </DroppableTimeBlock>
 
@@ -253,20 +252,18 @@ export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
                             >
                               <div
                                 role="button"
-                                className="absolute inset-x-0 top-48 h-[48px] cursor-pointer transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
-                                // onClick={() =>
-                                //   handleSetOpenModal(slotKey, true)
-                                // }
+                                className="absolute inset-x-0 top-[48px] h-[48px] cursor-pointer transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+                                onClick={() =>
+                                  handleSetOpenModal(slotKey30, true)
+                                }
                               />
                               <AddEventDialog
                                 startDate={day}
                                 startTime={{ hour, minute: 30 }}
-                                open={false}
-                                setOpen={(isOpen: boolean) => {}}
-                                // open={openModalMap[slotKey] || false}
-                                // setOpen={(isOpen: boolean) =>
-                                //   handleSetOpenModal(slotKey, isOpen)
-                                // }
+                                open={openModalMap[slotKey30] || false}
+                                setOpen={(isOpen: boolean) =>
+                                  handleSetOpenModal(slotKey30, isOpen)
+                                }
                               ></AddEventDialog>
                             </DroppableTimeBlock>
 
