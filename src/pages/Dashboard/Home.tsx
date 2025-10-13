@@ -216,7 +216,6 @@ export default function Home() {
   const [openReservations, setOpenReservations] = useState(false);
 
   const handleOpenModalPartite = (reservation: any) => {
-    console.log(reservation);
     setSelectedReservations(reservation);
     setOpenReservations(true);
   };
@@ -431,8 +430,11 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              <Tooltip id="prossime-partite-tooltip">
-                <div className="flex flex-col p-1 text-sm text-gray-700 dark:text-gray-200">
+              <Tooltip
+                id="prossime-partite-tooltip"
+                className="border border-gray-100 dark:border-gray-700/50 bg-white! dark:bg-gray-800! rounded-xl! shadow-2xl pointer-events-auto p-4 text-gray-700! dark:text-gray-400!"
+              >
+                <div className="flex flex-col">
                   <strong className="mb-1">Partecipanti:</strong>
                   {row.reservation_participants.map((partecipant, i) => (
                     <div
@@ -613,7 +615,11 @@ export default function Home() {
             <DataCard
               icon={<WalletMinimal />}
               title={"Totale Incassato"}
-              result={adminData.total_paid + " €"}
+              result={
+                adminData.total_paid != undefined
+                  ? adminData.total_paid + " €"
+                  : ""
+              }
               badgeStatus={"success"}
               percentage={11.01}
               bgIcon="bg-yellow-200 dark:bg-yellow-600"
@@ -621,7 +627,11 @@ export default function Home() {
             <DataCard
               icon={<EuroIcon />}
               title={"Totale da incassare"}
-              result={adminData.total_unpaid + " €"}
+              result={
+                adminData.total_unpaid != undefined
+                  ? adminData.total_unpaid + " €"
+                  : ""
+              }
               badgeStatus={"error"}
               percentage={1.01}
               bgIcon="bg-blue-200 dark:bg-blue-800"
@@ -629,7 +639,11 @@ export default function Home() {
             <DataCard
               icon={<CalendarPlus />}
               title={"Totale Partite"}
-              result={adminData.total_reservations}
+              result={
+                adminData.total_reservations != undefined
+                  ? adminData.total_reservations
+                  : ""
+              }
               badgeStatus={"success"}
               percentage={8.01}
               bgIcon="bg-green-200 dark:bg-green-800"
@@ -637,7 +651,11 @@ export default function Home() {
             <DataCard
               icon={<CalendarOff />}
               title={"Partite Annullate"}
-              result={adminData.total_cancelled_reservation}
+              result={
+                adminData.total_cancelled_reservation != undefined
+                  ? adminData.total_cancelled_reservation
+                  : ""
+              }
               badgeStatus={"error"}
               percentage={3.01}
               bgIcon="bg-red-200 dark:bg-red-800"
@@ -720,6 +738,7 @@ export default function Home() {
       <ReservationSummaryModal
         open={openReservations}
         onOpenChange={setOpenReservations}
+        id={selectedReservations?.id || ""}
         startDate={
           selectedReservations?.start_time
             ? format(selectedReservations?.start_time, "dd/MM/yyyy - HH:mm")
@@ -737,7 +756,7 @@ export default function Home() {
         open={openPayments}
         onOpenChange={setOpenPayments}
         reservation={selectedPayment?.reservation || []}
-        id={selectedPayment?.id || ""}
+        id={selectedPayment?.user_id || ""}
         name={selectedPayment?.name || ""}
         surname={selectedPayment?.surname || ""}
         total_amount={selectedPayment?.total_amount || 0}

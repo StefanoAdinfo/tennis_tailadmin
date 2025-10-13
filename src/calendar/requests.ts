@@ -63,7 +63,6 @@ export const get_Courts = async () => {
     }
 
     const processedCourts = addPropertyAtCourts(rawCourts);
-    console.log(processedCourts);
     return processedCourts;
   } catch (e) {
     console.error("Errore nel recupero dei campi:", e);
@@ -94,7 +93,6 @@ export const getEvents = async () => {
       throw new Error("Risposta API non valida: mancano i dati.");
     }
 
-    console.log(reservations);
     // console.log("CALENDAR_ITENS_MOCK", CALENDAR_ITENS_MOCK);
 
     const fixedReservations = reservations.map((reservation: any) => {

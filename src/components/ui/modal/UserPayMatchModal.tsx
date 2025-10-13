@@ -5,6 +5,7 @@ import Input from "../../form/input/InputField";
 import Button from "../button/Button";
 import { CircleAlert } from "../../../icons";
 import { Separator } from "../separator/Separator";
+import { format } from "date-fns";
 
 interface UserPayMatchModalProps {
   open: boolean;
@@ -26,16 +27,58 @@ export function UserPayMatchModal({
 }: UserPayMatchModalProps) {
   const [amount, setAmount] = useState(0);
   const [credit, setCredit] = useState(0);
-  const [reservationState, setReservationStete] = useState<Reservation[]>([]);
+  const [reservationState, setReservationState] = useState<Reservation[]>([]);
 
-  const calcAmount = () => {
+  const token = import.meta.env.VITE_TOKEN;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // Online
+      // https://api.tennisclubottaviano.it/api/UsersTotUnpaid?page=1
+
+      const apiUrl = `${import.meta.env.VITE_API_URL}/api/reservationPartecipants/${id}`;
+
+      try {
+        const response = await fetch(apiUrl, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(
+            `Errore: ${response.status} durante il fetch dei dati`
+          );
+        }
+
+        const result = await response.json();
+
+        if (result.data && result.meta) {
+          setReservationState(result.data.data);
+          const dataIsPaid = result.data.data.filter(
+            (item: any) => item.is_paid == 0
+          );
+          console.log("dataIsPaid", dataIsPaid);
+          calcAmount(dataIsPaid);
+        } else {
+          throw new Error("Risposta API non valida: mancano 'data' o 'meta'.");
+        }
+      } catch (e) {
+        throw new Error("Si è verificato un errore sconosciuto.");
+      }
+    };
+
+    if (id) {
+      fetchData();
+      calcCredit();
+    }
+  }, [id]);
+
+  const calcAmount = (reservation: any) => {
     let total = 0;
     reservation.forEach((r) => {
-      r.partecipants.forEach((p) => {
-        if (p?.id == id) {
-          total += p.total_amount || 0;
-        }
-      });
+      total += Number(r.amount) || 0;
     });
     setAmount(Math.round(total * 100) / 100);
   };
@@ -111,11 +154,11 @@ export function UserPayMatchModal({
   //   setReservationStete(updatedReservations);
   // };
 
-  useEffect(() => {
-    setReservationStete(reservation);
-    calcAmount();
-    calcCredit();
-  }, [reservation, id]);
+  // useEffect(() => {
+  //   setReservationStete(reservation);
+  //   calcAmount();
+  //   calcCredit();
+  // }, [reservation, id]);
 
   const handleCloseModal = () => {
     onOpenChange?.(false);
@@ -145,7 +188,7 @@ export function UserPayMatchModal({
             }`}
           >
             <div className="w-[15px] ">
-              {r.partecipants[0].is_paid === true ? (
+              {r.is_paid == true ? (
                 <svg
                   xmlns="http://www.w3.o rg/2000/svg"
                   viewBox="0 0 24 24"
@@ -159,7 +202,7 @@ export function UserPayMatchModal({
                 >
                   <path d="M20 6 9 17l-5-5"></path>
                 </svg>
-              ) : r.partecipants[0].is_paid === false ? (
+              ) : r.is_paid == false ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -180,24 +223,24 @@ export function UserPayMatchModal({
             </div>
 
             <div className="text-sm text-gray-800 dark:text-white/90">
-              {r.startDate}
+              {format(r.reservation.start_time, "dd/MM/yyyy")}
             </div>
             <div className="text-sm text-gray-800 dark:text-white/90">
-              {r.court.name}
+              {r.reservation.court.name}
             </div>
             <ul>
-              {r.partecipants.map((p) => (
+              {r.reservation.players.map((p, index) => (
                 <li
-                  key={p.id}
+                  key={index}
                   className="text-xs text-gray-800 dark:text-white/90"
                 >
-                  {p.name} {p.surname}
+                  {p.surname}
                 </li>
               ))}
             </ul>
 
             <div className="text-sm text-right w-14 text-gray-800 dark:text-white/90">
-              {r.partecipants[0].total_amount} €
+              {r.amount} €
             </div>
           </div>
         ))}

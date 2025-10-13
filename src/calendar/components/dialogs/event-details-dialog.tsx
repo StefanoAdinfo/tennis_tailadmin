@@ -23,6 +23,7 @@ export function EventDetailsDialog({ event, open, setOpen }: IProps) {
       total_amount={event.total_amount}
       open={open}
       onOpenChange={setOpen}
+      id={String(event.id)}
     />
   );
 }

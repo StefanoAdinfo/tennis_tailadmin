@@ -10,8 +10,8 @@ import { useState, type HTMLAttributes } from "react";
 import type { IEvent } from "~/calendar/interfaces";
 import type { VariantProps } from "class-variance-authority";
 
-import { Tooltip } from "~/components/ui/tooltip/Tooltip";
 import { EventDetailsDialog } from "../dialogs/event-details-dialog";
+import { Tooltip } from "react-tooltip";
 
 const calendarWeekEventCardVariants = cva(
   "flex select-none flex-col gap-0.5 truncate whitespace-nowrap rounded-md border px-2 py-1.5 text-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
@@ -92,7 +92,7 @@ export function EventBlock({ event, className }: IProps) {
     setOpenModal(true);
   };
 
-  const TriggerContent = (
+  return (
     <>
       <div
         role="button"
@@ -104,6 +104,7 @@ export function EventBlock({ event, className }: IProps) {
         )}
         style={{ height: `${heightInPixels}px` }}
         onKeyDown={handleKeyDown}
+        data-tooltip-id={`incassi-tooltip-${event.id}`}
       >
         <div className="overflow-hidden">
           <p>{event.court.name}</p>
@@ -116,64 +117,89 @@ export function EventBlock({ event, className }: IProps) {
               " " +
               (event.user.name.length > 0 ? event.user.name[0] + "." : "")}
           </p>
-          {/* {event.partecipants.map((partecipant) => (
-            <p key={partecipant.id}>
-              {partecipant.name} {partecipant.surname}
-            </p>
-          ))} */}
-        </div>
 
-        <div className="absolute bottom-0 right-0 px-1 text-xs font-bold pointer-events-none bg-gradient-to-t  text-neutral-500 dark:text-neutral-400">
-          ⋯
+          {event.reservation_participants.length > 0 &&
+            event.reservation_participants
+              .slice(0, event.number_of_people)
+              .map((player, i) => (
+                <div
+                  key={`partecipantContent-${i}`}
+                  className="flex items-center gap-2 py-0.5 whitespace-nowrap"
+                >
+                  <div className="w-5 h-5 overflow-hidden rounded-full flex-shrink-0">
+                    <img
+                      width={20}
+                      height={20}
+                      src={player.avatar || "/images/user/default-avatar.svg"}
+                      alt={player.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <span>{`${player.surname}`}</span>
+                </div>
+              ))}
         </div>
       </div>
+
+      <div className="absolute bottom-1 right-1 px-1 text-xs font-bold pointer-events-none bg-gradient-to-t  text-neutral-500 dark:text-neutral-400">
+        ⋯
+      </div>
+
+      <Tooltip
+        id={`incassi-tooltip-${event.id}`}
+        className="border border-gray-100 dark:border-gray-700/50 bg-white! dark:bg-gray-800! rounded-xl! shadow-2xl pointer-events-auto p-4 text-gray-700! dark:text-gray-400!"
+      >
+        <p className="text-muted-foreground text-xs mb-2 border-b pb-1 dark:border-gray-700/50">
+          {format(start, "dd MMMM yyyy", { locale: it })}
+        </p>
+
+        {/* 2. Campo e Orario (Bold e Grande) */}
+        <p className="font-bold text-base dark:text-white">
+          {event.court.name}
+        </p>
+        <p className="font-medium text-base mb-3 dark:text-white">
+          {format(start, "HH:mm", { locale: it })} –{" "}
+          {format(end, "HH:mm", { locale: it })}
+        </p>
+
+        {/* 3. Utente Principale (Più Evidenza) */}
+        <p className="mt-3 mb-1 font-bold dark:text-white">
+          {event.user.surname +
+            " " +
+            (event.user.name.length > 0 ? event.user.name[0] + "." : "")}
+        </p>
+        <div className="flex flex-col">
+          <p className="font-medium text-base mb-1 dark:text-white">
+            Partecipanti:
+          </p>
+          {event.reservation_participants.length > 0 &&
+            event.reservation_participants
+              .slice(0, event.number_of_people)
+              .map((player, i) => (
+                <div
+                  key={`partecipantContent-${i}`}
+                  className="flex items-center gap-2 py-0.5 whitespace-nowrap"
+                >
+                  <div className="w-5 h-5 overflow-hidden rounded-full flex-shrink-0">
+                    <img
+                      width={20}
+                      height={20}
+                      src={player.avatar || "/images/user/default-avatar.svg"}
+                      alt={player.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <span>{`${player.surname}`}</span>
+                </div>
+              ))}
+        </div>
+      </Tooltip>
+
       <EventDetailsDialog
         event={event}
         open={openModal}
         setOpen={setOpenModal}
       />
     </>
-  );
-
-  const TooltipContent = (
-    <>
-      {/* 1. Data */}
-      <p className="text-muted-foreground text-xs mb-2 border-b pb-1 dark:border-gray-700/50">
-        {format(start, "dd MMMM yyyy", { locale: it })}
-      </p>
-
-      {/* 2. Campo e Orario (Bold e Grande) */}
-      <p className="font-bold text-base dark:text-white">{event.court.name}</p>
-      <p className="font-medium text-base mb-3 dark:text-white">
-        {format(start, "HH:mm", { locale: it })} –{" "}
-        {format(end, "HH:mm", { locale: it })}
-      </p>
-
-      {/* 3. Utente Principale (Più Evidenza) */}
-      <p className="mt-3 mb-1 font-bold dark:text-white">
-        {event.user.surname +
-          " " +
-          (event.user.name.length > 0 ? event.user.name[0] + "." : "")}
-      </p>
-
-      {/* 4. Partecipanti */}
-      <div className="mt-2 space-y-0.5 text-gray-700 dark:text-gray-300">
-        {/* {event.partecipants.map((p) => (
-          <p key={p.id} className="text-sm">
-            {p.name} {p.surname}
-          </p>
-        ))} */}
-      </div>
-    </>
-  );
-
-  return (
-    <Tooltip
-      trigger={TriggerContent}
-      open={openTooltip}
-      setOpen={setOpenTooltip}
-    >
-      {TooltipContent}
-    </Tooltip>
   );
 }

@@ -12,6 +12,7 @@ import React from "react";
 import { format } from "date-fns";
 import Button from "~/components/ui/button/Button";
 import TsTable from "~/components/tables/TanstackTable/TSTable";
+import { ReservationSummaryModal } from "~/components/ui/modal/ReservationSummaryModal";
 
 export default function ReservationCollect() {
   const token = import.meta.env.VITE_TOKEN;
@@ -33,6 +34,7 @@ export default function ReservationCollect() {
   const [openReservations, setOpenReservations] = useState(false);
 
   const handleOpenModal = (reservation: any) => {
+    console.log("Selected reservation:", reservation);
     setSelectedReservations(reservation);
     setOpenReservations(true);
   };
@@ -77,7 +79,7 @@ export default function ReservationCollect() {
           return (
             <Button
               variant="ghost"
-              onClick={() => handleOpenModal(row.original)}
+              onClick={() => handleOpenModal(row)}
               className="text-green-500 hover:underline text-xs"
             >
               PAGA
@@ -179,6 +181,22 @@ export default function ReservationCollect() {
           </ComponentCard>
         </div>
       </div>
+      <ReservationSummaryModal
+        open={openReservations}
+        onOpenChange={setOpenReservations}
+        id={selectedReservations?.id || ""}
+        startDate={
+          selectedReservations?.start_time
+            ? format(selectedReservations?.start_time, "dd/MM/yyyy - HH:mm")
+            : ""
+        }
+        court_name={selectedReservations?.court.name || ""}
+        is_double={selectedReservations?.is_double || false}
+        lights_cost={selectedReservations?.lights_cost || 0}
+        note={selectedReservations?.reservation_note || ""}
+        partecipants={selectedReservations?.reservation_participants || []}
+        total_amount={selectedReservations?.total_amount || 0}
+      />
     </>
   );
 }

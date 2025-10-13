@@ -69,7 +69,7 @@ export default function UsersCollect() {
           return (
             <Button
               variant="ghost"
-              onClick={() => handleOpenModal(row.original)}
+              onClick={() => handleOpenModal(row)}
               className="text-green-500 hover:underline text-xs"
             >
               PAGA
@@ -176,7 +176,7 @@ export default function UsersCollect() {
         open={openPayments}
         onOpenChange={setOpenPayments}
         reservation={selectedPayment?.reservation || []}
-        id={selectedPayment?.id || ""}
+        id={selectedPayment?.user_id || ""}
         name={selectedPayment?.name || ""}
         surname={selectedPayment?.surname || ""}
         total_amount={selectedPayment?.total_amount || 0}
